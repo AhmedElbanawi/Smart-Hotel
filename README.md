@@ -5,3 +5,4 @@
    - Update the rooms depending on the subscription in temperature and light state.
    - Display outdoor temperatur and light state on LCD.
    - Display the subscription of each room on LCD.
+[Hotel.pdf](https://github.com/AhmedElbanawi/Smart-Hotel/files/8477152/Hotel.pdf)
