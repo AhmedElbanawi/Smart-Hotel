@@ -3,6 +3,9 @@
 #include "STD_MEMORY_MAP.h"
 #include "STD_TYPES.h"
 #include "STD_BITS.h"
+#include "ECU_OD.h"
+#include "ECU_RM.h"
+#include "TMP_SENSOR.h"
 #define SS_ENABLE 1
 #define SS_DISABLE 0
 typedef enum{

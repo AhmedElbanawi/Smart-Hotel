@@ -67,8 +67,18 @@ void DISP_Update(void){
 		ECU_RM_Tmp_Data[ECU_ROOM2].SubTemp=ECU_RM_Data[ECU_ROOM2].SubTemp;
 
 		ECU_OD_Tmp_Data.Light=ECU_OD_Data.Light;
-		ECU_OD_Tmp_Data.Temp=ECU_OD_Data.Temp;
 		ECU_OD_Tmp_Data.State=ECU_OD_Data.State;
+
+		if(ECU_OD_CNT_OFF==ECU_OD_Tmp_Data.State)
+		{
+			ECU_OD_Tmp_Data.Temp=TMP_Back_Up;
+		}else if(ECU_OD_CNT_ON==ECU_OD_Tmp_Data.State)
+		{
+			ECU_OD_Tmp_Data.Temp=ECU_OD_Data.Temp;
+		}else
+		{
+			ECU_OD_Tmp_Data.Temp=TMP_Back_Up;
+		}
 
 		IntToStr(StrTemp, ECU_OD_Tmp_Data.Temp);
 		if (TRUE == LCD_Update(StrTemp, ROW1, COL5)) {

@@ -130,6 +130,9 @@ void vector (void)
 #define SPIF 7
 #define WCOL 6
 #define SPI2X 0
+/******************************** WDT REGISTERS ********************************************/
+#define WDTCR (*(volatile unsigned char*)0x41)
+#define MCUCSR (*(volatile unsigned char*)0x54)
 /****************************************************************************/
 #endif
 /****************************************************************************/

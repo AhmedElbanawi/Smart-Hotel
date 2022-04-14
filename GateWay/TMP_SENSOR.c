@@ -1,6 +1,6 @@
 #include "TMP_SENSOR.h"
 volatile static BOOL_t ADC_Finished = FALSE;
-UINT32_t TMP_Back_Up = 0;
+UINT32_t TMP_Back_Up = 40;
 void TMP_Sensor_Init(void){
 	ADC_Init();
 	ADC_Set_Prescaler(DF128);

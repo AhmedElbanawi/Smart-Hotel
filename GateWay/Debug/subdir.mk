@@ -16,6 +16,7 @@ C_SRCS += \
 ../SPI.c \
 ../TMP_SENSOR.c \
 ../TMR0.c \
+../WDT.c \
 ../main.c 
 
 OBJS += \
@@ -31,6 +32,7 @@ OBJS += \
 ./SPI.o \
 ./TMP_SENSOR.o \
 ./TMR0.o \
+./WDT.o \
 ./main.o 
 
 C_DEPS += \
@@ -46,6 +48,7 @@ C_DEPS += \
 ./SPI.d \
 ./TMP_SENSOR.d \
 ./TMR0.d \
+./WDT.d \
 ./main.d 
 
 

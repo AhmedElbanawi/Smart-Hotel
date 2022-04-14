@@ -21,4 +21,5 @@ enum{
 typedef struct{
 	UINT8_t Temp,Light,State;
 }ECU_OD_DATA_t;
+extern ECU_OD_DATA_t ECU_OD_Data;
 #endif

@@ -5,6 +5,7 @@ ECU_RM_INFO_t ECU_RM_Info = ECU_RM_OFF;
 static void ECU_RM_Update(ECU_RM_t ROOM);
 void ECU_RM_Update_Info(void){
 	if (SS_ENABLE == SPI_Slave.Select[SS_RM1]) {
+		/*update reading&writing*/
 		ECU_RM_Update(ECU_ROOM1);
 	} else if (SS_ENABLE == SPI_Slave.Select[SS_RM2]) {
 		ECU_RM_Update(ECU_ROOM2);

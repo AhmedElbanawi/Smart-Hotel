@@ -19,6 +19,15 @@ void ECU_OD_Update_Info(void){
 		case ECU_OD_MODE_INFO_CNT:
 			ECU_OD_Mode = ECU_OD_MODE_INFO_ID;
 			ECU_OD_Data.State = SPI_Curr_Reading;
+			/*USSUB ROOMS*/
+			if(ECU_OD_CNT_OFF==ECU_OD_Data.State)
+			{
+				ECU_RM_Data[ECU_ROOM1].SubLight = ECU_RM_UNSUB_LIGHT;
+				ECU_RM_Data[ECU_ROOM1].SubTemp = ECU_RM_UNSUB_TMP;
+
+				ECU_RM_Data[ECU_ROOM2].SubLight = ECU_RM_UNSUB_LIGHT;
+				ECU_RM_Data[ECU_ROOM2].SubTemp = ECU_RM_UNSUB_TMP;
+			}
 			break;
 		case ECU_OD_MODE_INFO_TMP:
 			ECU_OD_Mode = ECU_OD_MODE_INFO_ID;

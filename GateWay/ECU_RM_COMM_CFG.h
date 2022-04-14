@@ -17,5 +17,13 @@ typedef enum{
 	ECU_ROOM2,
 	ECU_MAX_ROOMS
 }ECU_RM_t;
+typedef enum{
+	ECU_FRM_TMP=0x00,
+	ECU_FRM_USUB=0x40,
+	ECU_FRM_NIGHT=0x80,
+	ECU_FRM_MORNING=0xc0
+}ECU_RM_WF_t;
+
 extern ECU_RM_DATA_t ECU_RM_Data[MAX_ECU_RM];
+extern ECU_RM_INFO_t ECU_RM_Info;
 #endif
