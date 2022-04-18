@@ -3,15 +3,15 @@ GateWay.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00001260  00000000  00000000  00000094  2**1
+  0 .text         0000126c  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000086  00800060  00001260  000012f4  2**0
+  1 .data         00000088  00800060  0000126c  00001300  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000058  008000e6  008000e6  0000137a  2**0
+  2 .bss          00000057  008000e8  008000e8  00001388  2**0
                   ALLOC
-  3 .stab         000039fc  00000000  00000000  0000137c  2**2
+  3 .stab         000039fc  00000000  00000000  00001388  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      0000228e  00000000  00000000  00004d78  2**0
+  4 .stabstr      0000229f  00000000  00000000  00004d84  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -29,11 +29,11 @@ Disassembly of section .text:
       24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
       28:	0c 94 03 01 	jmp	0x206	; 0x206 <__vector_10>
       2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-      30:	0c 94 46 07 	jmp	0xe8c	; 0xe8c <__vector_12>
+      30:	0c 94 4c 07 	jmp	0xe98	; 0xe98 <__vector_12>
       34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
       38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
       3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-      40:	0c 94 df 07 	jmp	0xfbe	; 0xfbe <__vector_16>
+      40:	0c 94 e5 07 	jmp	0xfca	; 0xfca <__vector_16>
       44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
       48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
       4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -51,7 +51,7 @@ Disassembly of section .text:
       60:	10 e0       	ldi	r17, 0x00	; 0
       62:	a0 e6       	ldi	r26, 0x60	; 96
       64:	b0 e0       	ldi	r27, 0x00	; 0
-      66:	e0 e6       	ldi	r30, 0x60	; 96
+      66:	ec e6       	ldi	r30, 0x6C	; 108
       68:	f2 e1       	ldi	r31, 0x12	; 18
       6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
 
@@ -60,13 +60,13 @@ Disassembly of section .text:
       6e:	0d 92       	st	X+, r0
 
 00000070 <.do_copy_data_start>:
-      70:	a6 3e       	cpi	r26, 0xE6	; 230
+      70:	a8 3e       	cpi	r26, 0xE8	; 232
       72:	b1 07       	cpc	r27, r17
       74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
 
 00000076 <__do_clear_bss>:
       76:	11 e0       	ldi	r17, 0x01	; 1
-      78:	a6 ee       	ldi	r26, 0xE6	; 230
+      78:	a8 ee       	ldi	r26, 0xE8	; 232
       7a:	b0 e0       	ldi	r27, 0x00	; 0
       7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -74,11 +74,11 @@ Disassembly of section .text:
       7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-      80:	ae 33       	cpi	r26, 0x3E	; 62
+      80:	af 33       	cpi	r26, 0x3F	; 63
       82:	b1 07       	cpc	r27, r17
       84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-      86:	0e 94 ba 08 	call	0x1174	; 0x1174 <main>
-      8a:	0c 94 2e 09 	jmp	0x125c	; 0x125c <_exit>
+      86:	0e 94 c0 08 	call	0x1180	; 0x1180 <main>
+      8a:	0c 94 34 09 	jmp	0x1268	; 0x1268 <_exit>
 
 0000008e <__bad_interrupt>:
       8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -225,7 +225,7 @@ CO_SCH_Delete_Task(const UINT8_t ID){
      116:	df 01       	movw	r26, r30
      118:	aa 0f       	add	r26, r26
      11a:	bb 1f       	adc	r27, r27
-     11c:	a8 51       	subi	r26, 0x18	; 24
+     11c:	a6 51       	subi	r26, 0x16	; 22
      11e:	bf 4f       	sbci	r27, 0xFF	; 255
      120:	8d 91       	ld	r24, X+
      122:	9c 91       	ld	r25, X
@@ -246,7 +246,7 @@ CO_SCH_Delete_Task(const UINT8_t ID){
         CO_SCH_Task[ID].Period = 0;
      13a:	ee 0f       	add	r30, r30
      13c:	ff 1f       	adc	r31, r31
-     13e:	e6 51       	subi	r30, 0x16	; 22
+     13e:	e4 51       	subi	r30, 0x14	; 20
      140:	ff 4f       	sbci	r31, 0xFF	; 255
      142:	10 82       	st	Z, r1
      144:	08 95       	ret
@@ -264,7 +264,7 @@ CO_SCH_Add_Task(void (*const PTASK)(void),
 
      static UINT8_t Id = 0;
      if(Id < CO_SCH_MAX_TASKS){
-     14c:	20 91 e7 00 	lds	r18, 0x00E7
+     14c:	20 91 e9 00 	lds	r18, 0x00E9
      150:	26 30       	cpi	r18, 0x06	; 6
      152:	f0 f4       	brcc	.+60     	; 0x190 <CO_SCH_Add_Task+0x4a>
         CO_SCH_Task[Id].pTask = PTASK;
@@ -278,7 +278,7 @@ CO_SCH_Add_Task(void (*const PTASK)(void),
      162:	ee 0f       	add	r30, r30
      164:	ff 1f       	adc	r31, r31
      166:	df 01       	movw	r26, r30
-     168:	a8 51       	subi	r26, 0x18	; 24
+     168:	a6 51       	subi	r26, 0x16	; 22
      16a:	bf 4f       	sbci	r27, 0xFF	; 255
      16c:	11 96       	adiw	r26, 0x01	; 1
      16e:	dc 93       	st	X, r29
@@ -289,7 +289,7 @@ CO_SCH_Add_Task(void (*const PTASK)(void),
      176:	6c 93       	st	X, r22
      178:	13 97       	sbiw	r26, 0x03	; 3
         CO_SCH_Task[Id].Period = PERIOD;
-     17a:	e6 51       	subi	r30, 0x16	; 22
+     17a:	e4 51       	subi	r30, 0x14	; 20
      17c:	ff 4f       	sbci	r31, 0xFF	; 255
      17e:	40 83       	st	Z, r20
         CO_SCH_Task[Id].Run = 0;
@@ -301,7 +301,7 @@ CO_SCH_Add_Task(void (*const PTASK)(void),
      188:	2c 93       	st	X, r18
         Id++;
      18a:	2f 5f       	subi	r18, 0xFF	; 255
-     18c:	20 93 e7 00 	sts	0x00E7, r18
+     18c:	20 93 e9 00 	sts	0x00E9, r18
      }
      else{
         /* Error: Scheduler is Full */
@@ -320,10 +320,10 @@ CO_SCH_Dispatch_Tasks(void){
      19a:	df 93       	push	r29
 	UINT8_t Id;
      if(TRUE == CO_SCH_Update){
-     19c:	80 91 e6 00 	lds	r24, 0x00E6
+     19c:	80 91 e8 00 	lds	r24, 0x00E8
      1a0:	81 30       	cpi	r24, 0x01	; 1
      1a2:	69 f5       	brne	.+90     	; 0x1fe <CO_SCH_Dispatch_Tasks+0x68>
-     1a4:	e8 ee       	ldi	r30, 0xE8	; 232
+     1a4:	ea ee       	ldi	r30, 0xEA	; 234
      1a6:	f0 e0       	ldi	r31, 0x00	; 0
 /******************************************************************************/
 static void
@@ -357,7 +357,7 @@ CO_SCH_Update_Tasks(void){
 	UINT8_t Id;
 	for (Id = 0; Id < CO_SCH_MAX_TASKS; Id++) {
      1c6:	81 e0       	ldi	r24, 0x01	; 1
-     1c8:	ec 30       	cpi	r30, 0x0C	; 12
+     1c8:	ee 30       	cpi	r30, 0x0E	; 14
      1ca:	f8 07       	cpc	r31, r24
      1cc:	69 f7       	brne	.-38     	; 0x1a8 <CO_SCH_Dispatch_Tasks+0x12>
      1ce:	ef 01       	movw	r28, r30
@@ -403,7 +403,7 @@ CO_SCH_Dispatch_Tasks(void){
             }
         }
         CO_SCH_Update = FALSE;
-     1fa:	10 92 e6 00 	sts	0x00E6, r1
+     1fa:	10 92 e8 00 	sts	0x00E8, r1
      }
 }
      1fe:	df 91       	pop	r29
@@ -426,7 +426,7 @@ ISR(TIMER0_COMP_VECT){
      210:	8f 93       	push	r24
      CO_SCH_Update = TRUE;
      212:	81 e0       	ldi	r24, 0x01	; 1
-     214:	80 93 e6 00 	sts	0x00E6, r24
+     214:	80 93 e8 00 	sts	0x00E8, r24
 }
      218:	8f 91       	pop	r24
      21a:	0f 90       	pop	r0
@@ -447,7 +447,7 @@ CO_SCH_Stop(void){
      228:	8f bf       	out	0x3f, r24	; 63
 	TMR0_Set_Prescaler(TMR0_NO_CLK);
      22a:	80 e0       	ldi	r24, 0x00	; 0
-     22c:	0e 94 33 08 	call	0x1066	; 0x1066 <TMR0_Set_Prescaler>
+     22c:	0e 94 39 08 	call	0x1072	; 0x1072 <TMR0_Set_Prescaler>
 }
      230:	08 95       	ret
 
@@ -459,11 +459,11 @@ CO_SCH_Start(void){
      /* To Do: Enable Interrupt Here */
 	TMR0_Set_Prescaler(TMR0_DF64);				/* Tick = 32 us */
      232:	83 e0       	ldi	r24, 0x03	; 3
-     234:	0e 94 33 08 	call	0x1066	; 0x1066 <TMR0_Set_Prescaler>
+     234:	0e 94 39 08 	call	0x1072	; 0x1072 <TMR0_Set_Prescaler>
 	TMR0_Set_Buffer(TMR0_OCR, TMR_INT_CYCLE); 		/* 1 ms */
      238:	81 e0       	ldi	r24, 0x01	; 1
      23a:	6d e7       	ldi	r22, 0x7D	; 125
-     23c:	0e 94 7d 08 	call	0x10fa	; 0x10fa <TMR0_Set_Buffer>
+     23c:	0e 94 83 08 	call	0x1106	; 0x1106 <TMR0_Set_Buffer>
 	GIE;
      240:	8f b7       	in	r24, 0x3f	; 63
      242:	80 68       	ori	r24, 0x80	; 128
@@ -503,20 +503,20 @@ CO_SCH_Init(void){
      }
      /* To Do: Init Timer Here */
      TMR0_Init();
-     25e:	0e 94 86 08 	call	0x110c	; 0x110c <TMR0_Init>
+     25e:	0e 94 8c 08 	call	0x1118	; 0x1118 <TMR0_Init>
      TMR0_Mode(TMR0_CTC);
      262:	82 e0       	ldi	r24, 0x02	; 2
-     264:	0e 94 3a 08 	call	0x1074	; 0x1074 <TMR0_Mode>
+     264:	0e 94 40 08 	call	0x1080	; 0x1080 <TMR0_Mode>
      TMR0_Set_Prescaler(TMR0_NO_CLK);
      268:	80 e0       	ldi	r24, 0x00	; 0
-     26a:	0e 94 33 08 	call	0x1066	; 0x1066 <TMR0_Set_Prescaler>
+     26a:	0e 94 39 08 	call	0x1072	; 0x1072 <TMR0_Set_Prescaler>
      TMR0_Set_Buffer(TMR0_OCR, TMR_INT_CYCLE); 		/* 1 ms */
      26e:	81 e0       	ldi	r24, 0x01	; 1
      270:	6d e7       	ldi	r22, 0x7D	; 125
-     272:	0e 94 7d 08 	call	0x10fa	; 0x10fa <TMR0_Set_Buffer>
+     272:	0e 94 83 08 	call	0x1106	; 0x1106 <TMR0_Set_Buffer>
      TMR0_INT(TMR0_OC_INT_ENABLE);
      276:	82 e0       	ldi	r24, 0x02	; 2
-     278:	0e 94 5a 08 	call	0x10b4	; 0x10b4 <TMR0_INT>
+     278:	0e 94 60 08 	call	0x10c0	; 0x10c0 <TMR0_INT>
 }
      27c:	1f 91       	pop	r17
      27e:	08 95       	ret
@@ -545,7 +545,7 @@ void DIO_WRITE_PIN_VALUE(const DIO_PIN_ID_t PIN_ID, const DIO_PIN_STATE_t PIN_ST
      292:	f0 e0       	ldi	r31, 0x00	; 0
      294:	ee 0f       	add	r30, r30
      296:	ff 1f       	adc	r31, r31
-     298:	ea 53       	subi	r30, 0x3A	; 58
+     298:	e9 53       	subi	r30, 0x39	; 57
      29a:	ff 4f       	sbci	r31, 0xFF	; 255
      29c:	01 90       	ld	r0, Z+
      29e:	f0 81       	ld	r31, Z
@@ -568,7 +568,7 @@ void DIO_WRITE_PIN_VALUE(const DIO_PIN_ID_t PIN_ID, const DIO_PIN_STATE_t PIN_ST
      2ba:	f0 e0       	ldi	r31, 0x00	; 0
      2bc:	ee 0f       	add	r30, r30
      2be:	ff 1f       	adc	r31, r31
-     2c0:	ea 53       	subi	r30, 0x3A	; 58
+     2c0:	e9 53       	subi	r30, 0x39	; 57
      2c2:	ff 4f       	sbci	r31, 0xFF	; 255
      2c4:	01 90       	ld	r0, Z+
      2c6:	f0 81       	ld	r31, Z
@@ -642,7 +642,7 @@ DIO_INIT(void)
      320:	f0 e0       	ldi	r31, 0x00	; 0
      322:	ee 0f       	add	r30, r30
      324:	ff 1f       	adc	r31, r31
-     326:	e2 53       	subi	r30, 0x32	; 50
+     326:	e1 53       	subi	r30, 0x31	; 49
      328:	ff 4f       	sbci	r31, 0xFF	; 255
      32a:	01 90       	ld	r0, Z+
      32c:	f0 81       	ld	r31, Z
@@ -666,7 +666,7 @@ DIO_INIT(void)
      34a:	f0 e0       	ldi	r31, 0x00	; 0
      34c:	ee 0f       	add	r30, r30
      34e:	ff 1f       	adc	r31, r31
-     350:	e2 53       	subi	r30, 0x32	; 50
+     350:	e1 53       	subi	r30, 0x31	; 49
      352:	ff 4f       	sbci	r31, 0xFF	; 255
      354:	01 90       	ld	r0, Z+
      356:	f0 81       	ld	r31, Z
@@ -695,7 +695,7 @@ DIO_INIT(void)
      37c:	f0 e0       	ldi	r31, 0x00	; 0
      37e:	ee 0f       	add	r30, r30
      380:	ff 1f       	adc	r31, r31
-     382:	e2 53       	subi	r30, 0x32	; 50
+     382:	e1 53       	subi	r30, 0x31	; 49
      384:	ff 4f       	sbci	r31, 0xFF	; 255
      386:	01 90       	ld	r0, Z+
      388:	f0 81       	ld	r31, Z
@@ -761,7 +761,7 @@ DIO_PIN_STATE_t DIO_READ_PIN_VALUE(const DIO_PIN_ID_t PIN_ID){
      3d0:	f0 e0       	ldi	r31, 0x00	; 0
      3d2:	ee 0f       	add	r30, r30
      3d4:	ff 1f       	adc	r31, r31
-     3d6:	e2 54       	subi	r30, 0x42	; 66
+     3d6:	e1 54       	subi	r30, 0x41	; 65
      3d8:	ff 4f       	sbci	r31, 0xFF	; 255
      3da:	01 90       	ld	r0, Z+
      3dc:	f0 81       	ld	r31, Z
@@ -790,7 +790,7 @@ void DIO_WRITE_PORT(const DIO_PORT_ID_t PORT_ID, const UINT8_t VALUE){
      3f6:	f0 e0       	ldi	r31, 0x00	; 0
      3f8:	ee 0f       	add	r30, r30
      3fa:	ff 1f       	adc	r31, r31
-     3fc:	ea 54       	subi	r30, 0x4A	; 74
+     3fc:	e9 54       	subi	r30, 0x49	; 73
      3fe:	ff 4f       	sbci	r31, 0xFF	; 255
      400:	01 90       	ld	r0, Z+
      402:	f0 81       	ld	r31, Z
@@ -808,7 +808,7 @@ UINT8_t DIO_Read_PORT(const DIO_PORT_ID_t PORT_ID){
      40c:	f0 e0       	ldi	r31, 0x00	; 0
      40e:	ee 0f       	add	r30, r30
      410:	ff 1f       	adc	r31, r31
-     412:	e2 55       	subi	r30, 0x52	; 82
+     412:	e1 55       	subi	r30, 0x51	; 81
      414:	ff 4f       	sbci	r31, 0xFF	; 255
      416:	01 90       	ld	r0, Z+
      418:	f0 81       	ld	r31, Z
@@ -823,13 +823,11 @@ ECU_RM_DATA_t ECU_RM_Tmp_Data[MAX_ECU_RM];
 ECU_OD_DATA_t ECU_OD_Tmp_Data;
 void DISP_Update(void){
      420:	1f 93       	push	r17
-		}
+	static char StrTemp[3];
 
-	}
-#endif
 	static UINT8_t State = 0;
 	switch (State) {
-     422:	80 91 0c 01 	lds	r24, 0x010C
+     422:	80 91 0e 01 	lds	r24, 0x010E
      426:	83 30       	cpi	r24, 0x03	; 3
      428:	a9 f1       	breq	.+106    	; 0x494 <DISP_Update+0x74>
      42a:	84 30       	cpi	r24, 0x04	; 4
@@ -857,7 +855,7 @@ void DISP_Update(void){
      452:	90 e0       	ldi	r25, 0x00	; 0
      454:	60 e0       	ldi	r22, 0x00	; 0
      456:	40 e0       	ldi	r20, 0x00	; 0
-     458:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     458:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      45c:	81 30       	cpi	r24, 0x01	; 1
      45e:	09 f0       	breq	.+2      	; 0x462 <DISP_Update+0x42>
      460:	c6 c0       	rjmp	.+396    	; 0x5ee <DISP_Update+0x1ce>
@@ -871,13 +869,13 @@ void DISP_Update(void){
      466:	90 e0       	ldi	r25, 0x00	; 0
      468:	60 e0       	ldi	r22, 0x00	; 0
      46a:	48 e0       	ldi	r20, 0x08	; 8
-     46c:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     46c:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      470:	81 30       	cpi	r24, 0x01	; 1
      472:	09 f0       	breq	.+2      	; 0x476 <DISP_Update+0x56>
      474:	bc c0       	rjmp	.+376    	; 0x5ee <DISP_Update+0x1ce>
 			State = 2;
      476:	82 e0       	ldi	r24, 0x02	; 2
-     478:	80 93 0c 01 	sts	0x010C, r24
+     478:	80 93 0e 01 	sts	0x010E, r24
      47c:	b8 c0       	rjmp	.+368    	; 0x5ee <DISP_Update+0x1ce>
 		}
 		break;
@@ -887,7 +885,7 @@ void DISP_Update(void){
      480:	90 e0       	ldi	r25, 0x00	; 0
      482:	61 e0       	ldi	r22, 0x01	; 1
      484:	40 e0       	ldi	r20, 0x00	; 0
-     486:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     486:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      48a:	81 30       	cpi	r24, 0x01	; 1
      48c:	09 f0       	breq	.+2      	; 0x490 <DISP_Update+0x70>
      48e:	af c0       	rjmp	.+350    	; 0x5ee <DISP_Update+0x1ce>
@@ -902,7 +900,7 @@ void DISP_Update(void){
      496:	90 e0       	ldi	r25, 0x00	; 0
      498:	61 e0       	ldi	r22, 0x01	; 1
      49a:	48 e0       	ldi	r20, 0x08	; 8
-     49c:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     49c:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      4a0:	81 30       	cpi	r24, 0x01	; 1
      4a2:	09 f0       	breq	.+2      	; 0x4a6 <DISP_Update+0x86>
      4a4:	a4 c0       	rjmp	.+328    	; 0x5ee <DISP_Update+0x1ce>
@@ -913,56 +911,57 @@ void DISP_Update(void){
 		break;
 	case 4:
 		ECU_RM_Tmp_Data[ECU_ROOM1].SubLight=ECU_RM_Data[ECU_ROOM1].SubLight;
-     4aa:	80 91 35 01 	lds	r24, 0x0135
-     4ae:	80 93 28 01 	sts	0x0128, r24
+     4aa:	80 91 36 01 	lds	r24, 0x0136
+     4ae:	80 93 29 01 	sts	0x0129, r24
 		ECU_RM_Tmp_Data[ECU_ROOM1].SubTemp=ECU_RM_Data[ECU_ROOM1].SubTemp;
-     4b2:	80 91 36 01 	lds	r24, 0x0136
-     4b6:	80 93 29 01 	sts	0x0129, r24
+     4b2:	80 91 37 01 	lds	r24, 0x0137
+     4b6:	80 93 2a 01 	sts	0x012A, r24
 
 		ECU_RM_Tmp_Data[ECU_ROOM2].SubLight=ECU_RM_Data[ECU_ROOM2].SubLight;
-     4ba:	80 91 3a 01 	lds	r24, 0x013A
-     4be:	80 93 2d 01 	sts	0x012D, r24
+     4ba:	80 91 3b 01 	lds	r24, 0x013B
+     4be:	80 93 2e 01 	sts	0x012E, r24
 		ECU_RM_Tmp_Data[ECU_ROOM2].SubTemp=ECU_RM_Data[ECU_ROOM2].SubTemp;
-     4c2:	80 91 3b 01 	lds	r24, 0x013B
-     4c6:	80 93 2e 01 	sts	0x012E, r24
+     4c2:	80 91 3c 01 	lds	r24, 0x013C
+     4c6:	80 93 2f 01 	sts	0x012F, r24
 
 		ECU_OD_Tmp_Data.Light=ECU_OD_Data.Light;
-     4ca:	80 91 30 01 	lds	r24, 0x0130
-     4ce:	80 93 23 01 	sts	0x0123, r24
+     4ca:	80 91 31 01 	lds	r24, 0x0131
+     4ce:	80 93 24 01 	sts	0x0124, r24
 		ECU_OD_Tmp_Data.State=ECU_OD_Data.State;
-     4d2:	80 91 31 01 	lds	r24, 0x0131
-     4d6:	80 93 24 01 	sts	0x0124, r24
+     4d2:	80 91 32 01 	lds	r24, 0x0132
+     4d6:	80 93 25 01 	sts	0x0125, r24
 
 		if(ECU_OD_CNT_OFF==ECU_OD_Tmp_Data.State)
-     4da:	88 23       	and	r24, r24
+     4da:	88 37       	cpi	r24, 0x78	; 120
      4dc:	29 f0       	breq	.+10     	; 0x4e8 <DISP_Update+0xc8>
 		{
 			ECU_OD_Tmp_Data.Temp=TMP_Back_Up;
+
 		}else if(ECU_OD_CNT_ON==ECU_OD_Tmp_Data.State)
-     4de:	81 30       	cpi	r24, 0x01	; 1
+     4de:	82 38       	cpi	r24, 0x82	; 130
      4e0:	19 f4       	brne	.+6      	; 0x4e8 <DISP_Update+0xc8>
 		{
 			ECU_OD_Tmp_Data.Temp=ECU_OD_Data.Temp;
-     4e2:	80 91 2f 01 	lds	r24, 0x012F
+     4e2:	80 91 30 01 	lds	r24, 0x0130
      4e6:	02 c0       	rjmp	.+4      	; 0x4ec <DISP_Update+0xcc>
 		}else
 		{
 			ECU_OD_Tmp_Data.Temp=TMP_Back_Up;
-     4e8:	80 91 aa 00 	lds	r24, 0x00AA
-     4ec:	80 93 22 01 	sts	0x0122, r24
+     4e8:	80 91 ab 00 	lds	r24, 0x00AB
+     4ec:	80 93 23 01 	sts	0x0123, r24
 		}
 
 		IntToStr(StrTemp, ECU_OD_Tmp_Data.Temp);
-     4f0:	8d e0       	ldi	r24, 0x0D	; 13
+     4f0:	8f e0       	ldi	r24, 0x0F	; 15
      4f2:	91 e0       	ldi	r25, 0x01	; 1
-     4f4:	60 91 22 01 	lds	r22, 0x0122
-     4f8:	0e 94 43 04 	call	0x886	; 0x886 <IntToStr>
+     4f4:	60 91 23 01 	lds	r22, 0x0123
+     4f8:	0e 94 49 04 	call	0x892	; 0x892 <IntToStr>
 		if (TRUE == LCD_Update(StrTemp, ROW1, COL5)) {
-     4fc:	8d e0       	ldi	r24, 0x0D	; 13
+     4fc:	8f e0       	ldi	r24, 0x0F	; 15
      4fe:	91 e0       	ldi	r25, 0x01	; 1
      500:	60 e0       	ldi	r22, 0x00	; 0
      502:	44 e0       	ldi	r20, 0x04	; 4
-     504:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     504:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      508:	81 30       	cpi	r24, 0x01	; 1
      50a:	09 f0       	breq	.+2      	; 0x50e <DISP_Update+0xee>
      50c:	70 c0       	rjmp	.+224    	; 0x5ee <DISP_Update+0x1ce>
@@ -973,8 +972,8 @@ void DISP_Update(void){
 		break;
 	case 5:
 		if (ECU_OD_LIGHT_MORNING == ECU_OD_Tmp_Data.Light) {
-     512:	80 91 23 01 	lds	r24, 0x0123
-     516:	82 30       	cpi	r24, 0x02	; 2
+     512:	80 91 24 01 	lds	r24, 0x0124
+     516:	8c 38       	cpi	r24, 0x8C	; 140
      518:	19 f4       	brne	.+6      	; 0x520 <DISP_Update+0x100>
 			if (TRUE == LCD_Update("M", ROW2, COL7)) {
      51a:	86 e7       	ldi	r24, 0x76	; 118
@@ -983,7 +982,7 @@ void DISP_Update(void){
 				State = 6;
 			}
 		} else if (ECU_OD_LIGHT_NIGHT == ECU_OD_Tmp_Data.Light) {
-     520:	83 30       	cpi	r24, 0x03	; 3
+     520:	86 39       	cpi	r24, 0x96	; 150
      522:	19 f4       	brne	.+6      	; 0x52a <DISP_Update+0x10a>
 			if (TRUE == LCD_Update("N", ROW2, COL7)) {
      524:	88 e7       	ldi	r24, 0x78	; 120
@@ -997,7 +996,7 @@ void DISP_Update(void){
      52c:	90 e0       	ldi	r25, 0x00	; 0
      52e:	61 e0       	ldi	r22, 0x01	; 1
      530:	46 e0       	ldi	r20, 0x06	; 6
-     532:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     532:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      536:	81 30       	cpi	r24, 0x01	; 1
      538:	09 f0       	breq	.+2      	; 0x53c <DISP_Update+0x11c>
      53a:	59 c0       	rjmp	.+178    	; 0x5ee <DISP_Update+0x1ce>
@@ -1009,10 +1008,10 @@ void DISP_Update(void){
 		break;
 	case 6:
 		if (ECU_RM_Tmp_Data[ECU_ROOM1].SubLight == ECU_RM_SUB_LIGHT
-     540:	80 91 28 01 	lds	r24, 0x0128
+     540:	80 91 29 01 	lds	r24, 0x0129
      544:	8e 30       	cpi	r24, 0x0E	; 14
      546:	51 f4       	brne	.+20     	; 0x55c <DISP_Update+0x13c>
-     548:	80 91 29 01 	lds	r24, 0x0129
+     548:	80 91 2a 01 	lds	r24, 0x012A
      54c:	8d 30       	cpi	r24, 0x0D	; 13
      54e:	19 f4       	brne	.+6      	; 0x556 <DISP_Update+0x136>
 				&& ECU_RM_Tmp_Data[ECU_ROOM1].SubTemp == ECU_RM_SUB_TMP) {
@@ -1030,7 +1029,7 @@ void DISP_Update(void){
 				State = 7;
 			}
 		} else if (ECU_RM_Tmp_Data[ECU_ROOM1].SubTemp == ECU_RM_SUB_TMP) {
-     55c:	80 91 29 01 	lds	r24, 0x0129
+     55c:	80 91 2a 01 	lds	r24, 0x012A
      560:	8d 30       	cpi	r24, 0x0D	; 13
      562:	49 f4       	brne	.+18     	; 0x576 <DISP_Update+0x156>
 			if (TRUE == LCD_Update("T ", ROW1, COL13)) {
@@ -1038,7 +1037,7 @@ void DISP_Update(void){
      566:	90 e0       	ldi	r25, 0x00	; 0
      568:	60 e0       	ldi	r22, 0x00	; 0
      56a:	4c e0       	ldi	r20, 0x0C	; 12
-     56c:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     56c:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      570:	81 30       	cpi	r24, 0x01	; 1
      572:	e9 f5       	brne	.+122    	; 0x5ee <DISP_Update+0x1ce>
      574:	06 c0       	rjmp	.+12     	; 0x582 <DISP_Update+0x162>
@@ -1050,7 +1049,7 @@ void DISP_Update(void){
      578:	90 e0       	ldi	r25, 0x00	; 0
      57a:	60 e0       	ldi	r22, 0x00	; 0
      57c:	4c e0       	ldi	r20, 0x0C	; 12
-     57e:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     57e:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
 			State = 7;
      582:	87 e0       	ldi	r24, 0x07	; 7
      584:	79 cf       	rjmp	.-270    	; 0x478 <DISP_Update+0x58>
@@ -1058,10 +1057,10 @@ void DISP_Update(void){
 		break;
 	case 7:
 		if (ECU_RM_Tmp_Data[ECU_ROOM2].SubLight == ECU_RM_SUB_LIGHT
-     586:	80 91 2d 01 	lds	r24, 0x012D
+     586:	80 91 2e 01 	lds	r24, 0x012E
      58a:	8e 30       	cpi	r24, 0x0E	; 14
      58c:	d9 f4       	brne	.+54     	; 0x5c4 <DISP_Update+0x1a4>
-     58e:	80 91 2e 01 	lds	r24, 0x012E
+     58e:	80 91 2f 01 	lds	r24, 0x012F
      592:	8d 30       	cpi	r24, 0x0D	; 13
      594:	19 f4       	brne	.+6      	; 0x59c <DISP_Update+0x17c>
 				&& ECU_RM_Tmp_Data[ECU_ROOM2].SubTemp == ECU_RM_SUB_TMP) {
@@ -1078,12 +1077,12 @@ void DISP_Update(void){
      59e:	90 e0       	ldi	r25, 0x00	; 0
      5a0:	61 e0       	ldi	r22, 0x01	; 1
      5a2:	4c e0       	ldi	r20, 0x0C	; 12
-     5a4:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     5a4:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      5a8:	18 2f       	mov	r17, r24
      5aa:	81 30       	cpi	r24, 0x01	; 1
      5ac:	01 f5       	brne	.+64     	; 0x5ee <DISP_Update+0x1ce>
 				State = 0;
-     5ae:	10 92 0c 01 	sts	0x010C, r1
+     5ae:	10 92 0e 01 	sts	0x010E, r1
 				DIO_WRITE_PIN_VALUE(DIO_PINC6,1^DIO_READ_PIN_VALUE(DIO_PINC6));
      5b2:	86 e1       	ldi	r24, 0x16	; 22
      5b4:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
@@ -1094,7 +1093,7 @@ void DISP_Update(void){
      5c2:	15 c0       	rjmp	.+42     	; 0x5ee <DISP_Update+0x1ce>
 			}
 		} else if (ECU_RM_Tmp_Data[ECU_ROOM2].SubTemp == ECU_RM_SUB_TMP) {
-     5c4:	80 91 2e 01 	lds	r24, 0x012E
+     5c4:	80 91 2f 01 	lds	r24, 0x012F
      5c8:	8d 30       	cpi	r24, 0x0D	; 13
      5ca:	49 f4       	brne	.+18     	; 0x5de <DISP_Update+0x1be>
 			if (TRUE == LCD_Update("T ", ROW2, COL13)) {
@@ -1102,7 +1101,7 @@ void DISP_Update(void){
      5ce:	90 e0       	ldi	r25, 0x00	; 0
      5d0:	61 e0       	ldi	r22, 0x01	; 1
      5d2:	4c e0       	ldi	r20, 0x0C	; 12
-     5d4:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     5d4:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
      5d8:	81 30       	cpi	r24, 0x01	; 1
      5da:	49 f4       	brne	.+18     	; 0x5ee <DISP_Update+0x1ce>
      5dc:	06 c0       	rjmp	.+12     	; 0x5ea <DISP_Update+0x1ca>
@@ -1115,13 +1114,13 @@ void DISP_Update(void){
      5e0:	90 e0       	ldi	r25, 0x00	; 0
      5e2:	61 e0       	ldi	r22, 0x01	; 1
      5e4:	4c e0       	ldi	r20, 0x0C	; 12
-     5e6:	0e 94 6e 06 	call	0xcdc	; 0xcdc <LCD_Update>
+     5e6:	0e 94 74 06 	call	0xce8	; 0xce8 <LCD_Update>
 			State = 0;
 		}
 		break;
 	default:
 		State = 0;
-     5ea:	10 92 0c 01 	sts	0x010C, r1
+     5ea:	10 92 0e 01 	sts	0x010E, r1
 		break;
 	}
 
@@ -1136,2328 +1135,2335 @@ ECU_OD_DATA_t ECU_OD_Data;
 ECU_OD_MODE_t ECU_OD_Mode = ECU_OD_MODE_INFO_ID;
 void ECU_OD_Update_Info(void){
 	if (SS_ENABLE == SPI_Slave.Select[SS_OD]) {
-     5f2:	90 91 19 01 	lds	r25, 0x0119
-     5f6:	91 30       	cpi	r25, 0x01	; 1
-     5f8:	e1 f5       	brne	.+120    	; 0x672 <ECU_OD_Update_Info+0x80>
+     5f2:	80 91 1a 01 	lds	r24, 0x011A
+     5f6:	81 30       	cpi	r24, 0x01	; 1
+     5f8:	09 f0       	breq	.+2      	; 0x5fc <ECU_OD_Update_Info+0xa>
+     5fa:	41 c0       	rjmp	.+130    	; 0x67e <ECU_OD_Update_Info+0x8c>
 		switch (ECU_OD_Mode) {
-     5fa:	80 91 10 01 	lds	r24, 0x0110
-     5fe:	81 30       	cpi	r24, 0x01	; 1
-     600:	c1 f0       	breq	.+48     	; 0x632 <ECU_OD_Update_Info+0x40>
-     602:	81 30       	cpi	r24, 0x01	; 1
-     604:	28 f0       	brcs	.+10     	; 0x610 <ECU_OD_Update_Info+0x1e>
-     606:	82 30       	cpi	r24, 0x02	; 2
-     608:	39 f1       	breq	.+78     	; 0x658 <ECU_OD_Update_Info+0x66>
-     60a:	83 30       	cpi	r24, 0x03	; 3
-     60c:	91 f5       	brne	.+100    	; 0x672 <ECU_OD_Update_Info+0x80>
-     60e:	2b c0       	rjmp	.+86     	; 0x666 <ECU_OD_Update_Info+0x74>
+     5fc:	80 91 a8 00 	lds	r24, 0x00A8
+     600:	8a 35       	cpi	r24, 0x5A	; 90
+     602:	d1 f0       	breq	.+52     	; 0x638 <ECU_OD_Update_Info+0x46>
+     604:	8b 35       	cpi	r24, 0x5B	; 91
+     606:	18 f4       	brcc	.+6      	; 0x60e <ECU_OD_Update_Info+0x1c>
+     608:	80 35       	cpi	r24, 0x50	; 80
+     60a:	c9 f5       	brne	.+114    	; 0x67e <ECU_OD_Update_Info+0x8c>
+     60c:	05 c0       	rjmp	.+10     	; 0x618 <ECU_OD_Update_Info+0x26>
+     60e:	84 36       	cpi	r24, 0x64	; 100
+     610:	39 f1       	breq	.+78     	; 0x660 <ECU_OD_Update_Info+0x6e>
+     612:	8e 36       	cpi	r24, 0x6E	; 110
+     614:	a1 f5       	brne	.+104    	; 0x67e <ECU_OD_Update_Info+0x8c>
+     616:	2c c0       	rjmp	.+88     	; 0x670 <ECU_OD_Update_Info+0x7e>
 		case ECU_OD_MODE_INFO_ID:
 			if (ECU_OD_INFO_ID_CNT == SPI_Curr_Reading) {
-     610:	80 91 3d 01 	lds	r24, 0x013D
-     614:	88 23       	and	r24, r24
-     616:	19 f4       	brne	.+6      	; 0x61e <ECU_OD_Update_Info+0x2c>
+     618:	80 91 3e 01 	lds	r24, 0x013E
+     61c:	82 33       	cpi	r24, 0x32	; 50
+     61e:	11 f4       	brne	.+4      	; 0x624 <ECU_OD_Update_Info+0x32>
 				ECU_OD_Mode = ECU_OD_MODE_INFO_CNT;
-     618:	90 93 10 01 	sts	0x0110, r25
-     61c:	08 95       	ret
+     620:	8a e5       	ldi	r24, 0x5A	; 90
+     622:	07 c0       	rjmp	.+14     	; 0x632 <ECU_OD_Update_Info+0x40>
 			} else if (ECU_OD_INFO_ID_TMP == SPI_Curr_Reading) {
-     61e:	81 30       	cpi	r24, 0x01	; 1
-     620:	11 f4       	brne	.+4      	; 0x626 <ECU_OD_Update_Info+0x34>
+     624:	8c 33       	cpi	r24, 0x3C	; 60
+     626:	11 f4       	brne	.+4      	; 0x62c <ECU_OD_Update_Info+0x3a>
 				ECU_OD_Mode = ECU_OD_MODE_INFO_TMP;
-     622:	82 e0       	ldi	r24, 0x02	; 2
-     624:	03 c0       	rjmp	.+6      	; 0x62c <ECU_OD_Update_Info+0x3a>
+     628:	84 e6       	ldi	r24, 0x64	; 100
+     62a:	03 c0       	rjmp	.+6      	; 0x632 <ECU_OD_Update_Info+0x40>
 			} else if (ECU_OD_INFO_ID_LIGHT == SPI_Curr_Reading) {
-     626:	82 30       	cpi	r24, 0x02	; 2
-     628:	21 f5       	brne	.+72     	; 0x672 <ECU_OD_Update_Info+0x80>
+     62c:	86 34       	cpi	r24, 0x46	; 70
+     62e:	39 f5       	brne	.+78     	; 0x67e <ECU_OD_Update_Info+0x8c>
 				ECU_OD_Mode = ECU_OD_MODE_INFO_LIGHT;
-     62a:	83 e0       	ldi	r24, 0x03	; 3
-     62c:	80 93 10 01 	sts	0x0110, r24
-     630:	08 95       	ret
+     630:	8e e6       	ldi	r24, 0x6E	; 110
+     632:	80 93 a8 00 	sts	0x00A8, r24
+     636:	08 95       	ret
 			} else {
 
 			}
 			break;
 		case ECU_OD_MODE_INFO_CNT:
 			ECU_OD_Mode = ECU_OD_MODE_INFO_ID;
-     632:	10 92 10 01 	sts	0x0110, r1
+     638:	80 e5       	ldi	r24, 0x50	; 80
+     63a:	80 93 a8 00 	sts	0x00A8, r24
 			ECU_OD_Data.State = SPI_Curr_Reading;
-     636:	80 91 3d 01 	lds	r24, 0x013D
-     63a:	80 93 31 01 	sts	0x0131, r24
+     63e:	80 91 3e 01 	lds	r24, 0x013E
+     642:	80 93 32 01 	sts	0x0132, r24
 			/*USSUB ROOMS*/
 			if(ECU_OD_CNT_OFF==ECU_OD_Data.State)
-     63e:	88 23       	and	r24, r24
-     640:	c1 f4       	brne	.+48     	; 0x672 <ECU_OD_Update_Info+0x80>
+     646:	88 37       	cpi	r24, 0x78	; 120
+     648:	d1 f4       	brne	.+52     	; 0x67e <ECU_OD_Update_Info+0x8c>
 			{
 				ECU_RM_Data[ECU_ROOM1].SubLight = ECU_RM_UNSUB_LIGHT;
-     642:	90 e1       	ldi	r25, 0x10	; 16
-     644:	90 93 35 01 	sts	0x0135, r25
+     64a:	90 e1       	ldi	r25, 0x10	; 16
+     64c:	90 93 36 01 	sts	0x0136, r25
 				ECU_RM_Data[ECU_ROOM1].SubTemp = ECU_RM_UNSUB_TMP;
-     648:	8f e0       	ldi	r24, 0x0F	; 15
-     64a:	80 93 36 01 	sts	0x0136, r24
+     650:	8f e0       	ldi	r24, 0x0F	; 15
+     652:	80 93 37 01 	sts	0x0137, r24
 
 				ECU_RM_Data[ECU_ROOM2].SubLight = ECU_RM_UNSUB_LIGHT;
-     64e:	90 93 3a 01 	sts	0x013A, r25
+     656:	90 93 3b 01 	sts	0x013B, r25
 				ECU_RM_Data[ECU_ROOM2].SubTemp = ECU_RM_UNSUB_TMP;
-     652:	80 93 3b 01 	sts	0x013B, r24
-     656:	08 95       	ret
+     65a:	80 93 3c 01 	sts	0x013C, r24
+     65e:	08 95       	ret
 			}
 			break;
 		case ECU_OD_MODE_INFO_TMP:
 			ECU_OD_Mode = ECU_OD_MODE_INFO_ID;
-     658:	10 92 10 01 	sts	0x0110, r1
+     660:	80 e5       	ldi	r24, 0x50	; 80
+     662:	80 93 a8 00 	sts	0x00A8, r24
 			ECU_OD_Data.Temp = SPI_Curr_Reading;
-     65c:	80 91 3d 01 	lds	r24, 0x013D
-     660:	80 93 2f 01 	sts	0x012F, r24
-     664:	08 95       	ret
+     666:	80 91 3e 01 	lds	r24, 0x013E
+     66a:	80 93 30 01 	sts	0x0130, r24
+     66e:	08 95       	ret
 			break;
 		case ECU_OD_MODE_INFO_LIGHT:
 			ECU_OD_Mode = ECU_OD_MODE_INFO_ID;
-     666:	10 92 10 01 	sts	0x0110, r1
+     670:	80 e5       	ldi	r24, 0x50	; 80
+     672:	80 93 a8 00 	sts	0x00A8, r24
 			ECU_OD_Data.Light = SPI_Curr_Reading;
-     66a:	80 91 3d 01 	lds	r24, 0x013D
-     66e:	80 93 30 01 	sts	0x0130, r24
-     672:	08 95       	ret
+     676:	80 91 3e 01 	lds	r24, 0x013E
+     67a:	80 93 31 01 	sts	0x0131, r24
+     67e:	08 95       	ret
 
-00000674 <ECU_RM_Update>:
+00000680 <ECU_RM_Update>:
 
 	}
 }
 static void ECU_RM_Update(ECU_RM_t ROOM){
 
 	switch (SPI_Curr_Reading) {
-     674:	20 91 3d 01 	lds	r18, 0x013D
-     678:	2d 30       	cpi	r18, 0x0D	; 13
-     67a:	c9 f1       	breq	.+114    	; 0x6ee <ECU_RM_Update+0x7a>
-     67c:	2e 30       	cpi	r18, 0x0E	; 14
-     67e:	30 f4       	brcc	.+12     	; 0x68c <ECU_RM_Update+0x18>
-     680:	2b 30       	cpi	r18, 0x0B	; 11
-     682:	69 f0       	breq	.+26     	; 0x69e <ECU_RM_Update+0x2a>
-     684:	2c 30       	cpi	r18, 0x0C	; 12
-     686:	09 f0       	breq	.+2      	; 0x68a <ECU_RM_Update+0x16>
-     688:	55 c0       	rjmp	.+170    	; 0x734 <ECU_RM_Update+0xc0>
-     68a:	18 c0       	rjmp	.+48     	; 0x6bc <ECU_RM_Update+0x48>
-     68c:	2f 30       	cpi	r18, 0x0F	; 15
-     68e:	09 f4       	brne	.+2      	; 0x692 <ECU_RM_Update+0x1e>
-     690:	46 c0       	rjmp	.+140    	; 0x71e <ECU_RM_Update+0xaa>
-     692:	2f 30       	cpi	r18, 0x0F	; 15
-     694:	f8 f0       	brcs	.+62     	; 0x6d4 <ECU_RM_Update+0x60>
-     696:	20 31       	cpi	r18, 0x10	; 16
-     698:	09 f0       	breq	.+2      	; 0x69c <ECU_RM_Update+0x28>
-     69a:	4c c0       	rjmp	.+152    	; 0x734 <ECU_RM_Update+0xc0>
-     69c:	34 c0       	rjmp	.+104    	; 0x706 <ECU_RM_Update+0x92>
+     680:	20 91 3e 01 	lds	r18, 0x013E
+     684:	2d 30       	cpi	r18, 0x0D	; 13
+     686:	c9 f1       	breq	.+114    	; 0x6fa <ECU_RM_Update+0x7a>
+     688:	2e 30       	cpi	r18, 0x0E	; 14
+     68a:	30 f4       	brcc	.+12     	; 0x698 <ECU_RM_Update+0x18>
+     68c:	2b 30       	cpi	r18, 0x0B	; 11
+     68e:	69 f0       	breq	.+26     	; 0x6aa <ECU_RM_Update+0x2a>
+     690:	2c 30       	cpi	r18, 0x0C	; 12
+     692:	09 f0       	breq	.+2      	; 0x696 <ECU_RM_Update+0x16>
+     694:	55 c0       	rjmp	.+170    	; 0x740 <ECU_RM_Update+0xc0>
+     696:	18 c0       	rjmp	.+48     	; 0x6c8 <ECU_RM_Update+0x48>
+     698:	2f 30       	cpi	r18, 0x0F	; 15
+     69a:	09 f4       	brne	.+2      	; 0x69e <ECU_RM_Update+0x1e>
+     69c:	46 c0       	rjmp	.+140    	; 0x72a <ECU_RM_Update+0xaa>
+     69e:	2f 30       	cpi	r18, 0x0F	; 15
+     6a0:	f8 f0       	brcs	.+62     	; 0x6e0 <ECU_RM_Update+0x60>
+     6a2:	20 31       	cpi	r18, 0x10	; 16
+     6a4:	09 f0       	breq	.+2      	; 0x6a8 <ECU_RM_Update+0x28>
+     6a6:	4c c0       	rjmp	.+152    	; 0x740 <ECU_RM_Update+0xc0>
+     6a8:	34 c0       	rjmp	.+104    	; 0x712 <ECU_RM_Update+0x92>
 	case ECU_RM_OFF:
 		ECU_RM_Data[ROOM].SubLight = ECU_RM_UNSUB_LIGHT;
-     69e:	90 e0       	ldi	r25, 0x00	; 0
-     6a0:	fc 01       	movw	r30, r24
-     6a2:	ee 0f       	add	r30, r30
-     6a4:	ff 1f       	adc	r31, r31
-     6a6:	ee 0f       	add	r30, r30
-     6a8:	ff 1f       	adc	r31, r31
-     6aa:	e8 0f       	add	r30, r24
-     6ac:	f9 1f       	adc	r31, r25
-     6ae:	ee 5c       	subi	r30, 0xCE	; 206
-     6b0:	fe 4f       	sbci	r31, 0xFE	; 254
-     6b2:	80 e1       	ldi	r24, 0x10	; 16
-     6b4:	83 83       	std	Z+3, r24	; 0x03
+     6aa:	90 e0       	ldi	r25, 0x00	; 0
+     6ac:	fc 01       	movw	r30, r24
+     6ae:	ee 0f       	add	r30, r30
+     6b0:	ff 1f       	adc	r31, r31
+     6b2:	ee 0f       	add	r30, r30
+     6b4:	ff 1f       	adc	r31, r31
+     6b6:	e8 0f       	add	r30, r24
+     6b8:	f9 1f       	adc	r31, r25
+     6ba:	ed 5c       	subi	r30, 0xCD	; 205
+     6bc:	fe 4f       	sbci	r31, 0xFE	; 254
+     6be:	80 e1       	ldi	r24, 0x10	; 16
+     6c0:	83 83       	std	Z+3, r24	; 0x03
 		ECU_RM_Data[ROOM].SubTemp = ECU_RM_UNSUB_TMP;
-     6b6:	8f e0       	ldi	r24, 0x0F	; 15
-     6b8:	84 83       	std	Z+4, r24	; 0x04
-     6ba:	0a c0       	rjmp	.+20     	; 0x6d0 <ECU_RM_Update+0x5c>
+     6c2:	8f e0       	ldi	r24, 0x0F	; 15
+     6c4:	84 83       	std	Z+4, r24	; 0x04
+     6c6:	0a c0       	rjmp	.+20     	; 0x6dc <ECU_RM_Update+0x5c>
 		ECU_RM_Data[ROOM].State = ECU_RM_OFF;
 		break;
 	case ECU_RM_ON:
 		ECU_RM_Data[ROOM].State = ECU_RM_ON;
-     6bc:	90 e0       	ldi	r25, 0x00	; 0
-     6be:	fc 01       	movw	r30, r24
-     6c0:	ee 0f       	add	r30, r30
-     6c2:	ff 1f       	adc	r31, r31
-     6c4:	ee 0f       	add	r30, r30
-     6c6:	ff 1f       	adc	r31, r31
-     6c8:	e8 0f       	add	r30, r24
-     6ca:	f9 1f       	adc	r31, r25
-     6cc:	ee 5c       	subi	r30, 0xCE	; 206
-     6ce:	fe 4f       	sbci	r31, 0xFE	; 254
-     6d0:	22 83       	std	Z+2, r18	; 0x02
-     6d2:	08 95       	ret
+     6c8:	90 e0       	ldi	r25, 0x00	; 0
+     6ca:	fc 01       	movw	r30, r24
+     6cc:	ee 0f       	add	r30, r30
+     6ce:	ff 1f       	adc	r31, r31
+     6d0:	ee 0f       	add	r30, r30
+     6d2:	ff 1f       	adc	r31, r31
+     6d4:	e8 0f       	add	r30, r24
+     6d6:	f9 1f       	adc	r31, r25
+     6d8:	ed 5c       	subi	r30, 0xCD	; 205
+     6da:	fe 4f       	sbci	r31, 0xFE	; 254
+     6dc:	22 83       	std	Z+2, r18	; 0x02
+     6de:	08 95       	ret
 		break;
 	case ECU_RM_SUB_LIGHT:
 		ECU_RM_Data[ROOM].SubLight = ECU_RM_SUB_LIGHT;
-     6d4:	90 e0       	ldi	r25, 0x00	; 0
-     6d6:	fc 01       	movw	r30, r24
-     6d8:	ee 0f       	add	r30, r30
-     6da:	ff 1f       	adc	r31, r31
-     6dc:	ee 0f       	add	r30, r30
-     6de:	ff 1f       	adc	r31, r31
-     6e0:	e8 0f       	add	r30, r24
-     6e2:	f9 1f       	adc	r31, r25
-     6e4:	ee 5c       	subi	r30, 0xCE	; 206
-     6e6:	fe 4f       	sbci	r31, 0xFE	; 254
-     6e8:	8e e0       	ldi	r24, 0x0E	; 14
-     6ea:	83 83       	std	Z+3, r24	; 0x03
-     6ec:	08 95       	ret
+     6e0:	90 e0       	ldi	r25, 0x00	; 0
+     6e2:	fc 01       	movw	r30, r24
+     6e4:	ee 0f       	add	r30, r30
+     6e6:	ff 1f       	adc	r31, r31
+     6e8:	ee 0f       	add	r30, r30
+     6ea:	ff 1f       	adc	r31, r31
+     6ec:	e8 0f       	add	r30, r24
+     6ee:	f9 1f       	adc	r31, r25
+     6f0:	ed 5c       	subi	r30, 0xCD	; 205
+     6f2:	fe 4f       	sbci	r31, 0xFE	; 254
+     6f4:	8e e0       	ldi	r24, 0x0E	; 14
+     6f6:	83 83       	std	Z+3, r24	; 0x03
+     6f8:	08 95       	ret
 		break;
 	case ECU_RM_SUB_TMP:
 		ECU_RM_Data[ROOM].SubTemp = ECU_RM_SUB_TMP;
-     6ee:	90 e0       	ldi	r25, 0x00	; 0
-     6f0:	fc 01       	movw	r30, r24
-     6f2:	ee 0f       	add	r30, r30
-     6f4:	ff 1f       	adc	r31, r31
-     6f6:	ee 0f       	add	r30, r30
-     6f8:	ff 1f       	adc	r31, r31
-     6fa:	e8 0f       	add	r30, r24
-     6fc:	f9 1f       	adc	r31, r25
-     6fe:	ee 5c       	subi	r30, 0xCE	; 206
-     700:	fe 4f       	sbci	r31, 0xFE	; 254
-     702:	24 83       	std	Z+4, r18	; 0x04
-     704:	08 95       	ret
+     6fa:	90 e0       	ldi	r25, 0x00	; 0
+     6fc:	fc 01       	movw	r30, r24
+     6fe:	ee 0f       	add	r30, r30
+     700:	ff 1f       	adc	r31, r31
+     702:	ee 0f       	add	r30, r30
+     704:	ff 1f       	adc	r31, r31
+     706:	e8 0f       	add	r30, r24
+     708:	f9 1f       	adc	r31, r25
+     70a:	ed 5c       	subi	r30, 0xCD	; 205
+     70c:	fe 4f       	sbci	r31, 0xFE	; 254
+     70e:	24 83       	std	Z+4, r18	; 0x04
+     710:	08 95       	ret
 		break;
 	case ECU_RM_UNSUB_LIGHT:
 		ECU_RM_Data[ROOM].SubLight = ECU_RM_UNSUB_LIGHT;
-     706:	90 e0       	ldi	r25, 0x00	; 0
-     708:	fc 01       	movw	r30, r24
-     70a:	ee 0f       	add	r30, r30
-     70c:	ff 1f       	adc	r31, r31
-     70e:	ee 0f       	add	r30, r30
-     710:	ff 1f       	adc	r31, r31
-     712:	e8 0f       	add	r30, r24
-     714:	f9 1f       	adc	r31, r25
-     716:	ee 5c       	subi	r30, 0xCE	; 206
-     718:	fe 4f       	sbci	r31, 0xFE	; 254
-     71a:	23 83       	std	Z+3, r18	; 0x03
-     71c:	08 95       	ret
+     712:	90 e0       	ldi	r25, 0x00	; 0
+     714:	fc 01       	movw	r30, r24
+     716:	ee 0f       	add	r30, r30
+     718:	ff 1f       	adc	r31, r31
+     71a:	ee 0f       	add	r30, r30
+     71c:	ff 1f       	adc	r31, r31
+     71e:	e8 0f       	add	r30, r24
+     720:	f9 1f       	adc	r31, r25
+     722:	ed 5c       	subi	r30, 0xCD	; 205
+     724:	fe 4f       	sbci	r31, 0xFE	; 254
+     726:	23 83       	std	Z+3, r18	; 0x03
+     728:	08 95       	ret
 		break;
 	case ECU_RM_UNSUB_TMP:
 		ECU_RM_Data[ROOM].SubTemp = ECU_RM_UNSUB_TMP;
-     71e:	90 e0       	ldi	r25, 0x00	; 0
-     720:	fc 01       	movw	r30, r24
-     722:	ee 0f       	add	r30, r30
-     724:	ff 1f       	adc	r31, r31
-     726:	ee 0f       	add	r30, r30
-     728:	ff 1f       	adc	r31, r31
-     72a:	e8 0f       	add	r30, r24
-     72c:	f9 1f       	adc	r31, r25
-     72e:	ee 5c       	subi	r30, 0xCE	; 206
-     730:	fe 4f       	sbci	r31, 0xFE	; 254
-     732:	24 83       	std	Z+4, r18	; 0x04
-     734:	08 95       	ret
+     72a:	90 e0       	ldi	r25, 0x00	; 0
+     72c:	fc 01       	movw	r30, r24
+     72e:	ee 0f       	add	r30, r30
+     730:	ff 1f       	adc	r31, r31
+     732:	ee 0f       	add	r30, r30
+     734:	ff 1f       	adc	r31, r31
+     736:	e8 0f       	add	r30, r24
+     738:	f9 1f       	adc	r31, r25
+     73a:	ed 5c       	subi	r30, 0xCD	; 205
+     73c:	fe 4f       	sbci	r31, 0xFE	; 254
+     73e:	24 83       	std	Z+4, r18	; 0x04
+     740:	08 95       	ret
 
-00000736 <ECU_RM_Update_Info>:
+00000742 <ECU_RM_Update_Info>:
 #include "SPI.h"
 ECU_RM_DATA_t ECU_RM_Data[MAX_ECU_RM];
 ECU_RM_INFO_t ECU_RM_Info = ECU_RM_OFF;
 static void ECU_RM_Update(ECU_RM_t ROOM);
 void ECU_RM_Update_Info(void){
 	if (SS_ENABLE == SPI_Slave.Select[SS_RM1]) {
-     736:	80 91 1a 01 	lds	r24, 0x011A
-     73a:	81 30       	cpi	r24, 0x01	; 1
-     73c:	21 f4       	brne	.+8      	; 0x746 <ECU_RM_Update_Info+0x10>
+     742:	80 91 1b 01 	lds	r24, 0x011B
+     746:	81 30       	cpi	r24, 0x01	; 1
+     748:	21 f4       	brne	.+8      	; 0x752 <ECU_RM_Update_Info+0x10>
 		/*update reading&writing*/
 		ECU_RM_Update(ECU_ROOM1);
-     73e:	80 e0       	ldi	r24, 0x00	; 0
-     740:	0e 94 3a 03 	call	0x674	; 0x674 <ECU_RM_Update>
-     744:	08 95       	ret
+     74a:	80 e0       	ldi	r24, 0x00	; 0
+     74c:	0e 94 40 03 	call	0x680	; 0x680 <ECU_RM_Update>
+     750:	08 95       	ret
 	} else if (SS_ENABLE == SPI_Slave.Select[SS_RM2]) {
-     746:	80 91 1b 01 	lds	r24, 0x011B
-     74a:	81 30       	cpi	r24, 0x01	; 1
-     74c:	11 f4       	brne	.+4      	; 0x752 <ECU_RM_Update_Info+0x1c>
+     752:	80 91 1c 01 	lds	r24, 0x011C
+     756:	81 30       	cpi	r24, 0x01	; 1
+     758:	11 f4       	brne	.+4      	; 0x75e <ECU_RM_Update_Info+0x1c>
 		ECU_RM_Update(ECU_ROOM2);
-     74e:	0e 94 3a 03 	call	0x674	; 0x674 <ECU_RM_Update>
-     752:	08 95       	ret
+     75a:	0e 94 40 03 	call	0x680	; 0x680 <ECU_RM_Update>
+     75e:	08 95       	ret
 
-00000754 <KEYPAD_Init>:
+00000760 <KEYPAD_Init>:
 	KEYPAD_COL_t KYPAD_Col[KEYPAD_MAX_COLS] = {KEYPAD_COL1, KEYPAD_COL2, KEYPAD_COL3};
 #if KYPAD_SIZE == FOUR_X_FOUR
 	KYPAD_Col[3] = KEYPAD_COL4;
 #endif
 	for(Idx = 0; Idx < KEYPAD_MAX_COLS; Idx++){
 		DIO_WRITE_PIN_VALUE(KYPAD_Col[Idx], DIO_PIN_STATE_HIGH);
-     754:	80 e0       	ldi	r24, 0x00	; 0
-     756:	61 e0       	ldi	r22, 0x01	; 1
-     758:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-     75c:	81 e0       	ldi	r24, 0x01	; 1
-     75e:	61 e0       	ldi	r22, 0x01	; 1
-     760:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-     764:	82 e0       	ldi	r24, 0x02	; 2
-     766:	61 e0       	ldi	r22, 0x01	; 1
-     768:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-     76c:	83 e0       	ldi	r24, 0x03	; 3
-     76e:	61 e0       	ldi	r22, 0x01	; 1
-     770:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     760:	80 e0       	ldi	r24, 0x00	; 0
+     762:	61 e0       	ldi	r22, 0x01	; 1
+     764:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     768:	81 e0       	ldi	r24, 0x01	; 1
+     76a:	61 e0       	ldi	r22, 0x01	; 1
+     76c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     770:	82 e0       	ldi	r24, 0x02	; 2
+     772:	61 e0       	ldi	r22, 0x01	; 1
+     774:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     778:	83 e0       	ldi	r24, 0x03	; 3
+     77a:	61 e0       	ldi	r22, 0x01	; 1
+     77c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 	}
 }
-     774:	08 95       	ret
+     780:	08 95       	ret
 
-00000776 <KEYPAD_Read>:
+00000782 <KEYPAD_Read>:
 /****************************************************************************/
 UINT8_t KEYPAD_Read(void){
-     776:	cf 92       	push	r12
-     778:	df 92       	push	r13
-     77a:	ef 92       	push	r14
-     77c:	ff 92       	push	r15
-     77e:	0f 93       	push	r16
-     780:	1f 93       	push	r17
-     782:	df 93       	push	r29
-     784:	cf 93       	push	r28
-     786:	cd b7       	in	r28, 0x3d	; 61
-     788:	de b7       	in	r29, 0x3e	; 62
-     78a:	64 97       	sbiw	r28, 0x14	; 20
-     78c:	0f b6       	in	r0, 0x3f	; 63
-     78e:	f8 94       	cli
-     790:	de bf       	out	0x3e, r29	; 62
-     792:	0f be       	out	0x3f, r0	; 63
-     794:	cd bf       	out	0x3d, r28	; 61
+     782:	cf 92       	push	r12
+     784:	df 92       	push	r13
+     786:	ef 92       	push	r14
+     788:	ff 92       	push	r15
+     78a:	0f 93       	push	r16
+     78c:	1f 93       	push	r17
+     78e:	df 93       	push	r29
+     790:	cf 93       	push	r28
+     792:	cd b7       	in	r28, 0x3d	; 61
+     794:	de b7       	in	r29, 0x3e	; 62
+     796:	64 97       	sbiw	r28, 0x14	; 20
+     798:	0f b6       	in	r0, 0x3f	; 63
+     79a:	f8 94       	cli
+     79c:	de bf       	out	0x3e, r29	; 62
+     79e:	0f be       	out	0x3f, r0	; 63
+     7a0:	cd bf       	out	0x3d, r28	; 61
 	UINT8_t Col_Idx, Row_Idx, Key_Pressed = NO_KEY;
 	KEYPAD_COL_t KYPAD_Col[KEYPAD_MAX_COLS] = {KEYPAD_COL1, KEYPAD_COL2, KEYPAD_COL3};
-     796:	19 82       	std	Y+1, r1	; 0x01
-     798:	1a 82       	std	Y+2, r1	; 0x02
-     79a:	1b 82       	std	Y+3, r1	; 0x03
-     79c:	1c 82       	std	Y+4, r1	; 0x04
-     79e:	81 e0       	ldi	r24, 0x01	; 1
-     7a0:	8a 83       	std	Y+2, r24	; 0x02
-     7a2:	82 e0       	ldi	r24, 0x02	; 2
-     7a4:	8b 83       	std	Y+3, r24	; 0x03
+     7a2:	19 82       	std	Y+1, r1	; 0x01
+     7a4:	1a 82       	std	Y+2, r1	; 0x02
+     7a6:	1b 82       	std	Y+3, r1	; 0x03
+     7a8:	1c 82       	std	Y+4, r1	; 0x04
+     7aa:	81 e0       	ldi	r24, 0x01	; 1
+     7ac:	8a 83       	std	Y+2, r24	; 0x02
+     7ae:	82 e0       	ldi	r24, 0x02	; 2
+     7b0:	8b 83       	std	Y+3, r24	; 0x03
 	KEYPAD_ROW_t KEYPAD_Row[KEYPAD_MAX_ROWS] = {KEYPAD_ROW1, KEYPAD_ROW2, KEYPAD_ROW3};
 	UINT8_t Keypad[KEYPAD_MAX_ROWS][KEYPAD_MAX_COLS] = KEYPAD_VALUES;
-     7a6:	de 01       	movw	r26, r28
-     7a8:	15 96       	adiw	r26, 0x05	; 5
-     7aa:	e6 ed       	ldi	r30, 0xD6	; 214
-     7ac:	f0 e0       	ldi	r31, 0x00	; 0
-     7ae:	80 e1       	ldi	r24, 0x10	; 16
-     7b0:	01 90       	ld	r0, Z+
-     7b2:	0d 92       	st	X+, r0
-     7b4:	81 50       	subi	r24, 0x01	; 1
-     7b6:	e1 f7       	brne	.-8      	; 0x7b0 <KEYPAD_Read+0x3a>
+     7b2:	de 01       	movw	r26, r28
+     7b4:	15 96       	adiw	r26, 0x05	; 5
+     7b6:	e7 ed       	ldi	r30, 0xD7	; 215
+     7b8:	f0 e0       	ldi	r31, 0x00	; 0
+     7ba:	80 e1       	ldi	r24, 0x10	; 16
+     7bc:	01 90       	ld	r0, Z+
+     7be:	0d 92       	st	X+, r0
+     7c0:	81 50       	subi	r24, 0x01	; 1
+     7c2:	e1 f7       	brne	.-8      	; 0x7bc <KEYPAD_Read+0x3a>
 #if KYPAD_SIZE == FOUR_X_FOUR
 	KYPAD_Col[3] = KEYPAD_COL4;
-     7b8:	83 e0       	ldi	r24, 0x03	; 3
-     7ba:	8c 83       	std	Y+4, r24	; 0x04
+     7c4:	83 e0       	ldi	r24, 0x03	; 3
+     7c6:	8c 83       	std	Y+4, r24	; 0x04
 	KEYPAD_Row[3] = KEYPAD_ROW4;
-     7bc:	00 e0       	ldi	r16, 0x00	; 0
-     7be:	10 e0       	ldi	r17, 0x00	; 0
+     7c8:	00 e0       	ldi	r16, 0x00	; 0
+     7ca:	10 e0       	ldi	r17, 0x00	; 0
 #endif
 	for(Col_Idx = 0; Col_Idx < KEYPAD_MAX_COLS; Col_Idx++){
 		DIO_WRITE_PIN_VALUE(KYPAD_Col[Col_Idx], DIO_PIN_STATE_LOW);
-     7c0:	6e 01       	movw	r12, r28
-     7c2:	08 94       	sec
-     7c4:	c1 1c       	adc	r12, r1
-     7c6:	d1 1c       	adc	r13, r1
-     7c8:	f6 01       	movw	r30, r12
-     7ca:	e0 0f       	add	r30, r16
-     7cc:	f1 1f       	adc	r31, r17
-     7ce:	e0 80       	ld	r14, Z
-     7d0:	8e 2d       	mov	r24, r14
-     7d2:	60 e0       	ldi	r22, 0x00	; 0
-     7d4:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     7cc:	6e 01       	movw	r12, r28
+     7ce:	08 94       	sec
+     7d0:	c1 1c       	adc	r12, r1
+     7d2:	d1 1c       	adc	r13, r1
+     7d4:	f6 01       	movw	r30, r12
+     7d6:	e0 0f       	add	r30, r16
+     7d8:	f1 1f       	adc	r31, r17
+     7da:	e0 80       	ld	r14, Z
+     7dc:	8e 2d       	mov	r24, r14
+     7de:	60 e0       	ldi	r22, 0x00	; 0
+     7e0:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		for(Row_Idx = 0; Row_Idx < KEYPAD_MAX_ROWS; Row_Idx++){
 			if(DIO_PIN_STATE_LOW == DIO_READ_PIN_VALUE(KEYPAD_Row[Row_Idx])){
-     7d8:	64 e0       	ldi	r22, 0x04	; 4
-     7da:	f6 2e       	mov	r15, r22
-     7dc:	84 e0       	ldi	r24, 0x04	; 4
-     7de:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
-     7e2:	88 23       	and	r24, r24
-     7e4:	19 f4       	brne	.+6      	; 0x7ec <KEYPAD_Read+0x76>
-     7e6:	80 e0       	ldi	r24, 0x00	; 0
-     7e8:	90 e0       	ldi	r25, 0x00	; 0
-     7ea:	1d c0       	rjmp	.+58     	; 0x826 <KEYPAD_Read+0xb0>
-     7ec:	55 e0       	ldi	r21, 0x05	; 5
-     7ee:	f5 2e       	mov	r15, r21
-     7f0:	85 e0       	ldi	r24, 0x05	; 5
-     7f2:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
-     7f6:	88 23       	and	r24, r24
-     7f8:	19 f4       	brne	.+6      	; 0x800 <KEYPAD_Read+0x8a>
-     7fa:	81 e0       	ldi	r24, 0x01	; 1
-     7fc:	90 e0       	ldi	r25, 0x00	; 0
-     7fe:	13 c0       	rjmp	.+38     	; 0x826 <KEYPAD_Read+0xb0>
-     800:	46 e0       	ldi	r20, 0x06	; 6
-     802:	f4 2e       	mov	r15, r20
-     804:	86 e0       	ldi	r24, 0x06	; 6
-     806:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
-     80a:	88 23       	and	r24, r24
-     80c:	19 f4       	brne	.+6      	; 0x814 <KEYPAD_Read+0x9e>
-     80e:	82 e0       	ldi	r24, 0x02	; 2
-     810:	90 e0       	ldi	r25, 0x00	; 0
-     812:	09 c0       	rjmp	.+18     	; 0x826 <KEYPAD_Read+0xb0>
-     814:	87 e0       	ldi	r24, 0x07	; 7
-     816:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
-     81a:	88 23       	and	r24, r24
-     81c:	c9 f4       	brne	.+50     	; 0x850 <KEYPAD_Read+0xda>
-     81e:	83 e0       	ldi	r24, 0x03	; 3
-     820:	90 e0       	ldi	r25, 0x00	; 0
-     822:	37 e0       	ldi	r19, 0x07	; 7
-     824:	f3 2e       	mov	r15, r19
+     7e4:	64 e0       	ldi	r22, 0x04	; 4
+     7e6:	f6 2e       	mov	r15, r22
+     7e8:	84 e0       	ldi	r24, 0x04	; 4
+     7ea:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
+     7ee:	88 23       	and	r24, r24
+     7f0:	19 f4       	brne	.+6      	; 0x7f8 <KEYPAD_Read+0x76>
+     7f2:	80 e0       	ldi	r24, 0x00	; 0
+     7f4:	90 e0       	ldi	r25, 0x00	; 0
+     7f6:	1d c0       	rjmp	.+58     	; 0x832 <KEYPAD_Read+0xb0>
+     7f8:	55 e0       	ldi	r21, 0x05	; 5
+     7fa:	f5 2e       	mov	r15, r21
+     7fc:	85 e0       	ldi	r24, 0x05	; 5
+     7fe:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
+     802:	88 23       	and	r24, r24
+     804:	19 f4       	brne	.+6      	; 0x80c <KEYPAD_Read+0x8a>
+     806:	81 e0       	ldi	r24, 0x01	; 1
+     808:	90 e0       	ldi	r25, 0x00	; 0
+     80a:	13 c0       	rjmp	.+38     	; 0x832 <KEYPAD_Read+0xb0>
+     80c:	46 e0       	ldi	r20, 0x06	; 6
+     80e:	f4 2e       	mov	r15, r20
+     810:	86 e0       	ldi	r24, 0x06	; 6
+     812:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
+     816:	88 23       	and	r24, r24
+     818:	19 f4       	brne	.+6      	; 0x820 <KEYPAD_Read+0x9e>
+     81a:	82 e0       	ldi	r24, 0x02	; 2
+     81c:	90 e0       	ldi	r25, 0x00	; 0
+     81e:	09 c0       	rjmp	.+18     	; 0x832 <KEYPAD_Read+0xb0>
+     820:	87 e0       	ldi	r24, 0x07	; 7
+     822:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
+     826:	88 23       	and	r24, r24
+     828:	c9 f4       	brne	.+50     	; 0x85c <KEYPAD_Read+0xda>
+     82a:	83 e0       	ldi	r24, 0x03	; 3
+     82c:	90 e0       	ldi	r25, 0x00	; 0
+     82e:	37 e0       	ldi	r19, 0x07	; 7
+     830:	f3 2e       	mov	r15, r19
 				Key_Pressed = Keypad[Row_Idx][Col_Idx];
-     826:	88 0f       	add	r24, r24
-     828:	99 1f       	adc	r25, r25
-     82a:	88 0f       	add	r24, r24
-     82c:	99 1f       	adc	r25, r25
-     82e:	fe 01       	movw	r30, r28
-     830:	31 96       	adiw	r30, 0x01	; 1
-     832:	e8 0f       	add	r30, r24
-     834:	f9 1f       	adc	r31, r25
-     836:	e0 0f       	add	r30, r16
-     838:	f1 1f       	adc	r31, r17
-     83a:	14 81       	ldd	r17, Z+4	; 0x04
+     832:	88 0f       	add	r24, r24
+     834:	99 1f       	adc	r25, r25
+     836:	88 0f       	add	r24, r24
+     838:	99 1f       	adc	r25, r25
+     83a:	fe 01       	movw	r30, r28
+     83c:	31 96       	adiw	r30, 0x01	; 1
+     83e:	e8 0f       	add	r30, r24
+     840:	f9 1f       	adc	r31, r25
+     842:	e0 0f       	add	r30, r16
+     844:	f1 1f       	adc	r31, r17
+     846:	14 81       	ldd	r17, Z+4	; 0x04
 				while(DIO_PIN_STATE_LOW == DIO_READ_PIN_VALUE(KEYPAD_Row[Row_Idx]));
-     83c:	8f 2d       	mov	r24, r15
-     83e:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
-     842:	88 23       	and	r24, r24
-     844:	d9 f3       	breq	.-10     	; 0x83c <KEYPAD_Read+0xc6>
+     848:	8f 2d       	mov	r24, r15
+     84a:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <DIO_READ_PIN_VALUE>
+     84e:	88 23       	and	r24, r24
+     850:	d9 f3       	breq	.-10     	; 0x848 <KEYPAD_Read+0xc6>
 				DIO_WRITE_PIN_VALUE(KYPAD_Col[Col_Idx], DIO_PIN_STATE_HIGH);
-     846:	8e 2d       	mov	r24, r14
-     848:	61 e0       	ldi	r22, 0x01	; 1
-     84a:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-     84e:	0b c0       	rjmp	.+22     	; 0x866 <__stack+0x7>
+     852:	8e 2d       	mov	r24, r14
+     854:	61 e0       	ldi	r22, 0x01	; 1
+     856:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     85a:	0b c0       	rjmp	.+22     	; 0x872 <__stack+0x13>
 				return Key_Pressed;
 			}
 		}
 		DIO_WRITE_PIN_VALUE(KYPAD_Col[Col_Idx], DIO_PIN_STATE_HIGH);
-     850:	8e 2d       	mov	r24, r14
-     852:	61 e0       	ldi	r22, 0x01	; 1
-     854:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-     858:	0f 5f       	subi	r16, 0xFF	; 255
-     85a:	1f 4f       	sbci	r17, 0xFF	; 255
+     85c:	8e 2d       	mov	r24, r14
+     85e:	61 e0       	ldi	r22, 0x01	; 1
+     860:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     864:	0f 5f       	subi	r16, 0xFF	; 255
+     866:	1f 4f       	sbci	r17, 0xFF	; 255
 	UINT8_t Keypad[KEYPAD_MAX_ROWS][KEYPAD_MAX_COLS] = KEYPAD_VALUES;
 #if KYPAD_SIZE == FOUR_X_FOUR
 	KYPAD_Col[3] = KEYPAD_COL4;
 	KEYPAD_Row[3] = KEYPAD_ROW4;
 #endif
 	for(Col_Idx = 0; Col_Idx < KEYPAD_MAX_COLS; Col_Idx++){
-     85c:	04 30       	cpi	r16, 0x04	; 4
-     85e:	11 05       	cpc	r17, r1
-     860:	09 f0       	breq	.+2      	; 0x864 <__stack+0x5>
-     862:	b2 cf       	rjmp	.-156    	; 0x7c8 <KEYPAD_Read+0x52>
-     864:	16 e1       	ldi	r17, 0x16	; 22
+     868:	04 30       	cpi	r16, 0x04	; 4
+     86a:	11 05       	cpc	r17, r1
+     86c:	09 f0       	breq	.+2      	; 0x870 <__stack+0x11>
+     86e:	b2 cf       	rjmp	.-156    	; 0x7d4 <KEYPAD_Read+0x52>
+     870:	16 e1       	ldi	r17, 0x16	; 22
 			}
 		}
 		DIO_WRITE_PIN_VALUE(KYPAD_Col[Col_Idx], DIO_PIN_STATE_HIGH);
 	}
 	return Key_Pressed;
 }
-     866:	81 2f       	mov	r24, r17
-     868:	64 96       	adiw	r28, 0x14	; 20
-     86a:	0f b6       	in	r0, 0x3f	; 63
-     86c:	f8 94       	cli
-     86e:	de bf       	out	0x3e, r29	; 62
-     870:	0f be       	out	0x3f, r0	; 63
-     872:	cd bf       	out	0x3d, r28	; 61
-     874:	cf 91       	pop	r28
-     876:	df 91       	pop	r29
-     878:	1f 91       	pop	r17
-     87a:	0f 91       	pop	r16
-     87c:	ff 90       	pop	r15
-     87e:	ef 90       	pop	r14
-     880:	df 90       	pop	r13
-     882:	cf 90       	pop	r12
-     884:	08 95       	ret
+     872:	81 2f       	mov	r24, r17
+     874:	64 96       	adiw	r28, 0x14	; 20
+     876:	0f b6       	in	r0, 0x3f	; 63
+     878:	f8 94       	cli
+     87a:	de bf       	out	0x3e, r29	; 62
+     87c:	0f be       	out	0x3f, r0	; 63
+     87e:	cd bf       	out	0x3d, r28	; 61
+     880:	cf 91       	pop	r28
+     882:	df 91       	pop	r29
+     884:	1f 91       	pop	r17
+     886:	0f 91       	pop	r16
+     888:	ff 90       	pop	r15
+     88a:	ef 90       	pop	r14
+     88c:	df 90       	pop	r13
+     88e:	cf 90       	pop	r12
+     890:	08 95       	ret
 
-00000886 <IntToStr>:
+00000892 <IntToStr>:
 		break;
 
 	}
 	return IsFinished;
 }
 void IntToStr(char*Str,UINT8_t Num){
-     886:	fc 01       	movw	r30, r24
-     888:	26 2f       	mov	r18, r22
+     892:	fc 01       	movw	r30, r24
+     894:	26 2f       	mov	r18, r22
 	if (Num / 10) {
-     88a:	6a 30       	cpi	r22, 0x0A	; 10
-     88c:	60 f0       	brcs	.+24     	; 0x8a6 <IntToStr+0x20>
+     896:	6a 30       	cpi	r22, 0x0A	; 10
+     898:	60 f0       	brcs	.+24     	; 0x8b2 <IntToStr+0x20>
 		Str[0] = (Num / 10) + '0';
-     88e:	86 2f       	mov	r24, r22
-     890:	6a e0       	ldi	r22, 0x0A	; 10
-     892:	0e 94 0e 09 	call	0x121c	; 0x121c <__udivmodqi4>
-     896:	80 5d       	subi	r24, 0xD0	; 208
-     898:	80 83       	st	Z, r24
+     89a:	86 2f       	mov	r24, r22
+     89c:	6a e0       	ldi	r22, 0x0A	; 10
+     89e:	0e 94 14 09 	call	0x1228	; 0x1228 <__udivmodqi4>
+     8a2:	80 5d       	subi	r24, 0xD0	; 208
+     8a4:	80 83       	st	Z, r24
 		Str[1] = (Num % 10) + '0';
-     89a:	82 2f       	mov	r24, r18
-     89c:	0e 94 0e 09 	call	0x121c	; 0x121c <__udivmodqi4>
-     8a0:	90 5d       	subi	r25, 0xD0	; 208
-     8a2:	91 83       	std	Z+1, r25	; 0x01
-     8a4:	04 c0       	rjmp	.+8      	; 0x8ae <IntToStr+0x28>
+     8a6:	82 2f       	mov	r24, r18
+     8a8:	0e 94 14 09 	call	0x1228	; 0x1228 <__udivmodqi4>
+     8ac:	90 5d       	subi	r25, 0xD0	; 208
+     8ae:	91 83       	std	Z+1, r25	; 0x01
+     8b0:	04 c0       	rjmp	.+8      	; 0x8ba <IntToStr+0x28>
 		Str[2] = '\0';
 	} else {
 		Str[0] = Num + '0';
-     8a6:	20 5d       	subi	r18, 0xD0	; 208
-     8a8:	20 83       	st	Z, r18
+     8b2:	20 5d       	subi	r18, 0xD0	; 208
+     8b4:	20 83       	st	Z, r18
 		Str[1] = ' ';
-     8aa:	80 e2       	ldi	r24, 0x20	; 32
-     8ac:	81 83       	std	Z+1, r24	; 0x01
+     8b6:	80 e2       	ldi	r24, 0x20	; 32
+     8b8:	81 83       	std	Z+1, r24	; 0x01
 		Str[2] = '\0';
-     8ae:	12 82       	std	Z+2, r1	; 0x02
-     8b0:	08 95       	ret
+     8ba:	12 82       	std	Z+2, r1	; 0x02
+     8bc:	08 95       	ret
 
-000008b2 <LCD_Write_Char>:
+000008be <LCD_Write_Char>:
 		IsFinished=LCD_Send_Command(Address_Counter);
 	}
 	return IsFinished;
 }
 /*************************************************************************/
 BOOL_t LCD_Write_Char(const UINT8_t Character) {
-     8b2:	1f 93       	push	r17
-     8b4:	18 2f       	mov	r17, r24
+     8be:	1f 93       	push	r17
+     8c0:	18 2f       	mov	r17, r24
 	static UINT8_t Cnt=0;
 	BOOL_t IsFinished=FALSE;
 	++Cnt;
-     8b6:	80 91 14 01 	lds	r24, 0x0114
-     8ba:	8f 5f       	subi	r24, 0xFF	; 255
-     8bc:	80 93 14 01 	sts	0x0114, r24
+     8c2:	80 91 15 01 	lds	r24, 0x0115
+     8c6:	8f 5f       	subi	r24, 0xFF	; 255
+     8c8:	80 93 15 01 	sts	0x0115, r24
 	if(1==Cnt){
-     8c0:	81 30       	cpi	r24, 0x01	; 1
-     8c2:	21 f5       	brne	.+72     	; 0x90c <LCD_Write_Char+0x5a>
+     8cc:	81 30       	cpi	r24, 0x01	; 1
+     8ce:	21 f5       	brne	.+72     	; 0x918 <LCD_Write_Char+0x5a>
 		// Write operation
 		DIO_WRITE_PIN_VALUE(RW_PIN_NUMBER, DIO_PIN_STATE_LOW);     //  R/W
-     8c4:	8d e1       	ldi	r24, 0x1D	; 29
-     8c6:	60 e0       	ldi	r22, 0x00	; 0
-     8c8:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     8d0:	8d e1       	ldi	r24, 0x1D	; 29
+     8d2:	60 e0       	ldi	r22, 0x00	; 0
+     8d4:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		// Data Mode
 		DIO_WRITE_PIN_VALUE(RS_PIN_NUMBER, DIO_PIN_STATE_HIGH);   //   RS
-     8cc:	8e e1       	ldi	r24, 0x1E	; 30
-     8ce:	61 e0       	ldi	r22, 0x01	; 1
-     8d0:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     8d8:	8e e1       	ldi	r24, 0x1E	; 30
+     8da:	61 e0       	ldi	r22, 0x01	; 1
+     8dc:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_HIGH);   //  E
-     8d4:	8c e1       	ldi	r24, 0x1C	; 28
-     8d6:	61 e0       	ldi	r22, 0x01	; 1
-     8d8:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     8e0:	8c e1       	ldi	r24, 0x1C	; 28
+     8e2:	61 e0       	ldi	r22, 0x01	; 1
+     8e4:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		// SEND MSB
 		DIO_WRITE_PIN_VALUE(D4_PIN_NUMBER, GET_BIT(Character, 4));   //  D4
-     8dc:	61 2f       	mov	r22, r17
-     8de:	62 95       	swap	r22
-     8e0:	61 70       	andi	r22, 0x01	; 1
-     8e2:	88 e1       	ldi	r24, 0x18	; 24
-     8e4:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-		DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(Character, 5));   //  D5
      8e8:	61 2f       	mov	r22, r17
      8ea:	62 95       	swap	r22
-     8ec:	66 95       	lsr	r22
-     8ee:	61 70       	andi	r22, 0x01	; 1
-     8f0:	89 e1       	ldi	r24, 0x19	; 25
-     8f2:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     8ec:	61 70       	andi	r22, 0x01	; 1
+     8ee:	88 e1       	ldi	r24, 0x18	; 24
+     8f0:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+		DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(Character, 5));   //  D5
+     8f4:	61 2f       	mov	r22, r17
+     8f6:	62 95       	swap	r22
+     8f8:	66 95       	lsr	r22
+     8fa:	61 70       	andi	r22, 0x01	; 1
+     8fc:	89 e1       	ldi	r24, 0x19	; 25
+     8fe:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D6_PIN_NUMBER, GET_BIT(Character, 6));   //  D6
-     8f6:	12 95       	swap	r17
-     8f8:	16 95       	lsr	r17
-     8fa:	16 95       	lsr	r17
-     8fc:	13 70       	andi	r17, 0x03	; 3
-     8fe:	61 2f       	mov	r22, r17
-     900:	61 70       	andi	r22, 0x01	; 1
-     902:	8a e1       	ldi	r24, 0x1A	; 26
-     904:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     902:	12 95       	swap	r17
+     904:	16 95       	lsr	r17
+     906:	16 95       	lsr	r17
+     908:	13 70       	andi	r17, 0x03	; 3
+     90a:	61 2f       	mov	r22, r17
+     90c:	61 70       	andi	r22, 0x01	; 1
+     90e:	8a e1       	ldi	r24, 0x1A	; 26
+     910:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D7_PIN_NUMBER, GET_BIT(Character, 7));   //  D7
-     908:	16 95       	lsr	r17
-     90a:	1a c0       	rjmp	.+52     	; 0x940 <LCD_Write_Char+0x8e>
+     914:	16 95       	lsr	r17
+     916:	1a c0       	rjmp	.+52     	; 0x94c <LCD_Write_Char+0x8e>
 		/* Latch data */
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  E
 	}else if (3==Cnt) {
-     90c:	83 30       	cpi	r24, 0x03	; 3
-     90e:	11 f5       	brne	.+68     	; 0x954 <LCD_Write_Char+0xa2>
+     918:	83 30       	cpi	r24, 0x03	; 3
+     91a:	11 f5       	brne	.+68     	; 0x960 <LCD_Write_Char+0xa2>
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_HIGH);   //  E
-     910:	8c e1       	ldi	r24, 0x1C	; 28
-     912:	61 e0       	ldi	r22, 0x01	; 1
-     914:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     91c:	8c e1       	ldi	r24, 0x1C	; 28
+     91e:	61 e0       	ldi	r22, 0x01	; 1
+     920:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		// SEN LSB
 		DIO_WRITE_PIN_VALUE(D4_PIN_NUMBER, GET_BIT(Character, 0));   //  D4
-     918:	61 2f       	mov	r22, r17
-     91a:	61 70       	andi	r22, 0x01	; 1
-     91c:	88 e1       	ldi	r24, 0x18	; 24
-     91e:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-		DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(Character, 1));   //  D5
-     922:	61 2f       	mov	r22, r17
-     924:	66 95       	lsr	r22
+     924:	61 2f       	mov	r22, r17
      926:	61 70       	andi	r22, 0x01	; 1
-     928:	89 e1       	ldi	r24, 0x19	; 25
+     928:	88 e1       	ldi	r24, 0x18	; 24
      92a:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+		DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(Character, 1));   //  D5
+     92e:	61 2f       	mov	r22, r17
+     930:	66 95       	lsr	r22
+     932:	61 70       	andi	r22, 0x01	; 1
+     934:	89 e1       	ldi	r24, 0x19	; 25
+     936:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D6_PIN_NUMBER, GET_BIT(Character, 2));   //  D6
-     92e:	16 95       	lsr	r17
-     930:	16 95       	lsr	r17
-     932:	61 2f       	mov	r22, r17
-     934:	61 70       	andi	r22, 0x01	; 1
-     936:	8a e1       	ldi	r24, 0x1A	; 26
-     938:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-		DIO_WRITE_PIN_VALUE(D7_PIN_NUMBER, GET_BIT(Character, 3));   //  D7
+     93a:	16 95       	lsr	r17
      93c:	16 95       	lsr	r17
-     93e:	11 70       	andi	r17, 0x01	; 1
-     940:	8b e1       	ldi	r24, 0x1B	; 27
-     942:	61 2f       	mov	r22, r17
+     93e:	61 2f       	mov	r22, r17
+     940:	61 70       	andi	r22, 0x01	; 1
+     942:	8a e1       	ldi	r24, 0x1A	; 26
      944:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+		DIO_WRITE_PIN_VALUE(D7_PIN_NUMBER, GET_BIT(Character, 3));   //  D7
+     948:	16 95       	lsr	r17
+     94a:	11 70       	andi	r17, 0x01	; 1
+     94c:	8b e1       	ldi	r24, 0x1B	; 27
+     94e:	61 2f       	mov	r22, r17
+     950:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  E
-     948:	8c e1       	ldi	r24, 0x1C	; 28
-     94a:	60 e0       	ldi	r22, 0x00	; 0
-     94c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-     950:	80 e0       	ldi	r24, 0x00	; 0
-     952:	0a c0       	rjmp	.+20     	; 0x968 <LCD_Write_Char+0xb6>
+     954:	8c e1       	ldi	r24, 0x1C	; 28
+     956:	60 e0       	ldi	r22, 0x00	; 0
+     958:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     95c:	80 e0       	ldi	r24, 0x00	; 0
+     95e:	0a c0       	rjmp	.+20     	; 0x974 <LCD_Write_Char+0xb6>
 	//_delay_ms(10);
 
 
 	//_delay_ms(10);
 	/* Latch data */
 	else if (5==Cnt) {
-     954:	85 30       	cpi	r24, 0x05	; 5
-     956:	19 f4       	brne	.+6      	; 0x95e <LCD_Write_Char+0xac>
+     960:	85 30       	cpi	r24, 0x05	; 5
+     962:	19 f4       	brne	.+6      	; 0x96a <LCD_Write_Char+0xac>
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_HIGH);   //  E
-     958:	8c e1       	ldi	r24, 0x1C	; 28
-     95a:	61 e0       	ldi	r22, 0x01	; 1
-     95c:	f7 cf       	rjmp	.-18     	; 0x94c <LCD_Write_Char+0x9a>
+     964:	8c e1       	ldi	r24, 0x1C	; 28
+     966:	61 e0       	ldi	r22, 0x01	; 1
+     968:	f7 cf       	rjmp	.-18     	; 0x958 <LCD_Write_Char+0x9a>
 	}else if (8==Cnt) {
-     95e:	88 30       	cpi	r24, 0x08	; 8
-     960:	b9 f7       	brne	.-18     	; 0x950 <LCD_Write_Char+0x9e>
+     96a:	88 30       	cpi	r24, 0x08	; 8
+     96c:	b9 f7       	brne	.-18     	; 0x95c <LCD_Write_Char+0x9e>
 		Cnt=0;
-     962:	10 92 14 01 	sts	0x0114, r1
-     966:	81 e0       	ldi	r24, 0x01	; 1
+     96e:	10 92 15 01 	sts	0x0115, r1
+     972:	81 e0       	ldi	r24, 0x01	; 1
 		IsFinished=TRUE;
 	}
 	return IsFinished;
 }
-     968:	1f 91       	pop	r17
-     96a:	08 95       	ret
+     974:	1f 91       	pop	r17
+     976:	08 95       	ret
 
-0000096c <LCD_Disp_Number>:
+00000978 <LCD_Disp_Number>:
 /*************************************************************************/
 void LCD_Disp_Number(UINT16_t Number) {
-     96c:	0f 93       	push	r16
-     96e:	1f 93       	push	r17
-     970:	cf 93       	push	r28
-     972:	df 93       	push	r29
-     974:	fc 01       	movw	r30, r24
-     976:	ec 01       	movw	r28, r24
-     978:	40 e0       	ldi	r20, 0x00	; 0
+     978:	0f 93       	push	r16
+     97a:	1f 93       	push	r17
+     97c:	cf 93       	push	r28
+     97e:	df 93       	push	r29
+     980:	fc 01       	movw	r30, r24
+     982:	ec 01       	movw	r28, r24
+     984:	40 e0       	ldi	r20, 0x00	; 0
 }
 /*************************************************************************/
 static UINT16_t Get_Number_Length(UINT16_t Number) {
 	UINT8_t Length = 0;
 	do {
 		Length++;
-     97a:	4f 5f       	subi	r20, 0xFF	; 255
+     986:	4f 5f       	subi	r20, 0xFF	; 255
 	} while (Number /= 10);
-     97c:	ce 01       	movw	r24, r28
-     97e:	6a e0       	ldi	r22, 0x0A	; 10
-     980:	70 e0       	ldi	r23, 0x00	; 0
-     982:	0e 94 1a 09 	call	0x1234	; 0x1234 <__udivmodhi4>
-     986:	eb 01       	movw	r28, r22
-     988:	61 15       	cp	r22, r1
-     98a:	71 05       	cpc	r23, r1
-     98c:	b1 f7       	brne	.-20     	; 0x97a <LCD_Disp_Number+0xe>
+     988:	ce 01       	movw	r24, r28
+     98a:	6a e0       	ldi	r22, 0x0A	; 10
+     98c:	70 e0       	ldi	r23, 0x00	; 0
+     98e:	0e 94 20 09 	call	0x1240	; 0x1240 <__udivmodhi4>
+     992:	eb 01       	movw	r28, r22
+     994:	61 15       	cp	r22, r1
+     996:	71 05       	cpc	r23, r1
+     998:	b1 f7       	brne	.-20     	; 0x986 <LCD_Disp_Number+0xe>
 }
 /*************************************************************************/
 static UINT16_t Reverse_Number(UINT16_t Number) {
 	UINT16_t Reversed_Number = 0;
 	do {
 		Reversed_Number = Reversed_Number * 10 + Number % 10;
-     98e:	ce 01       	movw	r24, r28
-     990:	33 e0       	ldi	r19, 0x03	; 3
-     992:	88 0f       	add	r24, r24
-     994:	99 1f       	adc	r25, r25
-     996:	3a 95       	dec	r19
-     998:	e1 f7       	brne	.-8      	; 0x992 <LCD_Disp_Number+0x26>
-     99a:	cc 0f       	add	r28, r28
-     99c:	dd 1f       	adc	r29, r29
-     99e:	c8 0f       	add	r28, r24
-     9a0:	d9 1f       	adc	r29, r25
-     9a2:	cf 01       	movw	r24, r30
-     9a4:	6a e0       	ldi	r22, 0x0A	; 10
-     9a6:	70 e0       	ldi	r23, 0x00	; 0
-     9a8:	0e 94 1a 09 	call	0x1234	; 0x1234 <__udivmodhi4>
-     9ac:	c8 0f       	add	r28, r24
-     9ae:	d9 1f       	adc	r29, r25
+     99a:	ce 01       	movw	r24, r28
+     99c:	33 e0       	ldi	r19, 0x03	; 3
+     99e:	88 0f       	add	r24, r24
+     9a0:	99 1f       	adc	r25, r25
+     9a2:	3a 95       	dec	r19
+     9a4:	e1 f7       	brne	.-8      	; 0x99e <LCD_Disp_Number+0x26>
+     9a6:	cc 0f       	add	r28, r28
+     9a8:	dd 1f       	adc	r29, r29
+     9aa:	c8 0f       	add	r28, r24
+     9ac:	d9 1f       	adc	r29, r25
+     9ae:	cf 01       	movw	r24, r30
+     9b0:	6a e0       	ldi	r22, 0x0A	; 10
+     9b2:	70 e0       	ldi	r23, 0x00	; 0
+     9b4:	0e 94 20 09 	call	0x1240	; 0x1240 <__udivmodhi4>
+     9b8:	c8 0f       	add	r28, r24
+     9ba:	d9 1f       	adc	r29, r25
 	} while (Number /= 10);   //ex : 101
-     9b0:	cf 01       	movw	r24, r30
-     9b2:	6a e0       	ldi	r22, 0x0A	; 10
-     9b4:	70 e0       	ldi	r23, 0x00	; 0
-     9b6:	0e 94 1a 09 	call	0x1234	; 0x1234 <__udivmodhi4>
-     9ba:	fb 01       	movw	r30, r22
-     9bc:	61 15       	cp	r22, r1
-     9be:	71 05       	cpc	r23, r1
-     9c0:	31 f7       	brne	.-52     	; 0x98e <LCD_Disp_Number+0x22>
+     9bc:	cf 01       	movw	r24, r30
+     9be:	6a e0       	ldi	r22, 0x0A	; 10
+     9c0:	70 e0       	ldi	r23, 0x00	; 0
+     9c2:	0e 94 20 09 	call	0x1240	; 0x1240 <__udivmodhi4>
+     9c6:	fb 01       	movw	r30, r22
+     9c8:	61 15       	cp	r22, r1
+     9ca:	71 05       	cpc	r23, r1
+     9cc:	31 f7       	brne	.-52     	; 0x99a <LCD_Disp_Number+0x22>
 static UINT16_t Get_Number_Length(UINT16_t Number) {
 	UINT8_t Length = 0;
 	do {
 		Length++;
 	} while (Number /= 10);
 	return Length;
-     9c2:	04 2f       	mov	r16, r20
-     9c4:	10 e0       	ldi	r17, 0x00	; 0
+     9ce:	04 2f       	mov	r16, r20
+     9d0:	10 e0       	ldi	r17, 0x00	; 0
 void LCD_Disp_Number(UINT16_t Number) {
 	UINT16_t Length = 0;
 	Length = Get_Number_Length(Number);
 	Number = Reverse_Number(Number);
 	do {
 		Length--;
-     9c6:	01 50       	subi	r16, 0x01	; 1
-     9c8:	10 40       	sbci	r17, 0x00	; 0
+     9d2:	01 50       	subi	r16, 0x01	; 1
+     9d4:	10 40       	sbci	r17, 0x00	; 0
 		LCD_Write_Char((UINT8_t) (Number % 10) + '0'); //ex : 101
-     9ca:	ce 01       	movw	r24, r28
-     9cc:	6a e0       	ldi	r22, 0x0A	; 10
-     9ce:	70 e0       	ldi	r23, 0x00	; 0
-     9d0:	0e 94 1a 09 	call	0x1234	; 0x1234 <__udivmodhi4>
-     9d4:	80 5d       	subi	r24, 0xD0	; 208
-     9d6:	0e 94 59 04 	call	0x8b2	; 0x8b2 <LCD_Write_Char>
+     9d6:	ce 01       	movw	r24, r28
+     9d8:	6a e0       	ldi	r22, 0x0A	; 10
+     9da:	70 e0       	ldi	r23, 0x00	; 0
+     9dc:	0e 94 20 09 	call	0x1240	; 0x1240 <__udivmodhi4>
+     9e0:	80 5d       	subi	r24, 0xD0	; 208
+     9e2:	0e 94 5f 04 	call	0x8be	; 0x8be <LCD_Write_Char>
 	} while (Number /= 10);
-     9da:	ce 01       	movw	r24, r28
-     9dc:	6a e0       	ldi	r22, 0x0A	; 10
-     9de:	70 e0       	ldi	r23, 0x00	; 0
-     9e0:	0e 94 1a 09 	call	0x1234	; 0x1234 <__udivmodhi4>
-     9e4:	eb 01       	movw	r28, r22
-     9e6:	61 15       	cp	r22, r1
-     9e8:	71 05       	cpc	r23, r1
-     9ea:	69 f7       	brne	.-38     	; 0x9c6 <LCD_Disp_Number+0x5a>
-     9ec:	05 c0       	rjmp	.+10     	; 0x9f8 <LCD_Disp_Number+0x8c>
+     9e6:	ce 01       	movw	r24, r28
+     9e8:	6a e0       	ldi	r22, 0x0A	; 10
+     9ea:	70 e0       	ldi	r23, 0x00	; 0
+     9ec:	0e 94 20 09 	call	0x1240	; 0x1240 <__udivmodhi4>
+     9f0:	eb 01       	movw	r28, r22
+     9f2:	61 15       	cp	r22, r1
+     9f4:	71 05       	cpc	r23, r1
+     9f6:	69 f7       	brne	.-38     	; 0x9d2 <LCD_Disp_Number+0x5a>
+     9f8:	05 c0       	rjmp	.+10     	; 0xa04 <LCD_Disp_Number+0x8c>
 	while (Length) {
 		LCD_Write_Char('0');
-     9ee:	80 e3       	ldi	r24, 0x30	; 48
-     9f0:	0e 94 59 04 	call	0x8b2	; 0x8b2 <LCD_Write_Char>
+     9fa:	80 e3       	ldi	r24, 0x30	; 48
+     9fc:	0e 94 5f 04 	call	0x8be	; 0x8be <LCD_Write_Char>
 		Length--;
-     9f4:	01 50       	subi	r16, 0x01	; 1
-     9f6:	10 40       	sbci	r17, 0x00	; 0
+     a00:	01 50       	subi	r16, 0x01	; 1
+     a02:	10 40       	sbci	r17, 0x00	; 0
 	Number = Reverse_Number(Number);
 	do {
 		Length--;
 		LCD_Write_Char((UINT8_t) (Number % 10) + '0'); //ex : 101
 	} while (Number /= 10);
 	while (Length) {
-     9f8:	01 15       	cp	r16, r1
-     9fa:	11 05       	cpc	r17, r1
-     9fc:	c1 f7       	brne	.-16     	; 0x9ee <LCD_Disp_Number+0x82>
+     a04:	01 15       	cp	r16, r1
+     a06:	11 05       	cpc	r17, r1
+     a08:	c1 f7       	brne	.-16     	; 0x9fa <LCD_Disp_Number+0x82>
 		LCD_Write_Char('0');
 		Length--;
 	}
 }
-     9fe:	df 91       	pop	r29
-     a00:	cf 91       	pop	r28
-     a02:	1f 91       	pop	r17
-     a04:	0f 91       	pop	r16
-     a06:	08 95       	ret
+     a0a:	df 91       	pop	r29
+     a0c:	cf 91       	pop	r28
+     a0e:	1f 91       	pop	r17
+     a10:	0f 91       	pop	r16
+     a12:	08 95       	ret
 
-00000a08 <LCD_Disp_Str>:
+00000a14 <LCD_Disp_Str>:
 		IsFinished=TRUE;
 	}
 	return IsFinished;
 }
 /*************************************************************************/
 void LCD_Disp_Str(const UINT8_t* Data) {
-     a08:	cf 93       	push	r28
-     a0a:	df 93       	push	r29
-     a0c:	ec 01       	movw	r28, r24
-     a0e:	03 c0       	rjmp	.+6      	; 0xa16 <LCD_Disp_Str+0xe>
+     a14:	cf 93       	push	r28
+     a16:	df 93       	push	r29
+     a18:	ec 01       	movw	r28, r24
+     a1a:	03 c0       	rjmp	.+6      	; 0xa22 <LCD_Disp_Str+0xe>
 
 	while (*Data != '\0') {
 		LCD_Write_Char(*Data++);
-     a10:	21 96       	adiw	r28, 0x01	; 1
-     a12:	0e 94 59 04 	call	0x8b2	; 0x8b2 <LCD_Write_Char>
+     a1c:	21 96       	adiw	r28, 0x01	; 1
+     a1e:	0e 94 5f 04 	call	0x8be	; 0x8be <LCD_Write_Char>
 	return IsFinished;
 }
 /*************************************************************************/
 void LCD_Disp_Str(const UINT8_t* Data) {
 
 	while (*Data != '\0') {
-     a16:	88 81       	ld	r24, Y
-     a18:	88 23       	and	r24, r24
-     a1a:	d1 f7       	brne	.-12     	; 0xa10 <LCD_Disp_Str+0x8>
+     a22:	88 81       	ld	r24, Y
+     a24:	88 23       	and	r24, r24
+     a26:	d1 f7       	brne	.-12     	; 0xa1c <LCD_Disp_Str+0x8>
 		LCD_Write_Char(*Data++);
 	}
 
 }
-     a1c:	df 91       	pop	r29
-     a1e:	cf 91       	pop	r28
-     a20:	08 95       	ret
+     a28:	df 91       	pop	r29
+     a2a:	cf 91       	pop	r28
+     a2c:	08 95       	ret
 
-00000a22 <LCD_Send_Command>:
+00000a2e <LCD_Send_Command>:
 	}
 
 	return IsFinished;
 }
 /*************************************************************************/
 BOOL_t LCD_Send_Command(const UINT8_t CMD) {
-     a22:	1f 93       	push	r17
-     a24:	18 2f       	mov	r17, r24
+     a2e:	1f 93       	push	r17
+     a30:	18 2f       	mov	r17, r24
 	static UINT8_t Cnt=0;
 	BOOL_t IsFinished=FALSE;
 	++Cnt;
-     a26:	80 91 16 01 	lds	r24, 0x0116
-     a2a:	8f 5f       	subi	r24, 0xFF	; 255
-     a2c:	80 93 16 01 	sts	0x0116, r24
+     a32:	80 91 17 01 	lds	r24, 0x0117
+     a36:	8f 5f       	subi	r24, 0xFF	; 255
+     a38:	80 93 17 01 	sts	0x0117, r24
 	if(1==Cnt){
-     a30:	81 30       	cpi	r24, 0x01	; 1
-     a32:	21 f5       	brne	.+72     	; 0xa7c <LCD_Send_Command+0x5a>
+     a3c:	81 30       	cpi	r24, 0x01	; 1
+     a3e:	21 f5       	brne	.+72     	; 0xa88 <LCD_Send_Command+0x5a>
 		// Write operation
 		DIO_WRITE_PIN_VALUE(RW_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  R/W
-     a34:	8d e1       	ldi	r24, 0x1D	; 29
-     a36:	60 e0       	ldi	r22, 0x00	; 0
-     a38:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     a40:	8d e1       	ldi	r24, 0x1D	; 29
+     a42:	60 e0       	ldi	r22, 0x00	; 0
+     a44:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		// Command Mode
 		DIO_WRITE_PIN_VALUE(RS_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  RS
-     a3c:	8e e1       	ldi	r24, 0x1E	; 30
-     a3e:	60 e0       	ldi	r22, 0x00	; 0
-     a40:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     a48:	8e e1       	ldi	r24, 0x1E	; 30
+     a4a:	60 e0       	ldi	r22, 0x00	; 0
+     a4c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		// SEND MSB
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_HIGH);   //  E
-     a44:	8c e1       	ldi	r24, 0x1C	; 28
-     a46:	61 e0       	ldi	r22, 0x01	; 1
-     a48:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     a50:	8c e1       	ldi	r24, 0x1C	; 28
+     a52:	61 e0       	ldi	r22, 0x01	; 1
+     a54:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		DIO_WRITE_PIN_VALUE(D4_PIN_NUMBER, GET_BIT(CMD, 4));   //  D4
-     a4c:	61 2f       	mov	r22, r17
-     a4e:	62 95       	swap	r22
-     a50:	61 70       	andi	r22, 0x01	; 1
-     a52:	88 e1       	ldi	r24, 0x18	; 24
-     a54:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-		DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(CMD, 5));   //  D5
      a58:	61 2f       	mov	r22, r17
      a5a:	62 95       	swap	r22
-     a5c:	66 95       	lsr	r22
-     a5e:	61 70       	andi	r22, 0x01	; 1
-     a60:	89 e1       	ldi	r24, 0x19	; 25
-     a62:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     a5c:	61 70       	andi	r22, 0x01	; 1
+     a5e:	88 e1       	ldi	r24, 0x18	; 24
+     a60:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+		DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(CMD, 5));   //  D5
+     a64:	61 2f       	mov	r22, r17
+     a66:	62 95       	swap	r22
+     a68:	66 95       	lsr	r22
+     a6a:	61 70       	andi	r22, 0x01	; 1
+     a6c:	89 e1       	ldi	r24, 0x19	; 25
+     a6e:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D6_PIN_NUMBER, GET_BIT(CMD, 6));   //  D6
-     a66:	12 95       	swap	r17
-     a68:	16 95       	lsr	r17
-     a6a:	16 95       	lsr	r17
-     a6c:	13 70       	andi	r17, 0x03	; 3
-     a6e:	61 2f       	mov	r22, r17
-     a70:	61 70       	andi	r22, 0x01	; 1
-     a72:	8a e1       	ldi	r24, 0x1A	; 26
-     a74:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     a72:	12 95       	swap	r17
+     a74:	16 95       	lsr	r17
+     a76:	16 95       	lsr	r17
+     a78:	13 70       	andi	r17, 0x03	; 3
+     a7a:	61 2f       	mov	r22, r17
+     a7c:	61 70       	andi	r22, 0x01	; 1
+     a7e:	8a e1       	ldi	r24, 0x1A	; 26
+     a80:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D7_PIN_NUMBER, GET_BIT(CMD, 7));   //  D7
-     a78:	16 95       	lsr	r17
-     a7a:	1e c0       	rjmp	.+60     	; 0xab8 <LCD_Send_Command+0x96>
+     a84:	16 95       	lsr	r17
+     a86:	1e c0       	rjmp	.+60     	; 0xac4 <LCD_Send_Command+0x96>
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  E
 	}
 
 
 	//_delay_ms(10);
 	else if (3==Cnt) {
-     a7c:	83 30       	cpi	r24, 0x03	; 3
-     a7e:	29 f5       	brne	.+74     	; 0xaca <LCD_Send_Command+0xa8>
+     a88:	83 30       	cpi	r24, 0x03	; 3
+     a8a:	29 f5       	brne	.+74     	; 0xad6 <LCD_Send_Command+0xa8>
 		/* Latch data */
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_HIGH);   //  E
-     a80:	8c e1       	ldi	r24, 0x1C	; 28
-     a82:	61 e0       	ldi	r22, 0x01	; 1
-     a84:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     a8c:	8c e1       	ldi	r24, 0x1C	; 28
+     a8e:	61 e0       	ldi	r22, 0x01	; 1
+     a90:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		if (Configuration_Process == ENDED) {
-     a88:	80 91 15 01 	lds	r24, 0x0115
-     a8c:	81 30       	cpi	r24, 0x01	; 1
-     a8e:	39 f5       	brne	.+78     	; 0xade <LCD_Send_Command+0xbc>
+     a94:	80 91 16 01 	lds	r24, 0x0116
+     a98:	81 30       	cpi	r24, 0x01	; 1
+     a9a:	39 f5       	brne	.+78     	; 0xaea <LCD_Send_Command+0xbc>
 			// SEND LSB
 			DIO_WRITE_PIN_VALUE(D4_PIN_NUMBER, GET_BIT(CMD, 0));   //  D4
-     a90:	61 2f       	mov	r22, r17
-     a92:	61 70       	andi	r22, 0x01	; 1
-     a94:	88 e1       	ldi	r24, 0x18	; 24
-     a96:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-			DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(CMD, 1));   //  D5
-     a9a:	61 2f       	mov	r22, r17
-     a9c:	66 95       	lsr	r22
+     a9c:	61 2f       	mov	r22, r17
      a9e:	61 70       	andi	r22, 0x01	; 1
-     aa0:	89 e1       	ldi	r24, 0x19	; 25
+     aa0:	88 e1       	ldi	r24, 0x18	; 24
      aa2:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+			DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, GET_BIT(CMD, 1));   //  D5
+     aa6:	61 2f       	mov	r22, r17
+     aa8:	66 95       	lsr	r22
+     aaa:	61 70       	andi	r22, 0x01	; 1
+     aac:	89 e1       	ldi	r24, 0x19	; 25
+     aae:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 			DIO_WRITE_PIN_VALUE(D6_PIN_NUMBER, GET_BIT(CMD, 2));   //  D6
-     aa6:	16 95       	lsr	r17
-     aa8:	16 95       	lsr	r17
-     aaa:	61 2f       	mov	r22, r17
-     aac:	61 70       	andi	r22, 0x01	; 1
-     aae:	8a e1       	ldi	r24, 0x1A	; 26
-     ab0:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-			DIO_WRITE_PIN_VALUE(D7_PIN_NUMBER, GET_BIT(CMD, 3));   //  D7
+     ab2:	16 95       	lsr	r17
      ab4:	16 95       	lsr	r17
-     ab6:	11 70       	andi	r17, 0x01	; 1
-     ab8:	8b e1       	ldi	r24, 0x1B	; 27
-     aba:	61 2f       	mov	r22, r17
+     ab6:	61 2f       	mov	r22, r17
+     ab8:	61 70       	andi	r22, 0x01	; 1
+     aba:	8a e1       	ldi	r24, 0x1A	; 26
      abc:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+			DIO_WRITE_PIN_VALUE(D7_PIN_NUMBER, GET_BIT(CMD, 3));   //  D7
+     ac0:	16 95       	lsr	r17
+     ac2:	11 70       	andi	r17, 0x01	; 1
+     ac4:	8b e1       	ldi	r24, 0x1B	; 27
+     ac6:	61 2f       	mov	r22, r17
+     ac8:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 			DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  E
-     ac0:	8c e1       	ldi	r24, 0x1C	; 28
-     ac2:	60 e0       	ldi	r22, 0x00	; 0
-     ac4:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
-     ac8:	0a c0       	rjmp	.+20     	; 0xade <LCD_Send_Command+0xbc>
+     acc:	8c e1       	ldi	r24, 0x1C	; 28
+     ace:	60 e0       	ldi	r22, 0x00	; 0
+     ad0:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     ad4:	0a c0       	rjmp	.+20     	; 0xaea <LCD_Send_Command+0xbc>
 		}
 	}
 
 	// for latching
 	//_delay_ms(10);
 	else if (5 == Cnt) {
-     aca:	85 30       	cpi	r24, 0x05	; 5
-     acc:	41 f4       	brne	.+16     	; 0xade <LCD_Send_Command+0xbc>
+     ad6:	85 30       	cpi	r24, 0x05	; 5
+     ad8:	41 f4       	brne	.+16     	; 0xaea <LCD_Send_Command+0xbc>
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_HIGH);   //  E
-     ace:	8c e1       	ldi	r24, 0x1C	; 28
-     ad0:	61 e0       	ldi	r22, 0x01	; 1
-     ad2:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     ada:	8c e1       	ldi	r24, 0x1C	; 28
+     adc:	61 e0       	ldi	r22, 0x01	; 1
+     ade:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		Cnt=0;
-     ad6:	10 92 16 01 	sts	0x0116, r1
-     ada:	81 e0       	ldi	r24, 0x01	; 1
-     adc:	01 c0       	rjmp	.+2      	; 0xae0 <LCD_Send_Command+0xbe>
-     ade:	80 e0       	ldi	r24, 0x00	; 0
+     ae2:	10 92 17 01 	sts	0x0117, r1
+     ae6:	81 e0       	ldi	r24, 0x01	; 1
+     ae8:	01 c0       	rjmp	.+2      	; 0xaec <LCD_Send_Command+0xbe>
+     aea:	80 e0       	ldi	r24, 0x00	; 0
 		IsFinished=TRUE;
 	}
 	return IsFinished;
 }
-     ae0:	1f 91       	pop	r17
-     ae2:	08 95       	ret
+     aec:	1f 91       	pop	r17
+     aee:	08 95       	ret
 
-00000ae4 <LCD_Write_CGRAM>:
+00000af0 <LCD_Write_CGRAM>:
 		break;
 	}
 	return IsFinished;
 }
 /*************************************************************************/
 void LCD_Write_CGRAM(const UINT8_t* Data, CGRAM_ROW_ID_t ROW_ID){
-     ae4:	0f 93       	push	r16
-     ae6:	1f 93       	push	r17
-     ae8:	cf 93       	push	r28
-     aea:	df 93       	push	r29
-     aec:	8c 01       	movw	r16, r24
+     af0:	0f 93       	push	r16
+     af2:	1f 93       	push	r17
+     af4:	cf 93       	push	r28
+     af6:	df 93       	push	r29
+     af8:	8c 01       	movw	r16, r24
 	UINT8_t Address, Idx;
 	if(ROW_ID < CGRAM_MAX_ROWS){
-     aee:	68 30       	cpi	r22, 0x08	; 8
-     af0:	98 f4       	brcc	.+38     	; 0xb18 <LCD_Write_CGRAM+0x34>
+     afa:	68 30       	cpi	r22, 0x08	; 8
+     afc:	98 f4       	brcc	.+38     	; 0xb24 <LCD_Write_CGRAM+0x34>
 		Address = (ROW_ID * 8) | (1 << 6);
 		LCD_Send_Command(Address);
-     af2:	66 0f       	add	r22, r22
-     af4:	66 0f       	add	r22, r22
-     af6:	66 0f       	add	r22, r22
-     af8:	86 2f       	mov	r24, r22
-     afa:	80 64       	ori	r24, 0x40	; 64
-     afc:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     b00:	c0 e0       	ldi	r28, 0x00	; 0
-     b02:	d0 e0       	ldi	r29, 0x00	; 0
+     afe:	66 0f       	add	r22, r22
+     b00:	66 0f       	add	r22, r22
+     b02:	66 0f       	add	r22, r22
+     b04:	86 2f       	mov	r24, r22
+     b06:	80 64       	ori	r24, 0x40	; 64
+     b08:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     b0c:	c0 e0       	ldi	r28, 0x00	; 0
+     b0e:	d0 e0       	ldi	r29, 0x00	; 0
 		for(Idx = 0; Idx < 8; Idx++){
 			LCD_Write_Char(Data[Idx]);
-     b04:	f8 01       	movw	r30, r16
-     b06:	ec 0f       	add	r30, r28
-     b08:	fd 1f       	adc	r31, r29
-     b0a:	80 81       	ld	r24, Z
-     b0c:	0e 94 59 04 	call	0x8b2	; 0x8b2 <LCD_Write_Char>
-     b10:	21 96       	adiw	r28, 0x01	; 1
+     b10:	f8 01       	movw	r30, r16
+     b12:	ec 0f       	add	r30, r28
+     b14:	fd 1f       	adc	r31, r29
+     b16:	80 81       	ld	r24, Z
+     b18:	0e 94 5f 04 	call	0x8be	; 0x8be <LCD_Write_Char>
+     b1c:	21 96       	adiw	r28, 0x01	; 1
 void LCD_Write_CGRAM(const UINT8_t* Data, CGRAM_ROW_ID_t ROW_ID){
 	UINT8_t Address, Idx;
 	if(ROW_ID < CGRAM_MAX_ROWS){
 		Address = (ROW_ID * 8) | (1 << 6);
 		LCD_Send_Command(Address);
 		for(Idx = 0; Idx < 8; Idx++){
-     b12:	c8 30       	cpi	r28, 0x08	; 8
-     b14:	d1 05       	cpc	r29, r1
-     b16:	b1 f7       	brne	.-20     	; 0xb04 <LCD_Write_CGRAM+0x20>
+     b1e:	c8 30       	cpi	r28, 0x08	; 8
+     b20:	d1 05       	cpc	r29, r1
+     b22:	b1 f7       	brne	.-20     	; 0xb10 <LCD_Write_CGRAM+0x20>
 			LCD_Write_Char(Data[Idx]);
 		}
 	}
 	LCD_Send_Command(0x02);
-     b18:	82 e0       	ldi	r24, 0x02	; 2
-     b1a:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
+     b24:	82 e0       	ldi	r24, 0x02	; 2
+     b26:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
 }
-     b1e:	df 91       	pop	r29
-     b20:	cf 91       	pop	r28
-     b22:	1f 91       	pop	r17
-     b24:	0f 91       	pop	r16
-     b26:	08 95       	ret
+     b2a:	df 91       	pop	r29
+     b2c:	cf 91       	pop	r28
+     b2e:	1f 91       	pop	r17
+     b30:	0f 91       	pop	r16
+     b32:	08 95       	ret
 
-00000b28 <LCD_Clear>:
+00000b34 <LCD_Clear>:
 }
 /*************************************************************************/
 BOOL_t LCD_Clear(void){
 	BOOL_t IsFinished = FALSE;
 	static UINT8_t Cnt = 0;
 	switch (Cnt) {
-     b28:	80 91 13 01 	lds	r24, 0x0113
-     b2c:	88 23       	and	r24, r24
-     b2e:	19 f0       	breq	.+6      	; 0xb36 <LCD_Clear+0xe>
-     b30:	81 30       	cpi	r24, 0x01	; 1
-     b32:	89 f4       	brne	.+34     	; 0xb56 <LCD_Clear+0x2e>
-     b34:	06 c0       	rjmp	.+12     	; 0xb42 <LCD_Clear+0x1a>
+     b34:	80 91 14 01 	lds	r24, 0x0114
+     b38:	88 23       	and	r24, r24
+     b3a:	19 f0       	breq	.+6      	; 0xb42 <LCD_Clear+0xe>
+     b3c:	81 30       	cpi	r24, 0x01	; 1
+     b3e:	89 f4       	brne	.+34     	; 0xb62 <LCD_Clear+0x2e>
+     b40:	06 c0       	rjmp	.+12     	; 0xb4e <LCD_Clear+0x1a>
 	case 0:
 		if (TRUE == LCD_Send_Command(0x00)) {
-     b36:	80 e0       	ldi	r24, 0x00	; 0
-     b38:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     b3c:	81 30       	cpi	r24, 0x01	; 1
-     b3e:	79 f4       	brne	.+30     	; 0xb5e <LCD_Clear+0x36>
-     b40:	06 c0       	rjmp	.+12     	; 0xb4e <LCD_Clear+0x26>
+     b42:	80 e0       	ldi	r24, 0x00	; 0
+     b44:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     b48:	81 30       	cpi	r24, 0x01	; 1
+     b4a:	79 f4       	brne	.+30     	; 0xb6a <LCD_Clear+0x36>
+     b4c:	06 c0       	rjmp	.+12     	; 0xb5a <LCD_Clear+0x26>
 			Cnt = 1;
 		}
 		break;
 	case 1:
 		if (TRUE == LCD_Send_Command(0x01)) {
-     b42:	81 e0       	ldi	r24, 0x01	; 1
-     b44:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     b48:	81 30       	cpi	r24, 0x01	; 1
-     b4a:	49 f4       	brne	.+18     	; 0xb5e <LCD_Clear+0x36>
+     b4e:	81 e0       	ldi	r24, 0x01	; 1
+     b50:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     b54:	81 30       	cpi	r24, 0x01	; 1
+     b56:	49 f4       	brne	.+18     	; 0xb6a <LCD_Clear+0x36>
 			Cnt = 2;
-     b4c:	82 e0       	ldi	r24, 0x02	; 2
-     b4e:	80 93 13 01 	sts	0x0113, r24
-     b52:	80 e0       	ldi	r24, 0x00	; 0
-     b54:	08 95       	ret
+     b58:	82 e0       	ldi	r24, 0x02	; 2
+     b5a:	80 93 14 01 	sts	0x0114, r24
+     b5e:	80 e0       	ldi	r24, 0x00	; 0
+     b60:	08 95       	ret
 		}
 		break;
 	default:
 		Cnt = 0;
-     b56:	10 92 13 01 	sts	0x0113, r1
-     b5a:	81 e0       	ldi	r24, 0x01	; 1
-     b5c:	08 95       	ret
-     b5e:	80 e0       	ldi	r24, 0x00	; 0
+     b62:	10 92 14 01 	sts	0x0114, r1
+     b66:	81 e0       	ldi	r24, 0x01	; 1
+     b68:	08 95       	ret
+     b6a:	80 e0       	ldi	r24, 0x00	; 0
 		IsFinished = TRUE;
 		break;
 	}
 	return IsFinished;
 }
-     b60:	08 95       	ret
+     b6c:	08 95       	ret
 
-00000b62 <LCD_Jumb_To>:
+00000b6e <LCD_Jumb_To>:
 	BOOL_t IsFinished=FALSE;
 	/*
 	 First Row Start from 0X00
 	 Second Row Start From 0X40
 	 */
 	if (ROW < LCD_MAX_ROWS && COL < LCD_MAX_COLS) {
-     b62:	82 30       	cpi	r24, 0x02	; 2
-     b64:	68 f4       	brcc	.+26     	; 0xb80 <LCD_Jumb_To+0x1e>
-     b66:	60 31       	cpi	r22, 0x10	; 16
-     b68:	58 f4       	brcc	.+22     	; 0xb80 <LCD_Jumb_To+0x1e>
+     b6e:	82 30       	cpi	r24, 0x02	; 2
+     b70:	68 f4       	brcc	.+26     	; 0xb8c <LCD_Jumb_To+0x1e>
+     b72:	60 31       	cpi	r22, 0x10	; 16
+     b74:	58 f4       	brcc	.+22     	; 0xb8c <LCD_Jumb_To+0x1e>
 		Address_Counter = ((0X40 * ROW) + COL) | (1 << 7); // To Write into DDRAM;
-     b6a:	82 95       	swap	r24
-     b6c:	88 0f       	add	r24, r24
-     b6e:	88 0f       	add	r24, r24
-     b70:	80 7c       	andi	r24, 0xC0	; 192
-     b72:	86 0f       	add	r24, r22
-     b74:	80 68       	ori	r24, 0x80	; 128
-     b76:	80 93 18 01 	sts	0x0118, r24
+     b76:	82 95       	swap	r24
+     b78:	88 0f       	add	r24, r24
+     b7a:	88 0f       	add	r24, r24
+     b7c:	80 7c       	andi	r24, 0xC0	; 192
+     b7e:	86 0f       	add	r24, r22
+     b80:	80 68       	ori	r24, 0x80	; 128
+     b82:	80 93 19 01 	sts	0x0119, r24
 		IsFinished=LCD_Send_Command(Address_Counter);
-     b7a:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     b7e:	08 95       	ret
-     b80:	80 e0       	ldi	r24, 0x00	; 0
+     b86:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     b8a:	08 95       	ret
+     b8c:	80 e0       	ldi	r24, 0x00	; 0
 	}
 	return IsFinished;
 }
-     b82:	08 95       	ret
+     b8e:	08 95       	ret
 
-00000b84 <LCD_Disp_Special_Character>:
+00000b90 <LCD_Disp_Special_Character>:
 }
 /*************************************************************************/
 void LCD_Disp_Special_Character(const CGRAM_ROW_ID_t CGRAM_ROW_ID,
 								 const LCD_ROW_ID_t ROW,
 								 const LCD_COL_ID_t COL)
 {
-     b84:	1f 93       	push	r17
-     b86:	18 2f       	mov	r17, r24
+     b90:	1f 93       	push	r17
+     b92:	18 2f       	mov	r17, r24
 	if (ROW < LCD_MAX_ROWS && COL < LCD_MAX_COLS && CGRAM_ROW_ID < CGRAM_MAX_ROWS) {
-     b88:	62 30       	cpi	r22, 0x02	; 2
-     b8a:	58 f4       	brcc	.+22     	; 0xba2 <LCD_Disp_Special_Character+0x1e>
-     b8c:	40 31       	cpi	r20, 0x10	; 16
-     b8e:	48 f4       	brcc	.+18     	; 0xba2 <LCD_Disp_Special_Character+0x1e>
-     b90:	88 30       	cpi	r24, 0x08	; 8
-     b92:	38 f4       	brcc	.+14     	; 0xba2 <LCD_Disp_Special_Character+0x1e>
+     b94:	62 30       	cpi	r22, 0x02	; 2
+     b96:	58 f4       	brcc	.+22     	; 0xbae <LCD_Disp_Special_Character+0x1e>
+     b98:	40 31       	cpi	r20, 0x10	; 16
+     b9a:	48 f4       	brcc	.+18     	; 0xbae <LCD_Disp_Special_Character+0x1e>
+     b9c:	88 30       	cpi	r24, 0x08	; 8
+     b9e:	38 f4       	brcc	.+14     	; 0xbae <LCD_Disp_Special_Character+0x1e>
 		LCD_Jumb_To(ROW, COL);
-     b94:	86 2f       	mov	r24, r22
-     b96:	64 2f       	mov	r22, r20
-     b98:	0e 94 b1 05 	call	0xb62	; 0xb62 <LCD_Jumb_To>
+     ba0:	86 2f       	mov	r24, r22
+     ba2:	64 2f       	mov	r22, r20
+     ba4:	0e 94 b7 05 	call	0xb6e	; 0xb6e <LCD_Jumb_To>
 		LCD_Write_Char(CGRAM_ROW_ID);
-     b9c:	81 2f       	mov	r24, r17
-     b9e:	0e 94 59 04 	call	0x8b2	; 0x8b2 <LCD_Write_Char>
+     ba8:	81 2f       	mov	r24, r17
+     baa:	0e 94 5f 04 	call	0x8be	; 0x8be <LCD_Write_Char>
 	}
 
 }
-     ba2:	1f 91       	pop	r17
-     ba4:	08 95       	ret
+     bae:	1f 91       	pop	r17
+     bb0:	08 95       	ret
 
-00000ba6 <LCD_Jumb_ToAndWrite>:
+00000bb2 <LCD_Jumb_ToAndWrite>:
 }
 /*************************************************************************/
 void LCD_Jumb_ToAndWrite(const UINT8_t* Data,
 						const LCD_ROW_ID_t ROW,
 						const LCD_COL_ID_t COL)
 {
-     ba6:	cf 93       	push	r28
-     ba8:	df 93       	push	r29
-     baa:	ec 01       	movw	r28, r24
+     bb2:	cf 93       	push	r28
+     bb4:	df 93       	push	r29
+     bb6:	ec 01       	movw	r28, r24
 	if (ROW < LCD_MAX_ROWS && COL < LCD_MAX_COLS) {
-     bac:	62 30       	cpi	r22, 0x02	; 2
-     bae:	48 f4       	brcc	.+18     	; 0xbc2 <LCD_Jumb_ToAndWrite+0x1c>
-     bb0:	40 31       	cpi	r20, 0x10	; 16
-     bb2:	38 f4       	brcc	.+14     	; 0xbc2 <LCD_Jumb_ToAndWrite+0x1c>
+     bb8:	62 30       	cpi	r22, 0x02	; 2
+     bba:	48 f4       	brcc	.+18     	; 0xbce <LCD_Jumb_ToAndWrite+0x1c>
+     bbc:	40 31       	cpi	r20, 0x10	; 16
+     bbe:	38 f4       	brcc	.+14     	; 0xbce <LCD_Jumb_ToAndWrite+0x1c>
 		LCD_Jumb_To(ROW, COL);
-     bb4:	86 2f       	mov	r24, r22
-     bb6:	64 2f       	mov	r22, r20
-     bb8:	0e 94 b1 05 	call	0xb62	; 0xb62 <LCD_Jumb_To>
+     bc0:	86 2f       	mov	r24, r22
+     bc2:	64 2f       	mov	r22, r20
+     bc4:	0e 94 b7 05 	call	0xb6e	; 0xb6e <LCD_Jumb_To>
 		LCD_Disp_Str(Data);
-     bbc:	ce 01       	movw	r24, r28
-     bbe:	0e 94 04 05 	call	0xa08	; 0xa08 <LCD_Disp_Str>
+     bc8:	ce 01       	movw	r24, r28
+     bca:	0e 94 0a 05 	call	0xa14	; 0xa14 <LCD_Disp_Str>
 	}
 
 }
-     bc2:	df 91       	pop	r29
-     bc4:	cf 91       	pop	r28
-     bc6:	08 95       	ret
+     bce:	df 91       	pop	r29
+     bd0:	cf 91       	pop	r28
+     bd2:	08 95       	ret
 
-00000bc8 <LCD_Init>:
+00000bd4 <LCD_Init>:
 /*************************************************************************/
 
 BOOL_t LCD_Init(void) {
 	static UINT8_t Cnt=0;
 	BOOL_t IsFinished=FALSE;
 	switch(Cnt){
-     bc8:	80 91 17 01 	lds	r24, 0x0117
-     bcc:	85 30       	cpi	r24, 0x05	; 5
-     bce:	09 f4       	brne	.+2      	; 0xbd2 <LCD_Init+0xa>
-     bd0:	50 c0       	rjmp	.+160    	; 0xc72 <LCD_Init+0xaa>
-     bd2:	86 30       	cpi	r24, 0x06	; 6
-     bd4:	88 f4       	brcc	.+34     	; 0xbf8 <LCD_Init+0x30>
-     bd6:	82 30       	cpi	r24, 0x02	; 2
-     bd8:	09 f4       	brne	.+2      	; 0xbdc <LCD_Init+0x14>
-     bda:	40 c0       	rjmp	.+128    	; 0xc5c <LCD_Init+0x94>
-     bdc:	83 30       	cpi	r24, 0x03	; 3
-     bde:	30 f4       	brcc	.+12     	; 0xbec <LCD_Init+0x24>
-     be0:	88 23       	and	r24, r24
-     be2:	e1 f0       	breq	.+56     	; 0xc1c <LCD_Init+0x54>
-     be4:	81 30       	cpi	r24, 0x01	; 1
-     be6:	09 f0       	breq	.+2      	; 0xbea <LCD_Init+0x22>
-     be8:	71 c0       	rjmp	.+226    	; 0xccc <LCD_Init+0x104>
-     bea:	36 c0       	rjmp	.+108    	; 0xc58 <LCD_Init+0x90>
-     bec:	83 30       	cpi	r24, 0x03	; 3
-     bee:	c1 f1       	breq	.+112    	; 0xc60 <LCD_Init+0x98>
-     bf0:	84 30       	cpi	r24, 0x04	; 4
-     bf2:	09 f0       	breq	.+2      	; 0xbf6 <LCD_Init+0x2e>
-     bf4:	6b c0       	rjmp	.+214    	; 0xccc <LCD_Init+0x104>
-     bf6:	36 c0       	rjmp	.+108    	; 0xc64 <LCD_Init+0x9c>
-     bf8:	88 30       	cpi	r24, 0x08	; 8
-     bfa:	09 f4       	brne	.+2      	; 0xbfe <LCD_Init+0x36>
-     bfc:	4f c0       	rjmp	.+158    	; 0xc9c <LCD_Init+0xd4>
-     bfe:	89 30       	cpi	r24, 0x09	; 9
-     c00:	30 f4       	brcc	.+12     	; 0xc0e <LCD_Init+0x46>
-     c02:	86 30       	cpi	r24, 0x06	; 6
-     c04:	e9 f1       	breq	.+122    	; 0xc80 <LCD_Init+0xb8>
-     c06:	87 30       	cpi	r24, 0x07	; 7
-     c08:	09 f0       	breq	.+2      	; 0xc0c <LCD_Init+0x44>
-     c0a:	60 c0       	rjmp	.+192    	; 0xccc <LCD_Init+0x104>
-     c0c:	40 c0       	rjmp	.+128    	; 0xc8e <LCD_Init+0xc6>
-     c0e:	89 30       	cpi	r24, 0x09	; 9
-     c10:	09 f4       	brne	.+2      	; 0xc14 <LCD_Init+0x4c>
-     c12:	4e c0       	rjmp	.+156    	; 0xcb0 <LCD_Init+0xe8>
-     c14:	8a 30       	cpi	r24, 0x0A	; 10
-     c16:	09 f0       	breq	.+2      	; 0xc1a <LCD_Init+0x52>
-     c18:	59 c0       	rjmp	.+178    	; 0xccc <LCD_Init+0x104>
-     c1a:	51 c0       	rjmp	.+162    	; 0xcbe <LCD_Init+0xf6>
+     bd4:	80 91 18 01 	lds	r24, 0x0118
+     bd8:	85 30       	cpi	r24, 0x05	; 5
+     bda:	09 f4       	brne	.+2      	; 0xbde <LCD_Init+0xa>
+     bdc:	50 c0       	rjmp	.+160    	; 0xc7e <LCD_Init+0xaa>
+     bde:	86 30       	cpi	r24, 0x06	; 6
+     be0:	88 f4       	brcc	.+34     	; 0xc04 <LCD_Init+0x30>
+     be2:	82 30       	cpi	r24, 0x02	; 2
+     be4:	09 f4       	brne	.+2      	; 0xbe8 <LCD_Init+0x14>
+     be6:	40 c0       	rjmp	.+128    	; 0xc68 <LCD_Init+0x94>
+     be8:	83 30       	cpi	r24, 0x03	; 3
+     bea:	30 f4       	brcc	.+12     	; 0xbf8 <LCD_Init+0x24>
+     bec:	88 23       	and	r24, r24
+     bee:	e1 f0       	breq	.+56     	; 0xc28 <LCD_Init+0x54>
+     bf0:	81 30       	cpi	r24, 0x01	; 1
+     bf2:	09 f0       	breq	.+2      	; 0xbf6 <LCD_Init+0x22>
+     bf4:	71 c0       	rjmp	.+226    	; 0xcd8 <LCD_Init+0x104>
+     bf6:	36 c0       	rjmp	.+108    	; 0xc64 <LCD_Init+0x90>
+     bf8:	83 30       	cpi	r24, 0x03	; 3
+     bfa:	c1 f1       	breq	.+112    	; 0xc6c <LCD_Init+0x98>
+     bfc:	84 30       	cpi	r24, 0x04	; 4
+     bfe:	09 f0       	breq	.+2      	; 0xc02 <LCD_Init+0x2e>
+     c00:	6b c0       	rjmp	.+214    	; 0xcd8 <LCD_Init+0x104>
+     c02:	36 c0       	rjmp	.+108    	; 0xc70 <LCD_Init+0x9c>
+     c04:	88 30       	cpi	r24, 0x08	; 8
+     c06:	09 f4       	brne	.+2      	; 0xc0a <LCD_Init+0x36>
+     c08:	4f c0       	rjmp	.+158    	; 0xca8 <LCD_Init+0xd4>
+     c0a:	89 30       	cpi	r24, 0x09	; 9
+     c0c:	30 f4       	brcc	.+12     	; 0xc1a <LCD_Init+0x46>
+     c0e:	86 30       	cpi	r24, 0x06	; 6
+     c10:	e9 f1       	breq	.+122    	; 0xc8c <LCD_Init+0xb8>
+     c12:	87 30       	cpi	r24, 0x07	; 7
+     c14:	09 f0       	breq	.+2      	; 0xc18 <LCD_Init+0x44>
+     c16:	60 c0       	rjmp	.+192    	; 0xcd8 <LCD_Init+0x104>
+     c18:	40 c0       	rjmp	.+128    	; 0xc9a <LCD_Init+0xc6>
+     c1a:	89 30       	cpi	r24, 0x09	; 9
+     c1c:	09 f4       	brne	.+2      	; 0xc20 <LCD_Init+0x4c>
+     c1e:	4e c0       	rjmp	.+156    	; 0xcbc <LCD_Init+0xe8>
+     c20:	8a 30       	cpi	r24, 0x0A	; 10
+     c22:	09 f0       	breq	.+2      	; 0xc26 <LCD_Init+0x52>
+     c24:	59 c0       	rjmp	.+178    	; 0xcd8 <LCD_Init+0x104>
+     c26:	51 c0       	rjmp	.+162    	; 0xcca <LCD_Init+0xf6>
 	case 0:
 
 		DIO_WRITE_PIN_VALUE(E_PIN_NUMBER, DIO_PIN_STATE_HIGH); // E should be high
-     c1c:	8c e1       	ldi	r24, 0x1C	; 28
-     c1e:	61 e0       	ldi	r22, 0x01	; 1
-     c20:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     c28:	8c e1       	ldi	r24, 0x1C	; 28
+     c2a:	61 e0       	ldi	r22, 0x01	; 1
+     c2c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(RW_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  R/W
-     c24:	8d e1       	ldi	r24, 0x1D	; 29
-     c26:	60 e0       	ldi	r22, 0x00	; 0
-     c28:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     c30:	8d e1       	ldi	r24, 0x1D	; 29
+     c32:	60 e0       	ldi	r22, 0x00	; 0
+     c34:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(RS_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  RS
-     c2c:	8e e1       	ldi	r24, 0x1E	; 30
-     c2e:	60 e0       	ldi	r22, 0x00	; 0
-     c30:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     c38:	8e e1       	ldi	r24, 0x1E	; 30
+     c3a:	60 e0       	ldi	r22, 0x00	; 0
+     c3c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D4_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  D4
-     c34:	88 e1       	ldi	r24, 0x18	; 24
-     c36:	60 e0       	ldi	r22, 0x00	; 0
-     c38:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     c40:	88 e1       	ldi	r24, 0x18	; 24
+     c42:	60 e0       	ldi	r22, 0x00	; 0
+     c44:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D5_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  D5
-     c3c:	89 e1       	ldi	r24, 0x19	; 25
-     c3e:	60 e0       	ldi	r22, 0x00	; 0
-     c40:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     c48:	89 e1       	ldi	r24, 0x19	; 25
+     c4a:	60 e0       	ldi	r22, 0x00	; 0
+     c4c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D6_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  D6
-     c44:	8a e1       	ldi	r24, 0x1A	; 26
-     c46:	60 e0       	ldi	r22, 0x00	; 0
-     c48:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     c50:	8a e1       	ldi	r24, 0x1A	; 26
+     c52:	60 e0       	ldi	r22, 0x00	; 0
+     c54:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(D7_PIN_NUMBER, DIO_PIN_STATE_LOW);   //  D7
-     c4c:	8b e1       	ldi	r24, 0x1B	; 27
-     c4e:	60 e0       	ldi	r22, 0x00	; 0
-     c50:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     c58:	8b e1       	ldi	r24, 0x1B	; 27
+     c5a:	60 e0       	ldi	r22, 0x00	; 0
+     c5c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		Cnt=1;
-     c54:	81 e0       	ldi	r24, 0x01	; 1
-     c56:	28 c0       	rjmp	.+80     	; 0xca8 <LCD_Init+0xe0>
+     c60:	81 e0       	ldi	r24, 0x01	; 1
+     c62:	28 c0       	rjmp	.+80     	; 0xcb4 <LCD_Init+0xe0>
 		break;
 	case 1:
 		Cnt=2;
-     c58:	82 e0       	ldi	r24, 0x02	; 2
-     c5a:	26 c0       	rjmp	.+76     	; 0xca8 <LCD_Init+0xe0>
+     c64:	82 e0       	ldi	r24, 0x02	; 2
+     c66:	26 c0       	rjmp	.+76     	; 0xcb4 <LCD_Init+0xe0>
 		break;
 	case 2:
 		Cnt=3;
-     c5c:	83 e0       	ldi	r24, 0x03	; 3
-     c5e:	24 c0       	rjmp	.+72     	; 0xca8 <LCD_Init+0xe0>
+     c68:	83 e0       	ldi	r24, 0x03	; 3
+     c6a:	24 c0       	rjmp	.+72     	; 0xcb4 <LCD_Init+0xe0>
 		break;
 	case 3:
 		Cnt=4;
-     c60:	84 e0       	ldi	r24, 0x04	; 4
-     c62:	22 c0       	rjmp	.+68     	; 0xca8 <LCD_Init+0xe0>
+     c6c:	84 e0       	ldi	r24, 0x04	; 4
+     c6e:	22 c0       	rjmp	.+68     	; 0xcb4 <LCD_Init+0xe0>
 		break;
 	case 4:
 		if(TRUE==LCD_Send_Command(0X20)){
-     c64:	80 e2       	ldi	r24, 0x20	; 32
-     c66:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     c6a:	81 30       	cpi	r24, 0x01	; 1
-     c6c:	a9 f5       	brne	.+106    	; 0xcd8 <LCD_Init+0x110>
+     c70:	80 e2       	ldi	r24, 0x20	; 32
+     c72:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     c76:	81 30       	cpi	r24, 0x01	; 1
+     c78:	a9 f5       	brne	.+106    	; 0xce4 <LCD_Init+0x110>
 			Cnt=5;
-     c6e:	85 e0       	ldi	r24, 0x05	; 5
-     c70:	1b c0       	rjmp	.+54     	; 0xca8 <LCD_Init+0xe0>
+     c7a:	85 e0       	ldi	r24, 0x05	; 5
+     c7c:	1b c0       	rjmp	.+54     	; 0xcb4 <LCD_Init+0xe0>
 		}
 		break;
 	case 5:
 		if (TRUE == LCD_Send_Command(0X20)) {
-     c72:	80 e2       	ldi	r24, 0x20	; 32
-     c74:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     c78:	81 30       	cpi	r24, 0x01	; 1
-     c7a:	71 f5       	brne	.+92     	; 0xcd8 <LCD_Init+0x110>
+     c7e:	80 e2       	ldi	r24, 0x20	; 32
+     c80:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     c84:	81 30       	cpi	r24, 0x01	; 1
+     c86:	71 f5       	brne	.+92     	; 0xce4 <LCD_Init+0x110>
 			Cnt = 6;
-     c7c:	86 e0       	ldi	r24, 0x06	; 6
-     c7e:	14 c0       	rjmp	.+40     	; 0xca8 <LCD_Init+0xe0>
+     c88:	86 e0       	ldi	r24, 0x06	; 6
+     c8a:	14 c0       	rjmp	.+40     	; 0xcb4 <LCD_Init+0xe0>
 		}
 		break;
 	case 6:
 		if (TRUE == LCD_Send_Command(0X80)) {
-     c80:	80 e8       	ldi	r24, 0x80	; 128
-     c82:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     c86:	81 30       	cpi	r24, 0x01	; 1
-     c88:	39 f5       	brne	.+78     	; 0xcd8 <LCD_Init+0x110>
+     c8c:	80 e8       	ldi	r24, 0x80	; 128
+     c8e:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     c92:	81 30       	cpi	r24, 0x01	; 1
+     c94:	39 f5       	brne	.+78     	; 0xce4 <LCD_Init+0x110>
 			Cnt = 7;
-     c8a:	87 e0       	ldi	r24, 0x07	; 7
-     c8c:	0d c0       	rjmp	.+26     	; 0xca8 <LCD_Init+0xe0>
+     c96:	87 e0       	ldi	r24, 0x07	; 7
+     c98:	0d c0       	rjmp	.+26     	; 0xcb4 <LCD_Init+0xe0>
 		}
 		break;
 	case 7:
 		if (TRUE == LCD_Send_Command(0X00)) {
-     c8e:	80 e0       	ldi	r24, 0x00	; 0
-     c90:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     c94:	81 30       	cpi	r24, 0x01	; 1
-     c96:	01 f5       	brne	.+64     	; 0xcd8 <LCD_Init+0x110>
+     c9a:	80 e0       	ldi	r24, 0x00	; 0
+     c9c:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     ca0:	81 30       	cpi	r24, 0x01	; 1
+     ca2:	01 f5       	brne	.+64     	; 0xce4 <LCD_Init+0x110>
 			Cnt = 8;
-     c98:	88 e0       	ldi	r24, 0x08	; 8
-     c9a:	06 c0       	rjmp	.+12     	; 0xca8 <LCD_Init+0xe0>
+     ca4:	88 e0       	ldi	r24, 0x08	; 8
+     ca6:	06 c0       	rjmp	.+12     	; 0xcb4 <LCD_Init+0xe0>
 		}
 		break;
 	case 8:
 		if (TRUE == LCD_Send_Command(0XC0)) {
-     c9c:	80 ec       	ldi	r24, 0xC0	; 192
-     c9e:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     ca2:	81 30       	cpi	r24, 0x01	; 1
-     ca4:	c9 f4       	brne	.+50     	; 0xcd8 <LCD_Init+0x110>
+     ca8:	80 ec       	ldi	r24, 0xC0	; 192
+     caa:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     cae:	81 30       	cpi	r24, 0x01	; 1
+     cb0:	c9 f4       	brne	.+50     	; 0xce4 <LCD_Init+0x110>
 			Cnt = 9;
-     ca6:	89 e0       	ldi	r24, 0x09	; 9
-     ca8:	80 93 17 01 	sts	0x0117, r24
-     cac:	80 e0       	ldi	r24, 0x00	; 0
-     cae:	08 95       	ret
+     cb2:	89 e0       	ldi	r24, 0x09	; 9
+     cb4:	80 93 18 01 	sts	0x0118, r24
+     cb8:	80 e0       	ldi	r24, 0x00	; 0
+     cba:	08 95       	ret
 		}
 		break;
 	case 9:
 		if (TRUE == LCD_Send_Command(0X00)) {
-     cb0:	80 e0       	ldi	r24, 0x00	; 0
-     cb2:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     cb6:	81 30       	cpi	r24, 0x01	; 1
-     cb8:	79 f4       	brne	.+30     	; 0xcd8 <LCD_Init+0x110>
+     cbc:	80 e0       	ldi	r24, 0x00	; 0
+     cbe:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     cc2:	81 30       	cpi	r24, 0x01	; 1
+     cc4:	79 f4       	brne	.+30     	; 0xce4 <LCD_Init+0x110>
 			Cnt = 10;
-     cba:	8a e0       	ldi	r24, 0x0A	; 10
-     cbc:	f5 cf       	rjmp	.-22     	; 0xca8 <LCD_Init+0xe0>
+     cc6:	8a e0       	ldi	r24, 0x0A	; 10
+     cc8:	f5 cf       	rjmp	.-22     	; 0xcb4 <LCD_Init+0xe0>
 		}
 		break;
 	case 10:
 		if (TRUE == LCD_Send_Command(0X10)) {
-     cbe:	80 e1       	ldi	r24, 0x10	; 16
-     cc0:	0e 94 11 05 	call	0xa22	; 0xa22 <LCD_Send_Command>
-     cc4:	81 30       	cpi	r24, 0x01	; 1
-     cc6:	41 f4       	brne	.+16     	; 0xcd8 <LCD_Init+0x110>
+     cca:	80 e1       	ldi	r24, 0x10	; 16
+     ccc:	0e 94 17 05 	call	0xa2e	; 0xa2e <LCD_Send_Command>
+     cd0:	81 30       	cpi	r24, 0x01	; 1
+     cd2:	41 f4       	brne	.+16     	; 0xce4 <LCD_Init+0x110>
 			Cnt = 11;
-     cc8:	8b e0       	ldi	r24, 0x0B	; 11
-     cca:	ee cf       	rjmp	.-36     	; 0xca8 <LCD_Init+0xe0>
+     cd4:	8b e0       	ldi	r24, 0x0B	; 11
+     cd6:	ee cf       	rjmp	.-36     	; 0xcb4 <LCD_Init+0xe0>
 		}
 		break;
 	default:
 		Configuration_Process = ENDED;
-     ccc:	81 e0       	ldi	r24, 0x01	; 1
-     cce:	80 93 15 01 	sts	0x0115, r24
+     cd8:	81 e0       	ldi	r24, 0x01	; 1
+     cda:	80 93 16 01 	sts	0x0116, r24
 		Cnt = 0;
-     cd2:	10 92 17 01 	sts	0x0117, r1
-     cd6:	08 95       	ret
-     cd8:	80 e0       	ldi	r24, 0x00	; 0
+     cde:	10 92 18 01 	sts	0x0118, r1
+     ce2:	08 95       	ret
+     ce4:	80 e0       	ldi	r24, 0x00	; 0
 		IsFinished = TRUE;
 		break;
 	}
 
 	return IsFinished;
 }
-     cda:	08 95       	ret
+     ce6:	08 95       	ret
 
-00000cdc <LCD_Update>:
+00000ce8 <LCD_Update>:
 		Length++;
 	} while (Number /= 10);
 	return Length;
 }
 /*************************************************************************/
 BOOL_t LCD_Update(char*Str,LCD_ROW_ID_t ROW, LCD_COL_ID_t COL){
-     cdc:	cf 93       	push	r28
-     cde:	df 93       	push	r29
-     ce0:	ec 01       	movw	r28, r24
+     ce8:	cf 93       	push	r28
+     cea:	df 93       	push	r29
+     cec:	ec 01       	movw	r28, r24
 	static UINT8_t State=0, Idx=0;
 	BOOL_t IsFinished=FALSE;
 	switch (State) {
-     ce2:	90 91 12 01 	lds	r25, 0x0112
-     ce6:	91 30       	cpi	r25, 0x01	; 1
-     ce8:	51 f0       	breq	.+20     	; 0xcfe <LCD_Update+0x22>
-     cea:	91 30       	cpi	r25, 0x01	; 1
-     cec:	18 f0       	brcs	.+6      	; 0xcf4 <LCD_Update+0x18>
-     cee:	92 30       	cpi	r25, 0x02	; 2
-     cf0:	69 f5       	brne	.+90     	; 0xd4c <LCD_Update+0x70>
-     cf2:	0f c0       	rjmp	.+30     	; 0xd12 <LCD_Update+0x36>
+     cee:	90 91 13 01 	lds	r25, 0x0113
+     cf2:	91 30       	cpi	r25, 0x01	; 1
+     cf4:	51 f0       	breq	.+20     	; 0xd0a <LCD_Update+0x22>
+     cf6:	91 30       	cpi	r25, 0x01	; 1
+     cf8:	18 f0       	brcs	.+6      	; 0xd00 <LCD_Update+0x18>
+     cfa:	92 30       	cpi	r25, 0x02	; 2
+     cfc:	69 f5       	brne	.+90     	; 0xd58 <LCD_Update+0x70>
+     cfe:	0f c0       	rjmp	.+30     	; 0xd1e <LCD_Update+0x36>
 	case 0:
 		if(TRUE==LCD_Init()){
-     cf4:	0e 94 e4 05 	call	0xbc8	; 0xbc8 <LCD_Init>
-     cf8:	81 30       	cpi	r24, 0x01	; 1
-     cfa:	41 f5       	brne	.+80     	; 0xd4c <LCD_Update+0x70>
-     cfc:	07 c0       	rjmp	.+14     	; 0xd0c <LCD_Update+0x30>
+     d00:	0e 94 ea 05 	call	0xbd4	; 0xbd4 <LCD_Init>
+     d04:	81 30       	cpi	r24, 0x01	; 1
+     d06:	41 f5       	brne	.+80     	; 0xd58 <LCD_Update+0x70>
+     d08:	07 c0       	rjmp	.+14     	; 0xd18 <LCD_Update+0x30>
 			State=1;
 		}
 		break;
 	case 1:
 		if(TRUE==LCD_Jumb_To(ROW,COL)){
-     cfe:	86 2f       	mov	r24, r22
-     d00:	64 2f       	mov	r22, r20
-     d02:	0e 94 b1 05 	call	0xb62	; 0xb62 <LCD_Jumb_To>
-     d06:	81 30       	cpi	r24, 0x01	; 1
-     d08:	09 f5       	brne	.+66     	; 0xd4c <LCD_Update+0x70>
+     d0a:	86 2f       	mov	r24, r22
+     d0c:	64 2f       	mov	r22, r20
+     d0e:	0e 94 b7 05 	call	0xb6e	; 0xb6e <LCD_Jumb_To>
+     d12:	81 30       	cpi	r24, 0x01	; 1
+     d14:	09 f5       	brne	.+66     	; 0xd58 <LCD_Update+0x70>
 			State=2;
-     d0a:	82 e0       	ldi	r24, 0x02	; 2
-     d0c:	80 93 12 01 	sts	0x0112, r24
-     d10:	1d c0       	rjmp	.+58     	; 0xd4c <LCD_Update+0x70>
+     d16:	82 e0       	ldi	r24, 0x02	; 2
+     d18:	80 93 13 01 	sts	0x0113, r24
+     d1c:	1d c0       	rjmp	.+58     	; 0xd58 <LCD_Update+0x70>
 		}
 		break;
 	case 2:
 		if (Str[Idx] != '\0') {
-     d12:	80 91 11 01 	lds	r24, 0x0111
-     d16:	fe 01       	movw	r30, r28
-     d18:	e8 0f       	add	r30, r24
-     d1a:	f1 1d       	adc	r31, r1
-     d1c:	80 81       	ld	r24, Z
-     d1e:	88 23       	and	r24, r24
-     d20:	a9 f0       	breq	.+42     	; 0xd4c <LCD_Update+0x70>
+     d1e:	80 91 12 01 	lds	r24, 0x0112
+     d22:	fe 01       	movw	r30, r28
+     d24:	e8 0f       	add	r30, r24
+     d26:	f1 1d       	adc	r31, r1
+     d28:	80 81       	ld	r24, Z
+     d2a:	88 23       	and	r24, r24
+     d2c:	a9 f0       	breq	.+42     	; 0xd58 <LCD_Update+0x70>
 			if (TRUE == LCD_Write_Char(Str[Idx])) {
-     d22:	0e 94 59 04 	call	0x8b2	; 0x8b2 <LCD_Write_Char>
-     d26:	98 2f       	mov	r25, r24
-     d28:	81 30       	cpi	r24, 0x01	; 1
-     d2a:	81 f4       	brne	.+32     	; 0xd4c <LCD_Update+0x70>
+     d2e:	0e 94 5f 04 	call	0x8be	; 0x8be <LCD_Write_Char>
+     d32:	98 2f       	mov	r25, r24
+     d34:	81 30       	cpi	r24, 0x01	; 1
+     d36:	81 f4       	brne	.+32     	; 0xd58 <LCD_Update+0x70>
 				++Idx;
-     d2c:	80 91 11 01 	lds	r24, 0x0111
-     d30:	8f 5f       	subi	r24, 0xFF	; 255
-     d32:	80 93 11 01 	sts	0x0111, r24
+     d38:	80 91 12 01 	lds	r24, 0x0112
+     d3c:	8f 5f       	subi	r24, 0xFF	; 255
+     d3e:	80 93 12 01 	sts	0x0112, r24
 				if (Str[Idx] == '\0') {
-     d36:	c8 0f       	add	r28, r24
-     d38:	d1 1d       	adc	r29, r1
-     d3a:	88 81       	ld	r24, Y
-     d3c:	88 23       	and	r24, r24
-     d3e:	31 f4       	brne	.+12     	; 0xd4c <LCD_Update+0x70>
+     d42:	c8 0f       	add	r28, r24
+     d44:	d1 1d       	adc	r29, r1
+     d46:	88 81       	ld	r24, Y
+     d48:	88 23       	and	r24, r24
+     d4a:	31 f4       	brne	.+12     	; 0xd58 <LCD_Update+0x70>
 					IsFinished = TRUE;
 					Idx=0;
-     d40:	10 92 11 01 	sts	0x0111, r1
+     d4c:	10 92 12 01 	sts	0x0112, r1
 					State=1;
-     d44:	90 93 12 01 	sts	0x0112, r25
-     d48:	81 e0       	ldi	r24, 0x01	; 1
-     d4a:	01 c0       	rjmp	.+2      	; 0xd4e <LCD_Update+0x72>
-     d4c:	80 e0       	ldi	r24, 0x00	; 0
+     d50:	90 93 13 01 	sts	0x0113, r25
+     d54:	81 e0       	ldi	r24, 0x01	; 1
+     d56:	01 c0       	rjmp	.+2      	; 0xd5a <LCD_Update+0x72>
+     d58:	80 e0       	ldi	r24, 0x00	; 0
 	default:
 		break;
 
 	}
 	return IsFinished;
 }
-     d4e:	df 91       	pop	r29
-     d50:	cf 91       	pop	r28
-     d52:	08 95       	ret
+     d5a:	df 91       	pop	r29
+     d5c:	cf 91       	pop	r28
+     d5e:	08 95       	ret
 
-00000d54 <SPI_Set_State>:
+00000d60 <SPI_Set_State>:
 SS_t SPI_Slave={
 					{SS_DISABLE, SS_DISABLE, SS_DISABLE}
 };
 static void SPI_Update_Write(ECU_RM_t Room);
 void SPI_Set_State(const SPI_STATE_t STATE){
 	switch (STATE) {
-     d54:	88 23       	and	r24, r24
-     d56:	19 f0       	breq	.+6      	; 0xd5e <SPI_Set_State+0xa>
-     d58:	81 30       	cpi	r24, 0x01	; 1
-     d5a:	21 f4       	brne	.+8      	; 0xd64 <SPI_Set_State+0x10>
-     d5c:	02 c0       	rjmp	.+4      	; 0xd62 <SPI_Set_State+0xe>
+     d60:	88 23       	and	r24, r24
+     d62:	19 f0       	breq	.+6      	; 0xd6a <SPI_Set_State+0xa>
+     d64:	81 30       	cpi	r24, 0x01	; 1
+     d66:	21 f4       	brne	.+8      	; 0xd70 <SPI_Set_State+0x10>
+     d68:	02 c0       	rjmp	.+4      	; 0xd6e <SPI_Set_State+0xe>
 	case SPI_ENABLE:
 		SET_BIT(SPCR, SPE);
-     d5e:	6e 9a       	sbi	0x0d, 6	; 13
-     d60:	08 95       	ret
+     d6a:	6e 9a       	sbi	0x0d, 6	; 13
+     d6c:	08 95       	ret
 		break;
 	case SPI_DISABLE:
 		CLEAR_BIT(SPCR, SPE);
-     d62:	6e 98       	cbi	0x0d, 6	; 13
-     d64:	08 95       	ret
+     d6e:	6e 98       	cbi	0x0d, 6	; 13
+     d70:	08 95       	ret
 
-00000d66 <SPI_Set_Mode>:
+00000d72 <SPI_Set_Mode>:
 		break;
 	}
 }
 void SPI_Set_Mode(const SPI_MODE_t MODE){
 	switch (MODE) {
-     d66:	88 23       	and	r24, r24
-     d68:	19 f0       	breq	.+6      	; 0xd70 <SPI_Set_Mode+0xa>
-     d6a:	81 30       	cpi	r24, 0x01	; 1
-     d6c:	21 f4       	brne	.+8      	; 0xd76 <SPI_Set_Mode+0x10>
-     d6e:	02 c0       	rjmp	.+4      	; 0xd74 <SPI_Set_Mode+0xe>
+     d72:	88 23       	and	r24, r24
+     d74:	19 f0       	breq	.+6      	; 0xd7c <SPI_Set_Mode+0xa>
+     d76:	81 30       	cpi	r24, 0x01	; 1
+     d78:	21 f4       	brne	.+8      	; 0xd82 <SPI_Set_Mode+0x10>
+     d7a:	02 c0       	rjmp	.+4      	; 0xd80 <SPI_Set_Mode+0xe>
 	case SPI_MASTER:
 		SET_BIT(SPCR, MSTR);
-     d70:	6c 9a       	sbi	0x0d, 4	; 13
-     d72:	08 95       	ret
+     d7c:	6c 9a       	sbi	0x0d, 4	; 13
+     d7e:	08 95       	ret
 		break;
 	case SPI_SLAVE:
 		CLEAR_BIT(SPCR, MSTR);
-     d74:	6c 98       	cbi	0x0d, 4	; 13
-     d76:	08 95       	ret
+     d80:	6c 98       	cbi	0x0d, 4	; 13
+     d82:	08 95       	ret
 
-00000d78 <SPI_Set_CLK>:
+00000d84 <SPI_Set_CLK>:
 		break;
 	}
 }
 void SPI_Set_CLK(const SPI_DF_t DF){
 	SPCR &= 0xfc;
-     d78:	9d b1       	in	r25, 0x0d	; 13
-     d7a:	9c 7f       	andi	r25, 0xFC	; 252
-     d7c:	9d b9       	out	0x0d, r25	; 13
+     d84:	9d b1       	in	r25, 0x0d	; 13
+     d86:	9c 7f       	andi	r25, 0xFC	; 252
+     d88:	9d b9       	out	0x0d, r25	; 13
 	SPCR |= DF;
-     d7e:	9d b1       	in	r25, 0x0d	; 13
-     d80:	98 2b       	or	r25, r24
-     d82:	9d b9       	out	0x0d, r25	; 13
-	SPSR &=0xFE;
-     d84:	70 98       	cbi	0x0e, 0	; 14
-	SPSR |=(DF>>2);
-     d86:	9e b1       	in	r25, 0x0e	; 14
-     d88:	86 95       	lsr	r24
-     d8a:	86 95       	lsr	r24
+     d8a:	9d b1       	in	r25, 0x0d	; 13
      d8c:	98 2b       	or	r25, r24
-     d8e:	9e b9       	out	0x0e, r25	; 14
+     d8e:	9d b9       	out	0x0d, r25	; 13
+	SPSR &=0xFE;
+     d90:	70 98       	cbi	0x0e, 0	; 14
+	SPSR |=(DF>>2);
+     d92:	9e b1       	in	r25, 0x0e	; 14
+     d94:	86 95       	lsr	r24
+     d96:	86 95       	lsr	r24
+     d98:	98 2b       	or	r25, r24
+     d9a:	9e b9       	out	0x0e, r25	; 14
 }
-     d90:	08 95       	ret
+     d9c:	08 95       	ret
 
-00000d92 <SPI_Tx_Rx>:
+00000d9e <SPI_Tx_Rx>:
 UINT8_t SPI_Tx_Rx(const UINT8_t CHAR){
 	UINT8_t Tmp = SPDR;
-     d92:	9f b1       	in	r25, 0x0f	; 15
+     d9e:	9f b1       	in	r25, 0x0f	; 15
 	SPDR=CHAR;
-     d94:	8f b9       	out	0x0f, r24	; 15
+     da0:	8f b9       	out	0x0f, r24	; 15
 	return Tmp;
 }
-     d96:	89 2f       	mov	r24, r25
-     d98:	08 95       	ret
+     da2:	89 2f       	mov	r24, r25
+     da4:	08 95       	ret
 
-00000d9a <SPI_INT>:
+00000da6 <SPI_INT>:
 void SPI_INT(const SPI_INT_t INT){
 	switch (INT) {
-     d9a:	88 23       	and	r24, r24
-     d9c:	19 f0       	breq	.+6      	; 0xda4 <SPI_INT+0xa>
-     d9e:	81 30       	cpi	r24, 0x01	; 1
-     da0:	21 f4       	brne	.+8      	; 0xdaa <SPI_INT+0x10>
-     da2:	02 c0       	rjmp	.+4      	; 0xda8 <SPI_INT+0xe>
+     da6:	88 23       	and	r24, r24
+     da8:	19 f0       	breq	.+6      	; 0xdb0 <SPI_INT+0xa>
+     daa:	81 30       	cpi	r24, 0x01	; 1
+     dac:	21 f4       	brne	.+8      	; 0xdb6 <SPI_INT+0x10>
+     dae:	02 c0       	rjmp	.+4      	; 0xdb4 <SPI_INT+0xe>
 	case SPI_INT_DISABLE:
 		CLEAR_BIT(SPCR, 7);
-     da4:	6f 98       	cbi	0x0d, 7	; 13
-     da6:	08 95       	ret
+     db0:	6f 98       	cbi	0x0d, 7	; 13
+     db2:	08 95       	ret
 		break;
 	case SPI_INT_ENABLE:
 		SET_BIT(SPCR, 7);
-     da8:	6f 9a       	sbi	0x0d, 7	; 13
-     daa:	08 95       	ret
+     db4:	6f 9a       	sbi	0x0d, 7	; 13
+     db6:	08 95       	ret
 
-00000dac <SPI_Update_Write>:
+00000db8 <SPI_Update_Write>:
 		//DIO_WRITE_PIN_VALUE(DIO_PIND0, 1^DIO_READ_PIN_VALUE(DIO_PIND0));
 	}
 #endif
 }
 static void SPI_Update_Write(ECU_RM_t Room)
 {
-     dac:	98 2f       	mov	r25, r24
+     db8:	98 2f       	mov	r25, r24
 	static UINT8_t Room_Write_State[ECU_MAX_ROOMS] = { 0 };
 	static UINT8_t Coord=0;
 	switch(Coord)
-     dae:	80 91 1e 01 	lds	r24, 0x011E
-     db2:	81 30       	cpi	r24, 0x01	; 1
-     db4:	71 f0       	breq	.+28     	; 0xdd2 <SPI_Update_Write+0x26>
-     db6:	81 30       	cpi	r24, 0x01	; 1
-     db8:	18 f0       	brcs	.+6      	; 0xdc0 <SPI_Update_Write+0x14>
-     dba:	82 30       	cpi	r24, 0x02	; 2
-     dbc:	11 f5       	brne	.+68     	; 0xe02 <SPI_Update_Write+0x56>
-     dbe:	14 c0       	rjmp	.+40     	; 0xde8 <SPI_Update_Write+0x3c>
+     dba:	80 91 1f 01 	lds	r24, 0x011F
+     dbe:	81 30       	cpi	r24, 0x01	; 1
+     dc0:	71 f0       	breq	.+28     	; 0xdde <SPI_Update_Write+0x26>
+     dc2:	81 30       	cpi	r24, 0x01	; 1
+     dc4:	18 f0       	brcs	.+6      	; 0xdcc <SPI_Update_Write+0x14>
+     dc6:	82 30       	cpi	r24, 0x02	; 2
+     dc8:	11 f5       	brne	.+68     	; 0xe0e <SPI_Update_Write+0x56>
+     dca:	14 c0       	rjmp	.+40     	; 0xdf4 <SPI_Update_Write+0x3c>
 	{
 	case 0:
 		if(ECU_OD_CNT_OFF==ECU_OD_Data.State)
-     dc0:	80 91 31 01 	lds	r24, 0x0131
-     dc4:	88 23       	and	r24, r24
-     dc6:	e9 f4       	brne	.+58     	; 0xe02 <SPI_Update_Write+0x56>
+     dcc:	80 91 32 01 	lds	r24, 0x0132
+     dd0:	88 37       	cpi	r24, 0x78	; 120
+     dd2:	e9 f4       	brne	.+58     	; 0xe0e <SPI_Update_Write+0x56>
 		{
 			SPI_Tx_Val=ECU_FRM_USUB;
-     dc8:	80 e4       	ldi	r24, 0x40	; 64
-     dca:	80 93 3c 01 	sts	0x013C, r24
+     dd4:	80 e4       	ldi	r24, 0x40	; 64
+     dd6:	80 93 3d 01 	sts	0x013D, r24
 			Coord=1;
-     dce:	81 e0       	ldi	r24, 0x01	; 1
-     dd0:	08 c0       	rjmp	.+16     	; 0xde2 <SPI_Update_Write+0x36>
+     dda:	81 e0       	ldi	r24, 0x01	; 1
+     ddc:	08 c0       	rjmp	.+16     	; 0xdee <SPI_Update_Write+0x36>
 		}
 
 		break;
 	case 1:
 		if (ECU_OD_CNT_OFF == ECU_OD_Data.State) {
-     dd2:	80 91 31 01 	lds	r24, 0x0131
-     dd6:	88 23       	and	r24, r24
-     dd8:	a1 f4       	brne	.+40     	; 0xe02 <SPI_Update_Write+0x56>
+     dde:	80 91 32 01 	lds	r24, 0x0132
+     de2:	88 37       	cpi	r24, 0x78	; 120
+     de4:	a1 f4       	brne	.+40     	; 0xe0e <SPI_Update_Write+0x56>
 			SPI_Tx_Val = ECU_FRM_USUB;
-     dda:	80 e4       	ldi	r24, 0x40	; 64
-     ddc:	80 93 3c 01 	sts	0x013C, r24
+     de6:	80 e4       	ldi	r24, 0x40	; 64
+     de8:	80 93 3d 01 	sts	0x013D, r24
 			Coord = 2;
-     de0:	82 e0       	ldi	r24, 0x02	; 2
-     de2:	80 93 1e 01 	sts	0x011E, r24
-     de6:	0d c0       	rjmp	.+26     	; 0xe02 <SPI_Update_Write+0x56>
+     dec:	82 e0       	ldi	r24, 0x02	; 2
+     dee:	80 93 1f 01 	sts	0x011F, r24
+     df2:	0d c0       	rjmp	.+26     	; 0xe0e <SPI_Update_Write+0x56>
 		}
 
 		break;
 	case 2:
 		if (ECU_OD_CNT_OFF == ECU_OD_Data.State) {
-     de8:	80 91 31 01 	lds	r24, 0x0131
-     dec:	88 23       	and	r24, r24
-     dee:	29 f4       	brne	.+10     	; 0xdfa <SPI_Update_Write+0x4e>
+     df4:	80 91 32 01 	lds	r24, 0x0132
+     df8:	88 37       	cpi	r24, 0x78	; 120
+     dfa:	29 f4       	brne	.+10     	; 0xe06 <SPI_Update_Write+0x4e>
 			SPI_Tx_Val = TMP_Back_Up;
-     df0:	80 91 aa 00 	lds	r24, 0x00AA
-     df4:	80 93 3c 01 	sts	0x013C, r24
-     df8:	04 c0       	rjmp	.+8      	; 0xe02 <SPI_Update_Write+0x56>
+     dfc:	80 91 ab 00 	lds	r24, 0x00AB
+     e00:	80 93 3d 01 	sts	0x013D, r24
+     e04:	04 c0       	rjmp	.+8      	; 0xe0e <SPI_Update_Write+0x56>
 		}else if(ECU_OD_CNT_ON == ECU_OD_Data.State)
-     dfa:	81 30       	cpi	r24, 0x01	; 1
-     dfc:	11 f4       	brne	.+4      	; 0xe02 <SPI_Update_Write+0x56>
+     e06:	82 38       	cpi	r24, 0x82	; 130
+     e08:	11 f4       	brne	.+4      	; 0xe0e <SPI_Update_Write+0x56>
 		{
 			Coord=0;
-     dfe:	10 92 1e 01 	sts	0x011E, r1
+     e0a:	10 92 1f 01 	sts	0x011F, r1
 		break;
 	default:
 		break;
 	}
 
 	if (ECU_RM_SUB_LIGHT == ECU_RM_Data[Room].SubLight
-     e02:	a9 2f       	mov	r26, r25
-     e04:	b0 e0       	ldi	r27, 0x00	; 0
-     e06:	fd 01       	movw	r30, r26
-     e08:	ee 0f       	add	r30, r30
-     e0a:	ff 1f       	adc	r31, r31
-     e0c:	ee 0f       	add	r30, r30
-     e0e:	ff 1f       	adc	r31, r31
-     e10:	ea 0f       	add	r30, r26
-     e12:	fb 1f       	adc	r31, r27
-     e14:	ee 5c       	subi	r30, 0xCE	; 206
-     e16:	fe 4f       	sbci	r31, 0xFE	; 254
-     e18:	83 81       	ldd	r24, Z+3	; 0x03
-     e1a:	8e 30       	cpi	r24, 0x0E	; 14
-     e1c:	79 f5       	brne	.+94     	; 0xe7c <SPI_Update_Write+0xd0>
-     e1e:	84 81       	ldd	r24, Z+4	; 0x04
-     e20:	8d 30       	cpi	r24, 0x0D	; 13
-     e22:	01 f5       	brne	.+64     	; 0xe64 <SPI_Update_Write+0xb8>
+     e0e:	a9 2f       	mov	r26, r25
+     e10:	b0 e0       	ldi	r27, 0x00	; 0
+     e12:	fd 01       	movw	r30, r26
+     e14:	ee 0f       	add	r30, r30
+     e16:	ff 1f       	adc	r31, r31
+     e18:	ee 0f       	add	r30, r30
+     e1a:	ff 1f       	adc	r31, r31
+     e1c:	ea 0f       	add	r30, r26
+     e1e:	fb 1f       	adc	r31, r27
+     e20:	ed 5c       	subi	r30, 0xCD	; 205
+     e22:	fe 4f       	sbci	r31, 0xFE	; 254
+     e24:	83 81       	ldd	r24, Z+3	; 0x03
+     e26:	8e 30       	cpi	r24, 0x0E	; 14
+     e28:	79 f5       	brne	.+94     	; 0xe88 <SPI_Update_Write+0xd0>
+     e2a:	84 81       	ldd	r24, Z+4	; 0x04
+     e2c:	8d 30       	cpi	r24, 0x0D	; 13
+     e2e:	01 f5       	brne	.+64     	; 0xe70 <SPI_Update_Write+0xb8>
 			&& ECU_RM_SUB_TMP == ECU_RM_Data[Room].SubTemp) {
 		if (0 == Room_Write_State[Room]) {
-     e24:	fd 01       	movw	r30, r26
-     e26:	e1 5e       	subi	r30, 0xE1	; 225
-     e28:	fe 4f       	sbci	r31, 0xFE	; 254
-     e2a:	80 81       	ld	r24, Z
-     e2c:	88 23       	and	r24, r24
-     e2e:	39 f4       	brne	.+14     	; 0xe3e <SPI_Update_Write+0x92>
+     e30:	fd 01       	movw	r30, r26
+     e32:	e0 5e       	subi	r30, 0xE0	; 224
+     e34:	fe 4f       	sbci	r31, 0xFE	; 254
+     e36:	80 81       	ld	r24, Z
+     e38:	88 23       	and	r24, r24
+     e3a:	39 f4       	brne	.+14     	; 0xe4a <SPI_Update_Write+0x92>
 			SPI_Tx_Val = ECU_FRM_TMP | ECU_OD_Data.Temp;
-     e30:	80 91 2f 01 	lds	r24, 0x012F
-     e34:	80 93 3c 01 	sts	0x013C, r24
+     e3c:	80 91 30 01 	lds	r24, 0x0130
+     e40:	80 93 3d 01 	sts	0x013D, r24
 			Room_Write_State[Room] = 1;
-     e38:	81 e0       	ldi	r24, 0x01	; 1
-     e3a:	80 83       	st	Z, r24
-     e3c:	08 95       	ret
+     e44:	81 e0       	ldi	r24, 0x01	; 1
+     e46:	80 83       	st	Z, r24
+     e48:	08 95       	ret
 		} else if (1 == Room_Write_State[Room]) {
-     e3e:	81 30       	cpi	r24, 0x01	; 1
-     e40:	79 f4       	brne	.+30     	; 0xe60 <SPI_Update_Write+0xb4>
+     e4a:	81 30       	cpi	r24, 0x01	; 1
+     e4c:	79 f4       	brne	.+30     	; 0xe6c <SPI_Update_Write+0xb4>
 			if (ECU_OD_LIGHT_MORNING == ECU_OD_Data.Light) {
-     e42:	80 91 30 01 	lds	r24, 0x0130
-     e46:	82 30       	cpi	r24, 0x02	; 2
-     e48:	11 f4       	brne	.+4      	; 0xe4e <SPI_Update_Write+0xa2>
+     e4e:	80 91 31 01 	lds	r24, 0x0131
+     e52:	8c 38       	cpi	r24, 0x8C	; 140
+     e54:	11 f4       	brne	.+4      	; 0xe5a <SPI_Update_Write+0xa2>
 				SPI_Tx_Val = ECU_FRM_MORNING;
-     e4a:	80 ec       	ldi	r24, 0xC0	; 192
-     e4c:	03 c0       	rjmp	.+6      	; 0xe54 <SPI_Update_Write+0xa8>
+     e56:	80 ec       	ldi	r24, 0xC0	; 192
+     e58:	03 c0       	rjmp	.+6      	; 0xe60 <SPI_Update_Write+0xa8>
 			} else if (ECU_OD_LIGHT_NIGHT == ECU_OD_Data.Light) {
-     e4e:	83 30       	cpi	r24, 0x03	; 3
-     e50:	19 f4       	brne	.+6      	; 0xe58 <SPI_Update_Write+0xac>
+     e5a:	86 39       	cpi	r24, 0x96	; 150
+     e5c:	19 f4       	brne	.+6      	; 0xe64 <SPI_Update_Write+0xac>
 				SPI_Tx_Val = ECU_FRM_NIGHT;
-     e52:	80 e8       	ldi	r24, 0x80	; 128
-     e54:	80 93 3c 01 	sts	0x013C, r24
+     e5e:	80 e8       	ldi	r24, 0x80	; 128
+     e60:	80 93 3d 01 	sts	0x013D, r24
 			} else {
 
 			}
 
 			Room_Write_State[Room] = 0;
-     e58:	a1 5e       	subi	r26, 0xE1	; 225
-     e5a:	be 4f       	sbci	r27, 0xFE	; 254
-     e5c:	1c 92       	st	X, r1
-     e5e:	08 95       	ret
+     e64:	a0 5e       	subi	r26, 0xE0	; 224
+     e66:	be 4f       	sbci	r27, 0xFE	; 254
+     e68:	1c 92       	st	X, r1
+     e6a:	08 95       	ret
 		} else {
 			Room_Write_State[Room] = 0;
-     e60:	10 82       	st	Z, r1
-     e62:	08 95       	ret
+     e6c:	10 82       	st	Z, r1
+     e6e:	08 95       	ret
 		}
 	} else if (ECU_RM_SUB_LIGHT == ECU_RM_Data[Room].SubLight) {
 		if (ECU_OD_LIGHT_MORNING == ECU_OD_Data.Light) {
-     e64:	80 91 30 01 	lds	r24, 0x0130
-     e68:	82 30       	cpi	r24, 0x02	; 2
-     e6a:	11 f4       	brne	.+4      	; 0xe70 <SPI_Update_Write+0xc4>
+     e70:	80 91 31 01 	lds	r24, 0x0131
+     e74:	8c 38       	cpi	r24, 0x8C	; 140
+     e76:	11 f4       	brne	.+4      	; 0xe7c <SPI_Update_Write+0xc4>
 			SPI_Tx_Val = ECU_FRM_MORNING;
-     e6c:	80 ec       	ldi	r24, 0xC0	; 192
-     e6e:	03 c0       	rjmp	.+6      	; 0xe76 <SPI_Update_Write+0xca>
+     e78:	80 ec       	ldi	r24, 0xC0	; 192
+     e7a:	03 c0       	rjmp	.+6      	; 0xe82 <SPI_Update_Write+0xca>
 		} else if (ECU_OD_LIGHT_NIGHT == ECU_OD_Data.Light) {
-     e70:	83 30       	cpi	r24, 0x03	; 3
-     e72:	59 f4       	brne	.+22     	; 0xe8a <SPI_Update_Write+0xde>
+     e7c:	86 39       	cpi	r24, 0x96	; 150
+     e7e:	59 f4       	brne	.+22     	; 0xe96 <SPI_Update_Write+0xde>
 			SPI_Tx_Val = ECU_FRM_NIGHT;
-     e74:	80 e8       	ldi	r24, 0x80	; 128
-     e76:	80 93 3c 01 	sts	0x013C, r24
-     e7a:	08 95       	ret
+     e80:	80 e8       	ldi	r24, 0x80	; 128
+     e82:	80 93 3d 01 	sts	0x013D, r24
+     e86:	08 95       	ret
 		} else {
 
 		}
 	} else if (ECU_RM_SUB_TMP == ECU_RM_Data[Room].SubTemp) {
-     e7c:	84 81       	ldd	r24, Z+4	; 0x04
-     e7e:	8d 30       	cpi	r24, 0x0D	; 13
-     e80:	21 f4       	brne	.+8      	; 0xe8a <SPI_Update_Write+0xde>
+     e88:	84 81       	ldd	r24, Z+4	; 0x04
+     e8a:	8d 30       	cpi	r24, 0x0D	; 13
+     e8c:	21 f4       	brne	.+8      	; 0xe96 <SPI_Update_Write+0xde>
 		SPI_Tx_Val = ECU_FRM_TMP | ECU_OD_Data.Temp;
-     e82:	80 91 2f 01 	lds	r24, 0x012F
-     e86:	80 93 3c 01 	sts	0x013C, r24
-     e8a:	08 95       	ret
+     e8e:	80 91 30 01 	lds	r24, 0x0130
+     e92:	80 93 3d 01 	sts	0x013D, r24
+     e96:	08 95       	ret
 
-00000e8c <__vector_12>:
+00000e98 <__vector_12>:
 	} else {
 
 	}
 }
 ISR(SPI_VECT) {
-     e8c:	1f 92       	push	r1
-     e8e:	0f 92       	push	r0
-     e90:	0f b6       	in	r0, 0x3f	; 63
-     e92:	0f 92       	push	r0
-     e94:	11 24       	eor	r1, r1
-     e96:	8f 93       	push	r24
+     e98:	1f 92       	push	r1
+     e9a:	0f 92       	push	r0
+     e9c:	0f b6       	in	r0, 0x3f	; 63
+     e9e:	0f 92       	push	r0
+     ea0:	11 24       	eor	r1, r1
+     ea2:	8f 93       	push	r24
 	SPI_Finished = TRUE;
-     e98:	81 e0       	ldi	r24, 0x01	; 1
-     e9a:	80 93 a9 00 	sts	0x00A9, r24
+     ea4:	81 e0       	ldi	r24, 0x01	; 1
+     ea6:	80 93 aa 00 	sts	0x00AA, r24
 }
-     e9e:	8f 91       	pop	r24
-     ea0:	0f 90       	pop	r0
-     ea2:	0f be       	out	0x3f, r0	; 63
-     ea4:	0f 90       	pop	r0
-     ea6:	1f 90       	pop	r1
-     ea8:	18 95       	reti
+     eaa:	8f 91       	pop	r24
+     eac:	0f 90       	pop	r0
+     eae:	0f be       	out	0x3f, r0	; 63
+     eb0:	0f 90       	pop	r0
+     eb2:	1f 90       	pop	r1
+     eb4:	18 95       	reti
 
-00000eaa <SPI_Update>:
+00000eb6 <SPI_Update>:
 	SPI_Set_CLK(SPI_DF4);
 	SPI_Set_Mode(SPI_MASTER);
 	SPI_INT(SPI_INT_DISABLE);
 	SPI_Set_State(SPI_ENABLE);
 }
 void SPI_Update(void) {
-     eaa:	1f 93       	push	r17
+     eb6:	1f 93       	push	r17
 #if 1
 	static SS_ECU_t SlaveSelector = SS_OD;
 	static UINT8_t Cnt = 0;
 	++Cnt;
-     eac:	80 91 1c 01 	lds	r24, 0x011C
-     eb0:	8f 5f       	subi	r24, 0xFF	; 255
-     eb2:	80 93 1c 01 	sts	0x011C, r24
+     eb8:	80 91 1d 01 	lds	r24, 0x011D
+     ebc:	8f 5f       	subi	r24, 0xFF	; 255
+     ebe:	80 93 1d 01 	sts	0x011D, r24
 	switch (SlaveSelector) {
-     eb6:	10 91 1d 01 	lds	r17, 0x011D
-     eba:	11 30       	cpi	r17, 0x01	; 1
-     ebc:	19 f1       	breq	.+70     	; 0xf04 <SPI_Update+0x5a>
-     ebe:	11 30       	cpi	r17, 0x01	; 1
-     ec0:	20 f0       	brcs	.+8      	; 0xeca <SPI_Update+0x20>
-     ec2:	12 30       	cpi	r17, 0x02	; 2
-     ec4:	09 f0       	breq	.+2      	; 0xec8 <SPI_Update+0x1e>
-     ec6:	59 c0       	rjmp	.+178    	; 0xf7a <SPI_Update+0xd0>
-     ec8:	3a c0       	rjmp	.+116    	; 0xf3e <SPI_Update+0x94>
+     ec2:	10 91 1e 01 	lds	r17, 0x011E
+     ec6:	11 30       	cpi	r17, 0x01	; 1
+     ec8:	19 f1       	breq	.+70     	; 0xf10 <SPI_Update+0x5a>
+     eca:	11 30       	cpi	r17, 0x01	; 1
+     ecc:	20 f0       	brcs	.+8      	; 0xed6 <SPI_Update+0x20>
+     ece:	12 30       	cpi	r17, 0x02	; 2
+     ed0:	09 f0       	breq	.+2      	; 0xed4 <SPI_Update+0x1e>
+     ed2:	59 c0       	rjmp	.+178    	; 0xf86 <SPI_Update+0xd0>
+     ed4:	3a c0       	rjmp	.+116    	; 0xf4a <SPI_Update+0x94>
 	case SS_OD:
 
 		DIO_WRITE_PIN_VALUE(DIO_PINC2, DIO_PIN_STATE_HIGH);/*RM2*/
-     eca:	82 e1       	ldi	r24, 0x12	; 18
-     ecc:	61 e0       	ldi	r22, 0x01	; 1
-     ece:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     ed6:	82 e1       	ldi	r24, 0x12	; 18
+     ed8:	61 e0       	ldi	r22, 0x01	; 1
+     eda:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(DIO_PINC1, DIO_PIN_STATE_HIGH);/*RM1*/
-     ed2:	81 e1       	ldi	r24, 0x11	; 17
-     ed4:	61 e0       	ldi	r22, 0x01	; 1
-     ed6:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     ede:	81 e1       	ldi	r24, 0x11	; 17
+     ee0:	61 e0       	ldi	r22, 0x01	; 1
+     ee2:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(DIO_PINC0, DIO_PIN_STATE_LOW);/*OD*/
-     eda:	80 e1       	ldi	r24, 0x10	; 16
-     edc:	60 e0       	ldi	r22, 0x00	; 0
-     ede:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     ee6:	80 e1       	ldi	r24, 0x10	; 16
+     ee8:	60 e0       	ldi	r22, 0x00	; 0
+     eea:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		SPI_Slave.Select[SS_OD] = SS_ENABLE;
-     ee2:	91 e0       	ldi	r25, 0x01	; 1
-     ee4:	90 93 19 01 	sts	0x0119, r25
+     eee:	91 e0       	ldi	r25, 0x01	; 1
+     ef0:	90 93 1a 01 	sts	0x011A, r25
 		SPI_Slave.Select[SS_RM1] = SS_DISABLE;
-     ee8:	10 92 1a 01 	sts	0x011A, r1
+     ef4:	10 92 1b 01 	sts	0x011B, r1
 		SPI_Slave.Select[SS_RM2] = SS_DISABLE;
-     eec:	10 92 1b 01 	sts	0x011B, r1
+     ef8:	10 92 1c 01 	sts	0x011C, r1
 		if (MAX_DELAY == Cnt) {
-     ef0:	80 91 1c 01 	lds	r24, 0x011C
-     ef4:	87 31       	cpi	r24, 0x17	; 23
-     ef6:	09 f0       	breq	.+2      	; 0xefa <SPI_Update+0x50>
-     ef8:	40 c0       	rjmp	.+128    	; 0xf7a <SPI_Update+0xd0>
+     efc:	80 91 1d 01 	lds	r24, 0x011D
+     f00:	87 31       	cpi	r24, 0x17	; 23
+     f02:	09 f0       	breq	.+2      	; 0xf06 <SPI_Update+0x50>
+     f04:	40 c0       	rjmp	.+128    	; 0xf86 <SPI_Update+0xd0>
 			Cnt = 0;
-     efa:	10 92 1c 01 	sts	0x011C, r1
+     f06:	10 92 1d 01 	sts	0x011D, r1
 			SlaveSelector = SS_RM1;
-     efe:	90 93 1d 01 	sts	0x011D, r25
-     f02:	3b c0       	rjmp	.+118    	; 0xf7a <SPI_Update+0xd0>
+     f0a:	90 93 1e 01 	sts	0x011E, r25
+     f0e:	3b c0       	rjmp	.+118    	; 0xf86 <SPI_Update+0xd0>
 		}
 
 		break;
 	case SS_RM1:
 		DIO_WRITE_PIN_VALUE(DIO_PINC0, DIO_PIN_STATE_HIGH);/*OD*/
-     f04:	80 e1       	ldi	r24, 0x10	; 16
-     f06:	61 e0       	ldi	r22, 0x01	; 1
-     f08:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     f10:	80 e1       	ldi	r24, 0x10	; 16
+     f12:	61 e0       	ldi	r22, 0x01	; 1
+     f14:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(DIO_PINC2, DIO_PIN_STATE_HIGH);/*RM2*/
-     f0c:	82 e1       	ldi	r24, 0x12	; 18
-     f0e:	61 e0       	ldi	r22, 0x01	; 1
-     f10:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     f18:	82 e1       	ldi	r24, 0x12	; 18
+     f1a:	61 e0       	ldi	r22, 0x01	; 1
+     f1c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(DIO_PINC1, DIO_PIN_STATE_LOW);/*RM1*/
-     f14:	81 e1       	ldi	r24, 0x11	; 17
-     f16:	60 e0       	ldi	r22, 0x00	; 0
-     f18:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     f20:	81 e1       	ldi	r24, 0x11	; 17
+     f22:	60 e0       	ldi	r22, 0x00	; 0
+     f24:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		SPI_Slave.Select[SS_OD] = SS_DISABLE;
-     f1c:	10 92 19 01 	sts	0x0119, r1
+     f28:	10 92 1a 01 	sts	0x011A, r1
 		SPI_Slave.Select[SS_RM1] = SS_ENABLE;
-     f20:	10 93 1a 01 	sts	0x011A, r17
+     f2c:	10 93 1b 01 	sts	0x011B, r17
 		SPI_Slave.Select[SS_RM2] = SS_DISABLE;
-     f24:	10 92 1b 01 	sts	0x011B, r1
+     f30:	10 92 1c 01 	sts	0x011C, r1
 
 		if (MAX_DELAY == Cnt) {
-     f28:	80 91 1c 01 	lds	r24, 0x011C
-     f2c:	87 31       	cpi	r24, 0x17	; 23
-     f2e:	29 f4       	brne	.+10     	; 0xf3a <SPI_Update+0x90>
+     f34:	80 91 1d 01 	lds	r24, 0x011D
+     f38:	87 31       	cpi	r24, 0x17	; 23
+     f3a:	29 f4       	brne	.+10     	; 0xf46 <SPI_Update+0x90>
 			Cnt = 0;
-     f30:	10 92 1c 01 	sts	0x011C, r1
+     f3c:	10 92 1d 01 	sts	0x011D, r1
 			SlaveSelector = SS_RM2;
-     f34:	82 e0       	ldi	r24, 0x02	; 2
-     f36:	80 93 1d 01 	sts	0x011D, r24
+     f40:	82 e0       	ldi	r24, 0x02	; 2
+     f42:	80 93 1e 01 	sts	0x011E, r24
 		}
 		/*Update Writing */
 
 		SPI_Update_Write(ECU_ROOM1);
-     f3a:	80 e0       	ldi	r24, 0x00	; 0
-     f3c:	1c c0       	rjmp	.+56     	; 0xf76 <SPI_Update+0xcc>
+     f46:	80 e0       	ldi	r24, 0x00	; 0
+     f48:	1c c0       	rjmp	.+56     	; 0xf82 <SPI_Update+0xcc>
 		break;
 	case SS_RM2:
 		DIO_WRITE_PIN_VALUE(DIO_PINC0, DIO_PIN_STATE_HIGH);/*OD*/
-     f3e:	80 e1       	ldi	r24, 0x10	; 16
-     f40:	61 e0       	ldi	r22, 0x01	; 1
-     f42:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     f4a:	80 e1       	ldi	r24, 0x10	; 16
+     f4c:	61 e0       	ldi	r22, 0x01	; 1
+     f4e:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(DIO_PINC1, DIO_PIN_STATE_HIGH);/*RM1*/
-     f46:	81 e1       	ldi	r24, 0x11	; 17
-     f48:	61 e0       	ldi	r22, 0x01	; 1
-     f4a:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     f52:	81 e1       	ldi	r24, 0x11	; 17
+     f54:	61 e0       	ldi	r22, 0x01	; 1
+     f56:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 		DIO_WRITE_PIN_VALUE(DIO_PINC2, DIO_PIN_STATE_LOW);/*RM2*/
-     f4e:	82 e1       	ldi	r24, 0x12	; 18
-     f50:	60 e0       	ldi	r22, 0x00	; 0
-     f52:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     f5a:	82 e1       	ldi	r24, 0x12	; 18
+     f5c:	60 e0       	ldi	r22, 0x00	; 0
+     f5e:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 		SPI_Slave.Select[SS_RM2] = SS_ENABLE;
-     f56:	81 e0       	ldi	r24, 0x01	; 1
-     f58:	80 93 1b 01 	sts	0x011B, r24
+     f62:	81 e0       	ldi	r24, 0x01	; 1
+     f64:	80 93 1c 01 	sts	0x011C, r24
 		SPI_Slave.Select[SS_RM1] = SS_DISABLE;
-     f5c:	10 92 1a 01 	sts	0x011A, r1
+     f68:	10 92 1b 01 	sts	0x011B, r1
 		SPI_Slave.Select[SS_OD] = SS_DISABLE;
-     f60:	10 92 19 01 	sts	0x0119, r1
+     f6c:	10 92 1a 01 	sts	0x011A, r1
 		if (MAX_DELAY == Cnt) {
-     f64:	80 91 1c 01 	lds	r24, 0x011C
-     f68:	87 31       	cpi	r24, 0x17	; 23
-     f6a:	21 f4       	brne	.+8      	; 0xf74 <SPI_Update+0xca>
+     f70:	80 91 1d 01 	lds	r24, 0x011D
+     f74:	87 31       	cpi	r24, 0x17	; 23
+     f76:	21 f4       	brne	.+8      	; 0xf80 <SPI_Update+0xca>
 			SlaveSelector = SS_OD;
-     f6c:	10 92 1d 01 	sts	0x011D, r1
+     f78:	10 92 1e 01 	sts	0x011E, r1
 			Cnt = 0;
-     f70:	10 92 1c 01 	sts	0x011C, r1
+     f7c:	10 92 1d 01 	sts	0x011D, r1
 		}
 		SPI_Update_Write(ECU_ROOM2);
-     f74:	81 e0       	ldi	r24, 0x01	; 1
-     f76:	0e 94 d6 06 	call	0xdac	; 0xdac <SPI_Update_Write>
+     f80:	81 e0       	ldi	r24, 0x01	; 1
+     f82:	0e 94 dc 06 	call	0xdb8	; 0xdb8 <SPI_Update_Write>
 		break;
 	default:
 		break;
 	}
 	if (GET_BIT(SPSR, 7)) {
-     f7a:	8e b1       	in	r24, 0x0e	; 14
+     f86:	8e b1       	in	r24, 0x0e	; 14
 	}
 	SPI_Curr_Reading = SPI_Tx_Rx(SPI_Tx_Val);
-     f7c:	80 91 3c 01 	lds	r24, 0x013C
+     f88:	80 91 3d 01 	lds	r24, 0x013D
 	SPCR |= DF;
 	SPSR &=0xFE;
 	SPSR |=(DF>>2);
 }
 UINT8_t SPI_Tx_Rx(const UINT8_t CHAR){
 	UINT8_t Tmp = SPDR;
-     f80:	9f b1       	in	r25, 0x0f	; 15
+     f8c:	9f b1       	in	r25, 0x0f	; 15
 	SPDR=CHAR;
-     f82:	8f b9       	out	0x0f, r24	; 15
+     f8e:	8f b9       	out	0x0f, r24	; 15
 	default:
 		break;
 	}
 	if (GET_BIT(SPSR, 7)) {
 	}
 	SPI_Curr_Reading = SPI_Tx_Rx(SPI_Tx_Val);
-     f84:	90 93 3d 01 	sts	0x013D, r25
+     f90:	90 93 3e 01 	sts	0x013E, r25
 		SPI_Curr_Reading = SPI_Tx_Rx(tmp);
 		SPI_Finished = FALSE;
 		//DIO_WRITE_PIN_VALUE(DIO_PIND0, 1^DIO_READ_PIN_VALUE(DIO_PIND0));
 	}
 #endif
 }
-     f88:	1f 91       	pop	r17
-     f8a:	08 95       	ret
+     f94:	1f 91       	pop	r17
+     f96:	08 95       	ret
 
-00000f8c <SPI_Qinit>:
+00000f98 <SPI_Qinit>:
 		SET_BIT(SPCR, 7);
 		break;
 	}
 }
 void SPI_Qinit(void){
 	DIO_WRITE_PIN_VALUE(DIO_PINC2, DIO_PIN_STATE_HIGH);/*RM2*/
-     f8c:	82 e1       	ldi	r24, 0x12	; 18
-     f8e:	61 e0       	ldi	r22, 0x01	; 1
-     f90:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     f98:	82 e1       	ldi	r24, 0x12	; 18
+     f9a:	61 e0       	ldi	r22, 0x01	; 1
+     f9c:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 	DIO_WRITE_PIN_VALUE(DIO_PINC1, DIO_PIN_STATE_HIGH);/*RM1*/
-     f94:	81 e1       	ldi	r24, 0x11	; 17
-     f96:	61 e0       	ldi	r22, 0x01	; 1
-     f98:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     fa0:	81 e1       	ldi	r24, 0x11	; 17
+     fa2:	61 e0       	ldi	r22, 0x01	; 1
+     fa4:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 	DIO_WRITE_PIN_VALUE(DIO_PINC0, DIO_PIN_STATE_LOW);/*OD*/
-     f9c:	80 e1       	ldi	r24, 0x10	; 16
-     f9e:	60 e0       	ldi	r22, 0x00	; 0
-     fa0:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
+     fa8:	80 e1       	ldi	r24, 0x10	; 16
+     faa:	60 e0       	ldi	r22, 0x00	; 0
+     fac:	0e 94 40 01 	call	0x280	; 0x280 <DIO_WRITE_PIN_VALUE>
 
 	SPI_Set_CLK(SPI_DF4);
-     fa4:	80 e0       	ldi	r24, 0x00	; 0
-     fa6:	0e 94 bc 06 	call	0xd78	; 0xd78 <SPI_Set_CLK>
-	SPI_Set_Mode(SPI_MASTER);
-     faa:	80 e0       	ldi	r24, 0x00	; 0
-     fac:	0e 94 b3 06 	call	0xd66	; 0xd66 <SPI_Set_Mode>
-	SPI_INT(SPI_INT_DISABLE);
      fb0:	80 e0       	ldi	r24, 0x00	; 0
-     fb2:	0e 94 cd 06 	call	0xd9a	; 0xd9a <SPI_INT>
-	SPI_Set_State(SPI_ENABLE);
+     fb2:	0e 94 c2 06 	call	0xd84	; 0xd84 <SPI_Set_CLK>
+	SPI_Set_Mode(SPI_MASTER);
      fb6:	80 e0       	ldi	r24, 0x00	; 0
-     fb8:	0e 94 aa 06 	call	0xd54	; 0xd54 <SPI_Set_State>
+     fb8:	0e 94 b9 06 	call	0xd72	; 0xd72 <SPI_Set_Mode>
+	SPI_INT(SPI_INT_DISABLE);
+     fbc:	80 e0       	ldi	r24, 0x00	; 0
+     fbe:	0e 94 d3 06 	call	0xda6	; 0xda6 <SPI_INT>
+	SPI_Set_State(SPI_ENABLE);
+     fc2:	80 e0       	ldi	r24, 0x00	; 0
+     fc4:	0e 94 b0 06 	call	0xd60	; 0xd60 <SPI_Set_State>
 }
-     fbc:	08 95       	ret
+     fc8:	08 95       	ret
 
-00000fbe <__vector_16>:
+00000fca <__vector_16>:
 	if(TRUE == ADC_Finished){
 		TMP_Back_Up = TMP_Sensor_Read();
 		ADC_Finished = FALSE;
 	}
 }
 ISR(ADC_VECT){
-     fbe:	1f 92       	push	r1
-     fc0:	0f 92       	push	r0
-     fc2:	0f b6       	in	r0, 0x3f	; 63
-     fc4:	0f 92       	push	r0
-     fc6:	11 24       	eor	r1, r1
-     fc8:	8f 93       	push	r24
+     fca:	1f 92       	push	r1
+     fcc:	0f 92       	push	r0
+     fce:	0f b6       	in	r0, 0x3f	; 63
+     fd0:	0f 92       	push	r0
+     fd2:	11 24       	eor	r1, r1
+     fd4:	8f 93       	push	r24
 	ADC_Finished = TRUE;
-     fca:	81 e0       	ldi	r24, 0x01	; 1
-     fcc:	80 93 21 01 	sts	0x0121, r24
+     fd6:	81 e0       	ldi	r24, 0x01	; 1
+     fd8:	80 93 22 01 	sts	0x0122, r24
 }
-     fd0:	8f 91       	pop	r24
-     fd2:	0f 90       	pop	r0
-     fd4:	0f be       	out	0x3f, r0	; 63
-     fd6:	0f 90       	pop	r0
-     fd8:	1f 90       	pop	r1
-     fda:	18 95       	reti
+     fdc:	8f 91       	pop	r24
+     fde:	0f 90       	pop	r0
+     fe0:	0f be       	out	0x3f, r0	; 63
+     fe2:	0f 90       	pop	r0
+     fe4:	1f 90       	pop	r1
+     fe6:	18 95       	reti
 
-00000fdc <TMP_Sensor_Read>:
+00000fe8 <TMP_Sensor_Read>:
 	ADC_Set_Prescaler(DF128);
 	ADC_Interrupt(ENABLE);
 	ADC(ENABLE);
 	ADC_Conversion(START, TMP_SENSOR_CHANNEL);
 }
 UINT32_t TMP_Sensor_Read(void){
-     fdc:	ef 92       	push	r14
-     fde:	ff 92       	push	r15
-     fe0:	0f 93       	push	r16
-     fe2:	1f 93       	push	r17
+     fe8:	ef 92       	push	r14
+     fea:	ff 92       	push	r15
+     fec:	0f 93       	push	r16
+     fee:	1f 93       	push	r17
 	SINT32_t Tmp = 0;
 	Tmp = ADC_Read();
-     fe4:	0e 94 7a 00 	call	0xf4	; 0xf4 <ADC_Read>
+     ff0:	0e 94 7a 00 	call	0xf4	; 0xf4 <ADC_Read>
 	Tmp = (((Tmp * 5000) / 1024)) / 10;
-     fe8:	a0 e0       	ldi	r26, 0x00	; 0
-     fea:	b0 e0       	ldi	r27, 0x00	; 0
-     fec:	bc 01       	movw	r22, r24
-     fee:	cd 01       	movw	r24, r26
-     ff0:	24 ef       	ldi	r18, 0xF4	; 244
-     ff2:	31 e0       	ldi	r19, 0x01	; 1
-     ff4:	40 e0       	ldi	r20, 0x00	; 0
-     ff6:	50 e0       	ldi	r21, 0x00	; 0
-     ff8:	0e 94 ef 08 	call	0x11de	; 0x11de <__mulsi3>
-     ffc:	7b 01       	movw	r14, r22
-     ffe:	8c 01       	movw	r16, r24
+     ff4:	a0 e0       	ldi	r26, 0x00	; 0
+     ff6:	b0 e0       	ldi	r27, 0x00	; 0
+     ff8:	bc 01       	movw	r22, r24
+     ffa:	cd 01       	movw	r24, r26
+     ffc:	24 ef       	ldi	r18, 0xF4	; 244
+     ffe:	31 e0       	ldi	r19, 0x01	; 1
+    1000:	40 e0       	ldi	r20, 0x00	; 0
+    1002:	50 e0       	ldi	r21, 0x00	; 0
+    1004:	0e 94 f5 08 	call	0x11ea	; 0x11ea <__mulsi3>
+    1008:	7b 01       	movw	r14, r22
+    100a:	8c 01       	movw	r16, r24
 	ADC_Conversion(START, TMP_SENSOR_CHANNEL);
-    1000:	80 e0       	ldi	r24, 0x00	; 0
-    1002:	60 e0       	ldi	r22, 0x00	; 0
-    1004:	0e 94 52 00 	call	0xa4	; 0xa4 <ADC_Conversion>
-    1008:	8a e0       	ldi	r24, 0x0A	; 10
-    100a:	15 95       	asr	r17
-    100c:	07 95       	ror	r16
-    100e:	f7 94       	ror	r15
-    1010:	e7 94       	ror	r14
-    1012:	8a 95       	dec	r24
-    1014:	d1 f7       	brne	.-12     	; 0x100a <TMP_Sensor_Read+0x2e>
+    100c:	80 e0       	ldi	r24, 0x00	; 0
+    100e:	60 e0       	ldi	r22, 0x00	; 0
+    1010:	0e 94 52 00 	call	0xa4	; 0xa4 <ADC_Conversion>
+    1014:	8a e0       	ldi	r24, 0x0A	; 10
+    1016:	15 95       	asr	r17
+    1018:	07 95       	ror	r16
+    101a:	f7 94       	ror	r15
+    101c:	e7 94       	ror	r14
+    101e:	8a 95       	dec	r24
+    1020:	d1 f7       	brne	.-12     	; 0x1016 <TMP_Sensor_Read+0x2e>
 	return Tmp;
 }
-    1016:	b7 01       	movw	r22, r14
-    1018:	c8 01       	movw	r24, r16
-    101a:	1f 91       	pop	r17
-    101c:	0f 91       	pop	r16
-    101e:	ff 90       	pop	r15
-    1020:	ef 90       	pop	r14
-    1022:	08 95       	ret
+    1022:	b7 01       	movw	r22, r14
+    1024:	c8 01       	movw	r24, r16
+    1026:	1f 91       	pop	r17
+    1028:	0f 91       	pop	r16
+    102a:	ff 90       	pop	r15
+    102c:	ef 90       	pop	r14
+    102e:	08 95       	ret
 
-00001024 <TMP_Update>:
+00001030 <TMP_Update>:
 void TMP_Update(void){
 	if(TRUE == ADC_Finished){
-    1024:	80 91 21 01 	lds	r24, 0x0121
-    1028:	81 30       	cpi	r24, 0x01	; 1
-    102a:	61 f4       	brne	.+24     	; 0x1044 <TMP_Update+0x20>
+    1030:	80 91 22 01 	lds	r24, 0x0122
+    1034:	81 30       	cpi	r24, 0x01	; 1
+    1036:	61 f4       	brne	.+24     	; 0x1050 <TMP_Update+0x20>
 		TMP_Back_Up = TMP_Sensor_Read();
-    102c:	0e 94 ee 07 	call	0xfdc	; 0xfdc <TMP_Sensor_Read>
-    1030:	60 93 aa 00 	sts	0x00AA, r22
-    1034:	70 93 ab 00 	sts	0x00AB, r23
-    1038:	80 93 ac 00 	sts	0x00AC, r24
-    103c:	90 93 ad 00 	sts	0x00AD, r25
+    1038:	0e 94 f4 07 	call	0xfe8	; 0xfe8 <TMP_Sensor_Read>
+    103c:	60 93 ab 00 	sts	0x00AB, r22
+    1040:	70 93 ac 00 	sts	0x00AC, r23
+    1044:	80 93 ad 00 	sts	0x00AD, r24
+    1048:	90 93 ae 00 	sts	0x00AE, r25
 		ADC_Finished = FALSE;
-    1040:	10 92 21 01 	sts	0x0121, r1
-    1044:	08 95       	ret
+    104c:	10 92 22 01 	sts	0x0122, r1
+    1050:	08 95       	ret
 
-00001046 <TMP_Sensor_Init>:
+00001052 <TMP_Sensor_Init>:
 #include "TMP_SENSOR.h"
 volatile static BOOL_t ADC_Finished = FALSE;
 UINT32_t TMP_Back_Up = 40;
 void TMP_Sensor_Init(void){
 	ADC_Init();
-    1046:	0e 94 78 00 	call	0xf0	; 0xf0 <ADC_Init>
+    1052:	0e 94 78 00 	call	0xf0	; 0xf0 <ADC_Init>
 	ADC_Set_Prescaler(DF128);
-    104a:	87 e0       	ldi	r24, 0x07	; 7
-    104c:	0e 94 6b 00 	call	0xd6	; 0xd6 <ADC_Set_Prescaler>
+    1056:	87 e0       	ldi	r24, 0x07	; 7
+    1058:	0e 94 6b 00 	call	0xd6	; 0xd6 <ADC_Set_Prescaler>
 	ADC_Interrupt(ENABLE);
-    1050:	80 e0       	ldi	r24, 0x00	; 0
-    1052:	0e 94 62 00 	call	0xc4	; 0xc4 <ADC_Interrupt>
-	ADC(ENABLE);
-    1056:	80 e0       	ldi	r24, 0x00	; 0
-    1058:	0e 94 49 00 	call	0x92	; 0x92 <ADC>
-	ADC_Conversion(START, TMP_SENSOR_CHANNEL);
     105c:	80 e0       	ldi	r24, 0x00	; 0
-    105e:	60 e0       	ldi	r22, 0x00	; 0
-    1060:	0e 94 52 00 	call	0xa4	; 0xa4 <ADC_Conversion>
+    105e:	0e 94 62 00 	call	0xc4	; 0xc4 <ADC_Interrupt>
+	ADC(ENABLE);
+    1062:	80 e0       	ldi	r24, 0x00	; 0
+    1064:	0e 94 49 00 	call	0x92	; 0x92 <ADC>
+	ADC_Conversion(START, TMP_SENSOR_CHANNEL);
+    1068:	80 e0       	ldi	r24, 0x00	; 0
+    106a:	60 e0       	ldi	r22, 0x00	; 0
+    106c:	0e 94 52 00 	call	0xa4	; 0xa4 <ADC_Conversion>
 }
-    1064:	08 95       	ret
+    1070:	08 95       	ret
 
-00001066 <TMR0_Set_Prescaler>:
+00001072 <TMR0_Set_Prescaler>:
 #include "TMR0.h"
 void TMR0_Set_Prescaler(const TMR0_PRESCALER_t PRESCALER){
 	TCCR0 &= 0XF8;
-    1066:	93 b7       	in	r25, 0x33	; 51
-    1068:	98 7f       	andi	r25, 0xF8	; 248
-    106a:	93 bf       	out	0x33, r25	; 51
+    1072:	93 b7       	in	r25, 0x33	; 51
+    1074:	98 7f       	andi	r25, 0xF8	; 248
+    1076:	93 bf       	out	0x33, r25	; 51
 	TCCR0 |= PRESCALER;
-    106c:	93 b7       	in	r25, 0x33	; 51
-    106e:	98 2b       	or	r25, r24
-    1070:	93 bf       	out	0x33, r25	; 51
+    1078:	93 b7       	in	r25, 0x33	; 51
+    107a:	98 2b       	or	r25, r24
+    107c:	93 bf       	out	0x33, r25	; 51
 }
-    1072:	08 95       	ret
+    107e:	08 95       	ret
 
-00001074 <TMR0_Mode>:
+00001080 <TMR0_Mode>:
 void TMR0_Mode(const TMR0_MODE_t MODE){
 	switch (MODE) {
-    1074:	81 30       	cpi	r24, 0x01	; 1
-    1076:	51 f0       	breq	.+20     	; 0x108c <TMR0_Mode+0x18>
-    1078:	81 30       	cpi	r24, 0x01	; 1
-    107a:	28 f0       	brcs	.+10     	; 0x1086 <TMR0_Mode+0x12>
-    107c:	82 30       	cpi	r24, 0x02	; 2
-    107e:	61 f0       	breq	.+24     	; 0x1098 <TMR0_Mode+0x24>
-    1080:	83 30       	cpi	r24, 0x03	; 3
-    1082:	b9 f4       	brne	.+46     	; 0x10b2 <TMR0_Mode+0x3e>
-    1084:	10 c0       	rjmp	.+32     	; 0x10a6 <TMR0_Mode+0x32>
+    1080:	81 30       	cpi	r24, 0x01	; 1
+    1082:	51 f0       	breq	.+20     	; 0x1098 <TMR0_Mode+0x18>
+    1084:	81 30       	cpi	r24, 0x01	; 1
+    1086:	28 f0       	brcs	.+10     	; 0x1092 <TMR0_Mode+0x12>
+    1088:	82 30       	cpi	r24, 0x02	; 2
+    108a:	61 f0       	breq	.+24     	; 0x10a4 <TMR0_Mode+0x24>
+    108c:	83 30       	cpi	r24, 0x03	; 3
+    108e:	b9 f4       	brne	.+46     	; 0x10be <TMR0_Mode+0x3e>
+    1090:	10 c0       	rjmp	.+32     	; 0x10b2 <TMR0_Mode+0x32>
 	case TMR0_NORMAL:
 		CLEAR_BIT(TCCR0, 3);
-    1086:	83 b7       	in	r24, 0x33	; 51
-    1088:	87 7f       	andi	r24, 0xF7	; 247
-    108a:	08 c0       	rjmp	.+16     	; 0x109c <TMR0_Mode+0x28>
+    1092:	83 b7       	in	r24, 0x33	; 51
+    1094:	87 7f       	andi	r24, 0xF7	; 247
+    1096:	08 c0       	rjmp	.+16     	; 0x10a8 <TMR0_Mode+0x28>
 		CLEAR_BIT(TCCR0, 6);
 		break;
 	case TMR0_PWM:
 		SET_BIT(TCCR0, 6);
-    108c:	83 b7       	in	r24, 0x33	; 51
-    108e:	80 64       	ori	r24, 0x40	; 64
-    1090:	83 bf       	out	0x33, r24	; 51
+    1098:	83 b7       	in	r24, 0x33	; 51
+    109a:	80 64       	ori	r24, 0x40	; 64
+    109c:	83 bf       	out	0x33, r24	; 51
 		CLEAR_BIT(TCCR0, 3);
-    1092:	83 b7       	in	r24, 0x33	; 51
-    1094:	87 7f       	andi	r24, 0xF7	; 247
-    1096:	05 c0       	rjmp	.+10     	; 0x10a2 <TMR0_Mode+0x2e>
+    109e:	83 b7       	in	r24, 0x33	; 51
+    10a0:	87 7f       	andi	r24, 0xF7	; 247
+    10a2:	05 c0       	rjmp	.+10     	; 0x10ae <TMR0_Mode+0x2e>
 		break;
 	case TMR0_CTC:
 		SET_BIT(TCCR0, 3);
-    1098:	83 b7       	in	r24, 0x33	; 51
-    109a:	88 60       	ori	r24, 0x08	; 8
-    109c:	83 bf       	out	0x33, r24	; 51
+    10a4:	83 b7       	in	r24, 0x33	; 51
+    10a6:	88 60       	ori	r24, 0x08	; 8
+    10a8:	83 bf       	out	0x33, r24	; 51
 		CLEAR_BIT(TCCR0, 6);
-    109e:	83 b7       	in	r24, 0x33	; 51
-    10a0:	8f 7b       	andi	r24, 0xBF	; 191
-    10a2:	83 bf       	out	0x33, r24	; 51
-    10a4:	08 95       	ret
+    10aa:	83 b7       	in	r24, 0x33	; 51
+    10ac:	8f 7b       	andi	r24, 0xBF	; 191
+    10ae:	83 bf       	out	0x33, r24	; 51
+    10b0:	08 95       	ret
 		break;
 	case TMR0_FAST_PWM:
 		SET_BIT(TCCR0, 3);
-    10a6:	83 b7       	in	r24, 0x33	; 51
-    10a8:	88 60       	ori	r24, 0x08	; 8
-    10aa:	83 bf       	out	0x33, r24	; 51
+    10b2:	83 b7       	in	r24, 0x33	; 51
+    10b4:	88 60       	ori	r24, 0x08	; 8
+    10b6:	83 bf       	out	0x33, r24	; 51
 		SET_BIT(TCCR0, 6);
-    10ac:	83 b7       	in	r24, 0x33	; 51
-    10ae:	80 64       	ori	r24, 0x40	; 64
-    10b0:	83 bf       	out	0x33, r24	; 51
-    10b2:	08 95       	ret
+    10b8:	83 b7       	in	r24, 0x33	; 51
+    10ba:	80 64       	ori	r24, 0x40	; 64
+    10bc:	83 bf       	out	0x33, r24	; 51
+    10be:	08 95       	ret
 
-000010b4 <TMR0_INT>:
+000010c0 <TMR0_INT>:
 void TMR0_Init(void){
 	TMR0_Set_Buffer(TMR0_TCNTR, 0);
 	TMR0_Set_Buffer(TMR0_OCR, 0);
 }
 void TMR0_INT(const TMR0_INT_t INT){
 	switch(INT){
-    10b4:	81 30       	cpi	r24, 0x01	; 1
-    10b6:	51 f0       	breq	.+20     	; 0x10cc <TMR0_INT+0x18>
-    10b8:	81 30       	cpi	r24, 0x01	; 1
-    10ba:	28 f0       	brcs	.+10     	; 0x10c6 <TMR0_INT+0x12>
-    10bc:	82 30       	cpi	r24, 0x02	; 2
-    10be:	49 f0       	breq	.+18     	; 0x10d2 <TMR0_INT+0x1e>
-    10c0:	83 30       	cpi	r24, 0x03	; 3
-    10c2:	71 f4       	brne	.+28     	; 0x10e0 <TMR0_INT+0x2c>
-    10c4:	0a c0       	rjmp	.+20     	; 0x10da <TMR0_INT+0x26>
+    10c0:	81 30       	cpi	r24, 0x01	; 1
+    10c2:	51 f0       	breq	.+20     	; 0x10d8 <TMR0_INT+0x18>
+    10c4:	81 30       	cpi	r24, 0x01	; 1
+    10c6:	28 f0       	brcs	.+10     	; 0x10d2 <TMR0_INT+0x12>
+    10c8:	82 30       	cpi	r24, 0x02	; 2
+    10ca:	49 f0       	breq	.+18     	; 0x10de <TMR0_INT+0x1e>
+    10cc:	83 30       	cpi	r24, 0x03	; 3
+    10ce:	71 f4       	brne	.+28     	; 0x10ec <TMR0_INT+0x2c>
+    10d0:	0a c0       	rjmp	.+20     	; 0x10e6 <TMR0_INT+0x26>
 	case TMR0_OV_INT_ENABLE:
 		SET_BIT(TIMSK, 0);
-    10c6:	89 b7       	in	r24, 0x39	; 57
-    10c8:	81 60       	ori	r24, 0x01	; 1
-    10ca:	05 c0       	rjmp	.+10     	; 0x10d6 <TMR0_INT+0x22>
+    10d2:	89 b7       	in	r24, 0x39	; 57
+    10d4:	81 60       	ori	r24, 0x01	; 1
+    10d6:	05 c0       	rjmp	.+10     	; 0x10e2 <TMR0_INT+0x22>
 		break;
 	case TMR0_OV_INT_DISABLE:
 		CLEAR_BIT(TIMSK, 0);
-    10cc:	89 b7       	in	r24, 0x39	; 57
-    10ce:	8e 7f       	andi	r24, 0xFE	; 254
-    10d0:	02 c0       	rjmp	.+4      	; 0x10d6 <TMR0_INT+0x22>
+    10d8:	89 b7       	in	r24, 0x39	; 57
+    10da:	8e 7f       	andi	r24, 0xFE	; 254
+    10dc:	02 c0       	rjmp	.+4      	; 0x10e2 <TMR0_INT+0x22>
 		break;
 	case TMR0_OC_INT_ENABLE:
 		SET_BIT(TIMSK, 1);
-    10d2:	89 b7       	in	r24, 0x39	; 57
-    10d4:	82 60       	ori	r24, 0x02	; 2
-    10d6:	89 bf       	out	0x39, r24	; 57
-    10d8:	08 95       	ret
+    10de:	89 b7       	in	r24, 0x39	; 57
+    10e0:	82 60       	ori	r24, 0x02	; 2
+    10e2:	89 bf       	out	0x39, r24	; 57
+    10e4:	08 95       	ret
 		break;
 	case TMR0_OC_INT_DISABLE:
 		CLEAR_BIT(TIMSK, 1);
-    10da:	89 b7       	in	r24, 0x39	; 57
-    10dc:	8d 7f       	andi	r24, 0xFD	; 253
-    10de:	89 bf       	out	0x39, r24	; 57
-    10e0:	08 95       	ret
+    10e6:	89 b7       	in	r24, 0x39	; 57
+    10e8:	8d 7f       	andi	r24, 0xFD	; 253
+    10ea:	89 bf       	out	0x39, r24	; 57
+    10ec:	08 95       	ret
 
-000010e2 <TMR0_OC0>:
+000010ee <TMR0_OC0>:
 		break;
 	}
 }
 void TMR0_OC0(const TMR0_OC0_t STATE){
 	CLEAR_BIT(TCCR0, 4);
-    10e2:	93 b7       	in	r25, 0x33	; 51
-    10e4:	9f 7e       	andi	r25, 0xEF	; 239
-    10e6:	93 bf       	out	0x33, r25	; 51
-	CLEAR_BIT(TCCR0, 5);
-    10e8:	93 b7       	in	r25, 0x33	; 51
-    10ea:	9f 7d       	andi	r25, 0xDF	; 223
-    10ec:	93 bf       	out	0x33, r25	; 51
-	TCCR0 |= (STATE << 4);
     10ee:	93 b7       	in	r25, 0x33	; 51
-    10f0:	82 95       	swap	r24
-    10f2:	80 7f       	andi	r24, 0xF0	; 240
-    10f4:	98 2b       	or	r25, r24
-    10f6:	93 bf       	out	0x33, r25	; 51
+    10f0:	9f 7e       	andi	r25, 0xEF	; 239
+    10f2:	93 bf       	out	0x33, r25	; 51
+	CLEAR_BIT(TCCR0, 5);
+    10f4:	93 b7       	in	r25, 0x33	; 51
+    10f6:	9f 7d       	andi	r25, 0xDF	; 223
+    10f8:	93 bf       	out	0x33, r25	; 51
+	TCCR0 |= (STATE << 4);
+    10fa:	93 b7       	in	r25, 0x33	; 51
+    10fc:	82 95       	swap	r24
+    10fe:	80 7f       	andi	r24, 0xF0	; 240
+    1100:	98 2b       	or	r25, r24
+    1102:	93 bf       	out	0x33, r25	; 51
 }
-    10f8:	08 95       	ret
+    1104:	08 95       	ret
 
-000010fa <TMR0_Set_Buffer>:
+00001106 <TMR0_Set_Buffer>:
 void TMR0_Set_Buffer(const TMR0_BFF_t BUFFER, const UINT8_t VALUE){
 	switch (BUFFER) {
-    10fa:	88 23       	and	r24, r24
-    10fc:	19 f0       	breq	.+6      	; 0x1104 <TMR0_Set_Buffer+0xa>
-    10fe:	81 30       	cpi	r24, 0x01	; 1
-    1100:	21 f4       	brne	.+8      	; 0x110a <TMR0_Set_Buffer+0x10>
-    1102:	02 c0       	rjmp	.+4      	; 0x1108 <TMR0_Set_Buffer+0xe>
+    1106:	88 23       	and	r24, r24
+    1108:	19 f0       	breq	.+6      	; 0x1110 <TMR0_Set_Buffer+0xa>
+    110a:	81 30       	cpi	r24, 0x01	; 1
+    110c:	21 f4       	brne	.+8      	; 0x1116 <TMR0_Set_Buffer+0x10>
+    110e:	02 c0       	rjmp	.+4      	; 0x1114 <TMR0_Set_Buffer+0xe>
 	case TMR0_TCNTR:
 		TCNT0 = VALUE;
-    1104:	62 bf       	out	0x32, r22	; 50
-    1106:	08 95       	ret
+    1110:	62 bf       	out	0x32, r22	; 50
+    1112:	08 95       	ret
 		break;
 	case TMR0_OCR:
 		OCR0 = VALUE;
-    1108:	6c bf       	out	0x3c, r22	; 60
-    110a:	08 95       	ret
+    1114:	6c bf       	out	0x3c, r22	; 60
+    1116:	08 95       	ret
 
-0000110c <TMR0_Init>:
+00001118 <TMR0_Init>:
 		SET_BIT(TCCR0, 6);
 		break;
 	}
 }
 void TMR0_Init(void){
 	TMR0_Set_Buffer(TMR0_TCNTR, 0);
-    110c:	80 e0       	ldi	r24, 0x00	; 0
-    110e:	60 e0       	ldi	r22, 0x00	; 0
-    1110:	0e 94 7d 08 	call	0x10fa	; 0x10fa <TMR0_Set_Buffer>
+    1118:	80 e0       	ldi	r24, 0x00	; 0
+    111a:	60 e0       	ldi	r22, 0x00	; 0
+    111c:	0e 94 83 08 	call	0x1106	; 0x1106 <TMR0_Set_Buffer>
 	TMR0_Set_Buffer(TMR0_OCR, 0);
-    1114:	81 e0       	ldi	r24, 0x01	; 1
-    1116:	60 e0       	ldi	r22, 0x00	; 0
-    1118:	0e 94 7d 08 	call	0x10fa	; 0x10fa <TMR0_Set_Buffer>
+    1120:	81 e0       	ldi	r24, 0x01	; 1
+    1122:	60 e0       	ldi	r22, 0x00	; 0
+    1124:	0e 94 83 08 	call	0x1106	; 0x1106 <TMR0_Set_Buffer>
 }
-    111c:	08 95       	ret
+    1128:	08 95       	ret
 
-0000111e <TMR0_Read_Buffer>:
+0000112a <TMR0_Read_Buffer>:
 
 	}
 }
 UINT8_t TMR0_Read_Buffer(const TMR0_BFF_t BUFFER){
 	UINT8_t Buffer = 0;
 	switch (BUFFER) {
-    111e:	88 23       	and	r24, r24
-    1120:	21 f0       	breq	.+8      	; 0x112a <TMR0_Read_Buffer+0xc>
-    1122:	81 30       	cpi	r24, 0x01	; 1
-    1124:	21 f0       	breq	.+8      	; 0x112e <TMR0_Read_Buffer+0x10>
-    1126:	80 e0       	ldi	r24, 0x00	; 0
-    1128:	08 95       	ret
+    112a:	88 23       	and	r24, r24
+    112c:	21 f0       	breq	.+8      	; 0x1136 <TMR0_Read_Buffer+0xc>
+    112e:	81 30       	cpi	r24, 0x01	; 1
+    1130:	21 f0       	breq	.+8      	; 0x113a <TMR0_Read_Buffer+0x10>
+    1132:	80 e0       	ldi	r24, 0x00	; 0
+    1134:	08 95       	ret
 		case TMR0_TCNTR:
 			Buffer = TCNT0;
-    112a:	82 b7       	in	r24, 0x32	; 50
-    112c:	08 95       	ret
+    1136:	82 b7       	in	r24, 0x32	; 50
+    1138:	08 95       	ret
 			break;
 		case TMR0_OCR:
 			Buffer = OCR0;
-    112e:	8c b7       	in	r24, 0x3c	; 60
+    113a:	8c b7       	in	r24, 0x3c	; 60
 			break;
 		default:
 			break;
 		}
 	return Buffer;
 }
-    1130:	08 95       	ret
+    113c:	08 95       	ret
 
-00001132 <WDT_Enable>:
+0000113e <WDT_Enable>:
 #ifndef WDT_H
 #include "WDT.h"
 void WDT_Enable(void){
 	SET_BIT(WDTCR, 3);
-    1132:	81 b5       	in	r24, 0x21	; 33
-    1134:	88 60       	ori	r24, 0x08	; 8
-    1136:	81 bd       	out	0x21, r24	; 33
+    113e:	81 b5       	in	r24, 0x21	; 33
+    1140:	88 60       	ori	r24, 0x08	; 8
+    1142:	81 bd       	out	0x21, r24	; 33
 }
-    1138:	08 95       	ret
+    1144:	08 95       	ret
 
-0000113a <WDT_Priode>:
+00001146 <WDT_Priode>:
 void WDT_Priode(const WDT_PERIODE_t PERIODE){
 	WDTCR &= 0XF8;
-    113a:	91 b5       	in	r25, 0x21	; 33
-    113c:	98 7f       	andi	r25, 0xF8	; 248
-    113e:	91 bd       	out	0x21, r25	; 33
+    1146:	91 b5       	in	r25, 0x21	; 33
+    1148:	98 7f       	andi	r25, 0xF8	; 248
+    114a:	91 bd       	out	0x21, r25	; 33
 	WDTCR |= PERIODE;
-    1140:	91 b5       	in	r25, 0x21	; 33
-    1142:	98 2b       	or	r25, r24
-    1144:	91 bd       	out	0x21, r25	; 33
+    114c:	91 b5       	in	r25, 0x21	; 33
+    114e:	98 2b       	or	r25, r24
+    1150:	91 bd       	out	0x21, r25	; 33
 }
-    1146:	08 95       	ret
+    1152:	08 95       	ret
 
-00001148 <WDT_Refresh>:
+00001154 <WDT_Refresh>:
 void WDT_Refresh(void){
 	asm volatile("wdr");
-    1148:	a8 95       	wdr
+    1154:	a8 95       	wdr
 }
-    114a:	08 95       	ret
+    1156:	08 95       	ret
 
-0000114c <WDT_Disable>:
+00001158 <WDT_Disable>:
 void WDT_Disable(void){
 	SET_BIT(WDTCR, 3);
-    114c:	81 b5       	in	r24, 0x21	; 33
-    114e:	88 60       	ori	r24, 0x08	; 8
-    1150:	81 bd       	out	0x21, r24	; 33
-	SET_BIT(WDTCR, 4);
-    1152:	81 b5       	in	r24, 0x21	; 33
-    1154:	80 61       	ori	r24, 0x10	; 16
-    1156:	81 bd       	out	0x21, r24	; 33
-	CLEAR_BIT(WDTCR, 3);
     1158:	81 b5       	in	r24, 0x21	; 33
-    115a:	87 7f       	andi	r24, 0xF7	; 247
+    115a:	88 60       	ori	r24, 0x08	; 8
     115c:	81 bd       	out	0x21, r24	; 33
+	SET_BIT(WDTCR, 4);
+    115e:	81 b5       	in	r24, 0x21	; 33
+    1160:	80 61       	ori	r24, 0x10	; 16
+    1162:	81 bd       	out	0x21, r24	; 33
+	CLEAR_BIT(WDTCR, 3);
+    1164:	81 b5       	in	r24, 0x21	; 33
+    1166:	87 7f       	andi	r24, 0xF7	; 247
+    1168:	81 bd       	out	0x21, r24	; 33
 }
-    115e:	08 95       	ret
+    116a:	08 95       	ret
 
-00001160 <WDT_Qinit>:
+0000116c <WDT_Qinit>:
 #include "WDT.h"
 void WDT_Enable(void){
 	SET_BIT(WDTCR, 3);
 }
 void WDT_Priode(const WDT_PERIODE_t PERIODE){
 	WDTCR &= 0XF8;
-    1160:	81 b5       	in	r24, 0x21	; 33
-    1162:	88 7f       	andi	r24, 0xF8	; 248
-    1164:	81 bd       	out	0x21, r24	; 33
+    116c:	81 b5       	in	r24, 0x21	; 33
+    116e:	88 7f       	andi	r24, 0xF8	; 248
+    1170:	81 bd       	out	0x21, r24	; 33
 	WDTCR |= PERIODE;
-    1166:	81 b5       	in	r24, 0x21	; 33
-    1168:	86 60       	ori	r24, 0x06	; 6
-    116a:	81 bd       	out	0x21, r24	; 33
+    1172:	81 b5       	in	r24, 0x21	; 33
+    1174:	86 60       	ori	r24, 0x06	; 6
+    1176:	81 bd       	out	0x21, r24	; 33
 #ifndef WDT_H
 #include "WDT.h"
 void WDT_Enable(void){
 	SET_BIT(WDTCR, 3);
-    116c:	81 b5       	in	r24, 0x21	; 33
-    116e:	88 60       	ori	r24, 0x08	; 8
-    1170:	81 bd       	out	0x21, r24	; 33
+    1178:	81 b5       	in	r24, 0x21	; 33
+    117a:	88 60       	ori	r24, 0x08	; 8
+    117c:	81 bd       	out	0x21, r24	; 33
 }
 void WDT_Qinit(void)
 {
 	WDT_Priode(WDT_1000_MS);
 	WDT_Enable();
 }
-    1172:	08 95       	ret
+    117e:	08 95       	ret
 
-00001174 <main>:
+00001180 <main>:
 #include "ECU_RM.h"
 #include "WDT.h"
 
 int main(void)
 {
 	DIO_INIT();
-    1174:	0e 94 72 01 	call	0x2e4	; 0x2e4 <DIO_INIT>
+    1180:	0e 94 72 01 	call	0x2e4	; 0x2e4 <DIO_INIT>
 	TMP_Sensor_Init();
-    1178:	0e 94 23 08 	call	0x1046	; 0x1046 <TMP_Sensor_Init>
+    1184:	0e 94 29 08 	call	0x1052	; 0x1052 <TMP_Sensor_Init>
 	SPI_Qinit();
-    117c:	0e 94 c6 07 	call	0xf8c	; 0xf8c <SPI_Qinit>
+    1188:	0e 94 cc 07 	call	0xf98	; 0xf98 <SPI_Qinit>
 	WDT_Qinit();
-    1180:	0e 94 b0 08 	call	0x1160	; 0x1160 <WDT_Qinit>
+    118c:	0e 94 b6 08 	call	0x116c	; 0x116c <WDT_Qinit>
 	CO_SCH_Init();
-    1184:	0e 94 24 01 	call	0x248	; 0x248 <CO_SCH_Init>
+    1190:	0e 94 24 01 	call	0x248	; 0x248 <CO_SCH_Init>
 	CO_SCH_Add_Task(SPI_Update, 0, 20);
-    1188:	85 e5       	ldi	r24, 0x55	; 85
-    118a:	97 e0       	ldi	r25, 0x07	; 7
-    118c:	60 e0       	ldi	r22, 0x00	; 0
-    118e:	44 e1       	ldi	r20, 0x14	; 20
-    1190:	0e 94 a3 00 	call	0x146	; 0x146 <CO_SCH_Add_Task>
-	CO_SCH_Add_Task(ECU_OD_Update_Info, 0, 20);
-    1194:	89 ef       	ldi	r24, 0xF9	; 249
-    1196:	92 e0       	ldi	r25, 0x02	; 2
+    1194:	8b e5       	ldi	r24, 0x5B	; 91
+    1196:	97 e0       	ldi	r25, 0x07	; 7
     1198:	60 e0       	ldi	r22, 0x00	; 0
     119a:	44 e1       	ldi	r20, 0x14	; 20
     119c:	0e 94 a3 00 	call	0x146	; 0x146 <CO_SCH_Add_Task>
-	CO_SCH_Add_Task(ECU_RM_Update_Info, 0, 20);
-    11a0:	8b e9       	ldi	r24, 0x9B	; 155
-    11a2:	93 e0       	ldi	r25, 0x03	; 3
+	CO_SCH_Add_Task(ECU_OD_Update_Info, 0, 20);
+    11a0:	89 ef       	ldi	r24, 0xF9	; 249
+    11a2:	92 e0       	ldi	r25, 0x02	; 2
     11a4:	60 e0       	ldi	r22, 0x00	; 0
     11a6:	44 e1       	ldi	r20, 0x14	; 20
     11a8:	0e 94 a3 00 	call	0x146	; 0x146 <CO_SCH_Add_Task>
-	CO_SCH_Add_Task(DISP_Update, 0, 10);
-    11ac:	80 e1       	ldi	r24, 0x10	; 16
-    11ae:	92 e0       	ldi	r25, 0x02	; 2
+	CO_SCH_Add_Task(ECU_RM_Update_Info, 0, 20);
+    11ac:	81 ea       	ldi	r24, 0xA1	; 161
+    11ae:	93 e0       	ldi	r25, 0x03	; 3
     11b0:	60 e0       	ldi	r22, 0x00	; 0
-    11b2:	4a e0       	ldi	r20, 0x0A	; 10
+    11b2:	44 e1       	ldi	r20, 0x14	; 20
     11b4:	0e 94 a3 00 	call	0x146	; 0x146 <CO_SCH_Add_Task>
-	CO_SCH_Add_Task(TMP_Update, 0, 20);
-    11b8:	82 e1       	ldi	r24, 0x12	; 18
-    11ba:	98 e0       	ldi	r25, 0x08	; 8
+	CO_SCH_Add_Task(DISP_Update, 0, 10);
+    11b8:	80 e1       	ldi	r24, 0x10	; 16
+    11ba:	92 e0       	ldi	r25, 0x02	; 2
     11bc:	60 e0       	ldi	r22, 0x00	; 0
-    11be:	44 e1       	ldi	r20, 0x14	; 20
+    11be:	4a e0       	ldi	r20, 0x0A	; 10
     11c0:	0e 94 a3 00 	call	0x146	; 0x146 <CO_SCH_Add_Task>
-	CO_SCH_Add_Task(WDT_Refresh, 0, 100);
-    11c4:	84 ea       	ldi	r24, 0xA4	; 164
+	CO_SCH_Add_Task(TMP_Update, 0, 20);
+    11c4:	88 e1       	ldi	r24, 0x18	; 24
     11c6:	98 e0       	ldi	r25, 0x08	; 8
     11c8:	60 e0       	ldi	r22, 0x00	; 0
-    11ca:	44 e6       	ldi	r20, 0x64	; 100
+    11ca:	44 e1       	ldi	r20, 0x14	; 20
     11cc:	0e 94 a3 00 	call	0x146	; 0x146 <CO_SCH_Add_Task>
+	CO_SCH_Add_Task(WDT_Refresh, 0, 100);
+    11d0:	8a ea       	ldi	r24, 0xAA	; 170
+    11d2:	98 e0       	ldi	r25, 0x08	; 8
+    11d4:	60 e0       	ldi	r22, 0x00	; 0
+    11d6:	44 e6       	ldi	r20, 0x64	; 100
+    11d8:	0e 94 a3 00 	call	0x146	; 0x146 <CO_SCH_Add_Task>
 	CO_SCH_Start();
-    11d0:	0e 94 19 01 	call	0x232	; 0x232 <CO_SCH_Start>
+    11dc:	0e 94 19 01 	call	0x232	; 0x232 <CO_SCH_Start>
 	SPI_Update();
-    11d4:	0e 94 55 07 	call	0xeaa	; 0xeaa <SPI_Update>
+    11e0:	0e 94 5b 07 	call	0xeb6	; 0xeb6 <SPI_Update>
 	while(1)
 	{
 		CO_SCH_Dispatch_Tasks();
-    11d8:	0e 94 cb 00 	call	0x196	; 0x196 <CO_SCH_Dispatch_Tasks>
-    11dc:	fd cf       	rjmp	.-6      	; 0x11d8 <main+0x64>
+    11e4:	0e 94 cb 00 	call	0x196	; 0x196 <CO_SCH_Dispatch_Tasks>
+    11e8:	fd cf       	rjmp	.-6      	; 0x11e4 <main+0x64>
 
-000011de <__mulsi3>:
-    11de:	62 9f       	mul	r22, r18
-    11e0:	d0 01       	movw	r26, r0
-    11e2:	73 9f       	mul	r23, r19
-    11e4:	f0 01       	movw	r30, r0
-    11e6:	82 9f       	mul	r24, r18
-    11e8:	e0 0d       	add	r30, r0
-    11ea:	f1 1d       	adc	r31, r1
-    11ec:	64 9f       	mul	r22, r20
-    11ee:	e0 0d       	add	r30, r0
-    11f0:	f1 1d       	adc	r31, r1
-    11f2:	92 9f       	mul	r25, r18
-    11f4:	f0 0d       	add	r31, r0
-    11f6:	83 9f       	mul	r24, r19
-    11f8:	f0 0d       	add	r31, r0
-    11fa:	74 9f       	mul	r23, r20
-    11fc:	f0 0d       	add	r31, r0
-    11fe:	65 9f       	mul	r22, r21
+000011ea <__mulsi3>:
+    11ea:	62 9f       	mul	r22, r18
+    11ec:	d0 01       	movw	r26, r0
+    11ee:	73 9f       	mul	r23, r19
+    11f0:	f0 01       	movw	r30, r0
+    11f2:	82 9f       	mul	r24, r18
+    11f4:	e0 0d       	add	r30, r0
+    11f6:	f1 1d       	adc	r31, r1
+    11f8:	64 9f       	mul	r22, r20
+    11fa:	e0 0d       	add	r30, r0
+    11fc:	f1 1d       	adc	r31, r1
+    11fe:	92 9f       	mul	r25, r18
     1200:	f0 0d       	add	r31, r0
-    1202:	99 27       	eor	r25, r25
-    1204:	72 9f       	mul	r23, r18
-    1206:	b0 0d       	add	r27, r0
-    1208:	e1 1d       	adc	r30, r1
-    120a:	f9 1f       	adc	r31, r25
-    120c:	63 9f       	mul	r22, r19
-    120e:	b0 0d       	add	r27, r0
-    1210:	e1 1d       	adc	r30, r1
-    1212:	f9 1f       	adc	r31, r25
-    1214:	bd 01       	movw	r22, r26
-    1216:	cf 01       	movw	r24, r30
-    1218:	11 24       	eor	r1, r1
-    121a:	08 95       	ret
+    1202:	83 9f       	mul	r24, r19
+    1204:	f0 0d       	add	r31, r0
+    1206:	74 9f       	mul	r23, r20
+    1208:	f0 0d       	add	r31, r0
+    120a:	65 9f       	mul	r22, r21
+    120c:	f0 0d       	add	r31, r0
+    120e:	99 27       	eor	r25, r25
+    1210:	72 9f       	mul	r23, r18
+    1212:	b0 0d       	add	r27, r0
+    1214:	e1 1d       	adc	r30, r1
+    1216:	f9 1f       	adc	r31, r25
+    1218:	63 9f       	mul	r22, r19
+    121a:	b0 0d       	add	r27, r0
+    121c:	e1 1d       	adc	r30, r1
+    121e:	f9 1f       	adc	r31, r25
+    1220:	bd 01       	movw	r22, r26
+    1222:	cf 01       	movw	r24, r30
+    1224:	11 24       	eor	r1, r1
+    1226:	08 95       	ret
 
-0000121c <__udivmodqi4>:
-    121c:	99 1b       	sub	r25, r25
-    121e:	79 e0       	ldi	r23, 0x09	; 9
-    1220:	04 c0       	rjmp	.+8      	; 0x122a <__udivmodqi4_ep>
+00001228 <__udivmodqi4>:
+    1228:	99 1b       	sub	r25, r25
+    122a:	79 e0       	ldi	r23, 0x09	; 9
+    122c:	04 c0       	rjmp	.+8      	; 0x1236 <__udivmodqi4_ep>
 
-00001222 <__udivmodqi4_loop>:
-    1222:	99 1f       	adc	r25, r25
-    1224:	96 17       	cp	r25, r22
-    1226:	08 f0       	brcs	.+2      	; 0x122a <__udivmodqi4_ep>
-    1228:	96 1b       	sub	r25, r22
+0000122e <__udivmodqi4_loop>:
+    122e:	99 1f       	adc	r25, r25
+    1230:	96 17       	cp	r25, r22
+    1232:	08 f0       	brcs	.+2      	; 0x1236 <__udivmodqi4_ep>
+    1234:	96 1b       	sub	r25, r22
 
-0000122a <__udivmodqi4_ep>:
-    122a:	88 1f       	adc	r24, r24
-    122c:	7a 95       	dec	r23
-    122e:	c9 f7       	brne	.-14     	; 0x1222 <__udivmodqi4_loop>
-    1230:	80 95       	com	r24
-    1232:	08 95       	ret
+00001236 <__udivmodqi4_ep>:
+    1236:	88 1f       	adc	r24, r24
+    1238:	7a 95       	dec	r23
+    123a:	c9 f7       	brne	.-14     	; 0x122e <__udivmodqi4_loop>
+    123c:	80 95       	com	r24
+    123e:	08 95       	ret
 
-00001234 <__udivmodhi4>:
-    1234:	aa 1b       	sub	r26, r26
-    1236:	bb 1b       	sub	r27, r27
-    1238:	51 e1       	ldi	r21, 0x11	; 17
-    123a:	07 c0       	rjmp	.+14     	; 0x124a <__udivmodhi4_ep>
+00001240 <__udivmodhi4>:
+    1240:	aa 1b       	sub	r26, r26
+    1242:	bb 1b       	sub	r27, r27
+    1244:	51 e1       	ldi	r21, 0x11	; 17
+    1246:	07 c0       	rjmp	.+14     	; 0x1256 <__udivmodhi4_ep>
 
-0000123c <__udivmodhi4_loop>:
-    123c:	aa 1f       	adc	r26, r26
-    123e:	bb 1f       	adc	r27, r27
-    1240:	a6 17       	cp	r26, r22
-    1242:	b7 07       	cpc	r27, r23
-    1244:	10 f0       	brcs	.+4      	; 0x124a <__udivmodhi4_ep>
-    1246:	a6 1b       	sub	r26, r22
-    1248:	b7 0b       	sbc	r27, r23
+00001248 <__udivmodhi4_loop>:
+    1248:	aa 1f       	adc	r26, r26
+    124a:	bb 1f       	adc	r27, r27
+    124c:	a6 17       	cp	r26, r22
+    124e:	b7 07       	cpc	r27, r23
+    1250:	10 f0       	brcs	.+4      	; 0x1256 <__udivmodhi4_ep>
+    1252:	a6 1b       	sub	r26, r22
+    1254:	b7 0b       	sbc	r27, r23
 
-0000124a <__udivmodhi4_ep>:
-    124a:	88 1f       	adc	r24, r24
-    124c:	99 1f       	adc	r25, r25
-    124e:	5a 95       	dec	r21
-    1250:	a9 f7       	brne	.-22     	; 0x123c <__udivmodhi4_loop>
-    1252:	80 95       	com	r24
-    1254:	90 95       	com	r25
-    1256:	bc 01       	movw	r22, r24
-    1258:	cd 01       	movw	r24, r26
-    125a:	08 95       	ret
+00001256 <__udivmodhi4_ep>:
+    1256:	88 1f       	adc	r24, r24
+    1258:	99 1f       	adc	r25, r25
+    125a:	5a 95       	dec	r21
+    125c:	a9 f7       	brne	.-22     	; 0x1248 <__udivmodhi4_loop>
+    125e:	80 95       	com	r24
+    1260:	90 95       	com	r25
+    1262:	bc 01       	movw	r22, r24
+    1264:	cd 01       	movw	r24, r26
+    1266:	08 95       	ret
 
-0000125c <_exit>:
-    125c:	f8 94       	cli
+00001268 <_exit>:
+    1268:	f8 94       	cli
 
-0000125e <__stop_program>:
-    125e:	ff cf       	rjmp	.-2      	; 0x125e <__stop_program>
+0000126a <__stop_program>:
+    126a:	ff cf       	rjmp	.-2      	; 0x126a <__stop_program>
