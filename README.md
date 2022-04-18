@@ -6,5 +6,5 @@
    - Display outdoor temperatur and light state on LCD.
    - Display the subscription of each room on LCD.
 
-![image](https://user-images.githubusercontent.com/51443318/163073107-24297330-6668-4381-aa3b-578e06a6a6ad.png)
+![image](https://user-images.githubusercontent.com/51443318/163801516-791783ba-1329-491a-83bf-905b530d7e95.png)
 
